@@ -52,7 +52,80 @@ var panelContent = {
   id: panelID,
   tab: "<i class='fa fa-bars active'></i>",
   pane: "<p id='sidebar-content'></p>",
-  title: "<h2 id='sidebar-title'>No state selected</h2>"
+  // pane: '<p id="sidebar-content"></p><a href="https://arahmandc.github.io/dump/img/cs.jpg" target="_blank"><img src="https://arahmandc.github.io/dump/img/cs.jpg" width="200px"></a> <p><h4>details:</h4></p><p id="sidebar-contentt"></p>',
+  title: '<h2 id="sidebar-title">No state selected</h2>',
+
+};
+sidebar.addPanel(panelContent);
+
+map.on('click', function (feature, layer) {
+  sidebar.close(panelID);
+});
+
+
+
+var pointGroupLayer;
+
+var geojsonStates = {
+    'type': 'FeatureCollection',
+    'features': []
+  };
+
+
+
+function addPoints(data) {
+  if (pointGroupLayer != null) {
+    pointGroupLayer.remove();
+  }
+  pointGroupLayer = L.layerGroup().addTo(map);
+
+  for(var row = 0; row < data.length; row++) {
+    var marker = L.marker([data[row].lat, data[row].long]).addTo(pointGroupLayer);
+
+     marker.feature = {
+      properties: {
+        location: data[row].location_name,
+        category: data[row].category,
+        level: data[row].level,
+      }
+    };
+    marker.on({
+      click: function(e) {
+        L.DomEvent.stopPropagation(e);
+        document.getElementById('sidebar-title').innerHTML = e.target.feature.properties.location;
+        document.getElementById('sidebar-content').innerHTML = e.target.feature.properties.category;
+        document.getElementById('sidebar-contentt').innerHTML = e.target.feature.properties.level;
+        sidebar.open(panelID);
+      }
+    });
+
+    var icon = L.AwesomeMarkers.icon({
+      icon: 'info-sign',
+      iconColor: 'white',
+      markerColor: getColor(data[row].category),
+      prefix: 'glyphicon',
+      extraClasses: 'fa-rotate-0'
+    });
+    marker.setIcon(icon);
+  }
+}
+
+
+
+
+
+function getColor(type) {
+  switch (type) {
+    case 'Coffee Shop':
+      return 'green';
+    case 'Restaurant':
+      return 'blue';
+    default:
+      return 'green';
+  }
+}
+
+  title: "<h2 id='sidebar-title'>No District selected</h2>"
 };
 sidebar.addPanel(panelContent);
 
@@ -103,7 +176,7 @@ function addPolygons(data) {
   }
 
   // The polygons are styled slightly differently on mouse hovers
-  var polygonStyle = { color: "#2ca25f", fillColor: "#99d8c9", weight: 1.5 };
+  var polygonStyle = { color: "#f78c72", fillColor: "#f09d89", weight: 1.5 };
   var polygonHoverStyle = { color: "green", fillColor: "#2ca25f", weight: 3 };
 
   polygonLayer = L.geoJSON(geojsonStates, {
