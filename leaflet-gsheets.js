@@ -15,7 +15,7 @@ function init() {
           //https://docs.google.com/spreadsheets/d/1EUFSaqi30b6oefK0YWWNDDOzwmCTTXlXkFHAc2QrUxM/edit#gid=0
  
   var polyURL =
-    "https://docs.google.com/spreadsheets/d/1vgAM5JxJVTqFoycx_GytEv_IItqdy2IE61MLsbUpYz4/edit?usp=sharing";
+    "https://docs.google.com/spreadsheets/d/1vsCq5u22w6IjKXyoOWQefDcPzgf9IIRswXs4ActkziU/edit?usp=sharing";
   var pointsURL =
     //"https://docs.google.com/spreadsheets/d/1kjJVPF0LyaiaDYF8z_x23UulGciGtBALQ1a1pK0coRM/edit?usp=sharing";
 
@@ -25,7 +25,7 @@ function init() {
 window.addEventListener("DOMContentLoaded", init);
 
 // Create a new Leaflet map centered on the continental US [23.699, 89.308], 7
-var map = L.map("map").setView([40, -100], 4);
+var map = L.map("map").setView([23.699, 89.308], 7);
 
 // This is the Carto Positron basemap
 var basemap = L.tileLayer(
