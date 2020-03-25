@@ -17,15 +17,15 @@ function init() {
   var polyURL =
     "https://docs.google.com/spreadsheets/d/1EUFSaqi30b6oefK0YWWNDDOzwmCTTXlXkFHAc2QrUxM/edit?usp=sharing";
   var pointsURL =
-    "https://docs.google.com/spreadsheets/d/1kjJVPF0LyaiaDYF8z_x23UulGciGtBALQ1a1pK0coRM/edit?usp=sharing";
+    //"https://docs.google.com/spreadsheets/d/1kjJVPF0LyaiaDYF8z_x23UulGciGtBALQ1a1pK0coRM/edit?usp=sharing";
 
   Tabletop.init({ key: polyURL, callback: addPolygons, simpleSheet: true });
   Tabletop.init({ key: pointsURL, callback: addPoints, simpleSheet: true }); // simpleSheet assumes there is only one table and automatically sends its data
 }
 window.addEventListener("DOMContentLoaded", init);
 
-// Create a new Leaflet map centered on the continental US
-var map = L.map("map").setView([23.699, 89.308], 7);
+// Create a new Leaflet map centered on the continental US [23.699, 89.308], 7
+var map = L.map("map").setView([40, -100], 4);
 
 // This is the Carto Positron basemap
 var basemap = L.tileLayer(
