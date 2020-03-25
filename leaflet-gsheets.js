@@ -12,10 +12,10 @@ function init() {
   // the first is the polygon layer and the second the points
 
 
-
+          //https://docs.google.com/spreadsheets/d/1EUFSaqi30b6oefK0YWWNDDOzwmCTTXlXkFHAc2QrUxM/edit#gid=0
  
   var polyURL =
-    "https://docs.google.com/spreadsheets/d/1wgZ-s0ocaSpOTU4cP2E2CSUJZNk0JSoypBvGH7IcLgc/edit?usp=sharing";
+    "https://docs.google.com/spreadsheets/d/1EUFSaqi30b6oefK0YWWNDDOzwmCTTXlXkFHAc2QrUxM/edit?usp=sharing";
   var pointsURL =
     "https://docs.google.com/spreadsheets/d/1kjJVPF0LyaiaDYF8z_x23UulGciGtBALQ1a1pK0coRM/edit?usp=sharing";
 
