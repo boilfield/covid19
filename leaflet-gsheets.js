@@ -20,7 +20,7 @@ function init() {
     //"https://docs.google.com/spreadsheets/d/1kjJVPF0LyaiaDYF8z_x23UulGciGtBALQ1a1pK0coRM/edit?usp=sharing";
 
   Tabletop.init({ key: polyURL, callback: addPolygons, simpleSheet: true });
-  Tabletop.init({ key: pointsURL, callback: addPoints, simpleSheet: true }); // simpleSheet assumes there is only one table and automatically sends its data
+  // Tabletop.init({ key: pointsURL, callback: addPoints, simpleSheet: true }); // simpleSheet assumes there is only one table and automatically sends its data
 }
 window.addEventListener("DOMContentLoaded", init);
 
@@ -39,6 +39,8 @@ var basemap = L.tileLayer(
 );
 basemap.addTo(map);
 
+
+
 var sidebar = L.control
   .sidebar({
     container: "sidebar",
@@ -51,10 +53,11 @@ let panelID = "my-info-panel";
 var panelContent = {
   id: panelID,
   tab: "<i class='fa fa-bars active'></i>",
-  pane: "<p id='sidebar-content'></p>",
-  // pane: '<p id="sidebar-content"></p><a href="https://arahmandc.github.io/dump/img/cs.jpg" target="_blank"><img src="https://arahmandc.github.io/dump/img/cs.jpg" width="200px"></a> <p><h4>details:</h4></p><p id="sidebar-contentt"></p>',
-  title: '<h2 id="sidebar-title">No state selected</h2>',
 
+
+  title: '<h2 id="sidebar-title">No District selected</h2>',
+  pane: '<p id="sidebar-content"></p><p><h4>details:</h4></p><p id="sidebar-image"></p><p>Total confirmed:<p id="sidebar-contentt"></p></p><p>Total Deaths:</p><p>Total Recover:</p>',
+  // pane: '<a href="'+imagepath+'" target="_blank"><img width="200px" hight="200px" src="'+imagepath+'"</img></a>',
 };
 sidebar.addPanel(panelContent);
 
@@ -64,78 +67,10 @@ map.on('click', function (feature, layer) {
 
 
 
-var pointGroupLayer;
 
-var geojsonStates = {
-    'type': 'FeatureCollection',
-    'features': []
-  };
-
-
-
-function addPoints(data) {
-  if (pointGroupLayer != null) {
-    pointGroupLayer.remove();
-  }
-  pointGroupLayer = L.layerGroup().addTo(map);
-
-  for(var row = 0; row < data.length; row++) {
-    var marker = L.marker([data[row].lat, data[row].long]).addTo(pointGroupLayer);
-
-     marker.feature = {
-      properties: {
-        location: data[row].location_name,
-        category: data[row].category,
-        level: data[row].level,
-      }
-    };
-    marker.on({
-      click: function(e) {
-        L.DomEvent.stopPropagation(e);
-        document.getElementById('sidebar-title').innerHTML = e.target.feature.properties.location;
-        document.getElementById('sidebar-content').innerHTML = e.target.feature.properties.category;
-        document.getElementById('sidebar-contentt').innerHTML = e.target.feature.properties.level;
-        sidebar.open(panelID);
-      }
-    });
-
-    var icon = L.AwesomeMarkers.icon({
-      icon: 'info-sign',
-      iconColor: 'white',
-      markerColor: getColor(data[row].category),
-      prefix: 'glyphicon',
-      extraClasses: 'fa-rotate-0'
-    });
-    marker.setIcon(icon);
-  }
-}
-
-
-
-
-
-function getColor(type) {
-  switch (type) {
-    case 'Coffee Shop':
-      return 'green';
-    case 'Restaurant':
-      return 'blue';
-    default:
-      return 'green';
-  }
-}
-
-  title: "<h2 id='sidebar-title'>No District selected</h2>"
-};
-sidebar.addPanel(panelContent);
-
-map.on("click", function() {
-  sidebar.close(panelID);
-});
 
 // These are declared outisde the functions so that the functions can check if they already exist
 var polygonLayer;
-var pointGroupLayer;
 
 // The form of data must be a JSON representation of a table as returned by Tabletop.js
 // addPolygons first checks if the map layer has already been assigned, and if so, deletes it and makes a fresh one
@@ -167,17 +102,35 @@ function addPolygons(data) {
         },
         properties: {
           name: data[row].name,
-          summary: data[row].summary,
-          state: data[row].state,
-          local: data[row].local
+          confirmed: data[row].confirmed,
+          deaths: data[row].deaths,
+          recover: data[row].recover,
+          image: data[row].image
         }
       });
     }
   }
 
+  var info = L.control();
+
+  info.onAdd = function (map) {
+
+    this._div = L.DomUtil.create('div', 'info');
+    this.update();
+    return this._div;
+  };
+
+  info.update = function (props) {
+    this._div.innerHTML = '<h4>COVID 19 | Bangladesh </h4>'
+  };
+
+  info.addTo(map);
+
+
+
   // The polygons are styled slightly differently on mouse hovers
   var polygonStyle = { color: "#f78c72", fillColor: "#f09d89", weight: 1.5 };
-  var polygonHoverStyle = { color: "green", fillColor: "#2ca25f", weight: 3 };
+  var polygonHoverStyle = { color: "#f5eb5d", fillColor: "#f7ea2f", weight: 15 };
 
   polygonLayer = L.geoJSON(geojsonStates, {
     onEachFeature: function(feature, layer) {
@@ -190,15 +143,19 @@ function addPolygons(data) {
         },
         click: function(e) {
           // This zooms the map to the clicked polygon
-          // map.fitBounds(e.target.getBounds());
+          map.fitBounds(e.target.getBounds());
 
           // if this isn't added, then map.click is also fired!
           L.DomEvent.stopPropagation(e);
 
+          document.getElementById("sidebar-image").innerHTML =
+            e.target.feature.properties.image;
+
           document.getElementById("sidebar-title").innerHTML =
             e.target.feature.properties.name;
-          document.getElementById("sidebar-content").innerHTML =
-            e.target.feature.properties.summary;
+
+          document.getElementById("sidebar-contentt").innerHTML =
+            e.target.feature.properties.confirmed;
           sidebar.open(panelID);
         }
       });
@@ -207,61 +164,6 @@ function addPolygons(data) {
   }).addTo(map);
 }
 
-// addPoints is a bit simpler, as no GeoJSON is needed for the points
-// It does the same check to overwrite the existing points layer once the Google Sheets data comes along
-function addPoints(data) {
-  if (pointGroupLayer != null) {
-    pointGroupLayer.remove();
-  }
-  pointGroupLayer = L.layerGroup().addTo(map);
 
-  for (var row = 0; row < data.length; row++) {
-    var marker = L.marker([data[row].lat, data[row].long]).addTo(
-      pointGroupLayer
-    );
 
-    // UNCOMMENT THIS LINE TO USE POPUPS
-    //marker.bindPopup('<h2>' + data[row].location + '</h2>There's a ' + data[row].level + ' ' + data[row].category + ' here');
 
-    // COMMENT THE NEXT 14 LINES TO DISABLE SIDEBAR FOR THE MARKERS
-    marker.feature = {
-      properties: {
-        location: data[row].location,
-        category: data[row].category
-      }
-    };
-    marker.on({
-      click: function(e) {
-        L.DomEvent.stopPropagation(e);
-        document.getElementById("sidebar-title").innerHTML =
-          e.target.feature.properties.location;
-        document.getElementById("sidebar-content").innerHTML =
-          e.target.feature.properties.category;
-        sidebar.open(panelID);
-      }
-    });
-
-    // AwesomeMarkers is used to create fancier icons
-    var icon = L.AwesomeMarkers.icon({
-      icon: "info-sign",
-      iconColor: "white",
-      markerColor: getColor(data[row].category),
-      prefix: "glyphicon",
-      extraClasses: "fa-rotate-0"
-    });
-    marker.setIcon(icon);
-  }
-}
-
-// Returns different colors depending on the string passed
-// Used for the points layer
-function getColor(type) {
-  switch (type) {
-    case "Coffee Shop":
-      return "green";
-    case "Restaurant":
-      return "blue";
-    default:
-      return "green";
-  }
-}
