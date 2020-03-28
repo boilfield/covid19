@@ -10,9 +10,6 @@ function init() {
   // PASTE YOUR URLs HERE
   // these URLs come from Google Sheets 'shareable link' form
   // the first is the polygon layer and the second the points
-
-
-          //https://docs.google.com/spreadsheets/d/1EUFSaqi30b6oefK0YWWNDDOzwmCTTXlXkFHAc2QrUxM/edit#gid=0
  
   var polyURL =
     "https://docs.google.com/spreadsheets/d/1vsCq5u22w6IjKXyoOWQefDcPzgf9IIRswXs4ActkziU/edit?usp=sharing";
@@ -25,19 +22,22 @@ function init() {
 window.addEventListener("DOMContentLoaded", init);
 
 // Create a new Leaflet map centered on the continental US [23.699, 89.308], 7
-var map = L.map("map").setView([23.699, 89.308], 7);
+var map = L.map("map").setView([23.816, 94.427], 7);
 
 // This is the Carto Positron basemap
+var hash = new L.Hash(map);
+
 var basemap = L.tileLayer(
   "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png",
   {
     attribution:
       "&copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> &copy; <a href='http://cartodb.com/attributions'>CartoDB</a>",
     subdomains: "abcd",
-    maxZoom: 19
+    maxZoom: 9,
+    minZoom:7
   }
-);
-basemap.addTo(map);
+); basemap.addTo(map);
+
 
 
 
@@ -142,10 +142,12 @@ function addPolygons(data) {
           e.target.setStyle(polygonHoverStyle);
         },
         click: function(e) {
-          // This zooms the map to the clicked polygon
-          map.fitBounds(e.target.getBounds());
 
-          // if this isn't added, then map.click is also fired!
+
+  // This zooms the map to the clicked polygon
+          // map.fitBounds(e.target.getBounds());
+
+  // if this isn't added, then map.click is also fired!
           L.DomEvent.stopPropagation(e);
 
           document.getElementById("sidebar-image").innerHTML =
@@ -164,6 +166,14 @@ function addPolygons(data) {
   }).addTo(map);
 }
 
+//bound box
 
+var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+            if (bounds_group.getLayers().length) {
+                map.fitBounds(bounds_group.getBounds());
+            }
+            map.setMaxBounds(map.getBounds());
+        }setBounds();
 
 
