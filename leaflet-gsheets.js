@@ -177,3 +177,11 @@ var bounds_group = new L.featureGroup([]);
         }setBounds();
 
 
+    //logo position: bottomright, topright, topleft, bottomleft
+    var logo = L.control({position: 'bottomleft'});
+    logo.onAdd = function(map){
+        var div = L.DomUtil.create('div', 'myclass');
+        div.innerHTML= "<img src='boil.png'/>";
+        return div;
+    }
+    logo.addTo(map);
