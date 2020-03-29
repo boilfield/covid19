@@ -1,6 +1,6 @@
 .leaflet-sidebar {
   position: absolute;
-  top: 0;
+  top: 65px;
   bottom: 0;
   width: 100%;
   overflow: hidden;
@@ -10,7 +10,7 @@
   @media (min-width: 768px) {
     .leaflet-sidebar {
       top: 0px;
-      bottom: 50px;
+      bottom: 0px;
       transition: width 500ms; } }
   @media (min-width: 768px) and (max-width: 991px) {
     .leaflet-sidebar {
@@ -38,7 +38,7 @@
       right: 0px; } }
 
 .leaflet-sidebar-tabs {
-  top: 0;
+  top: 80px;
   bottom: 0;
   height: 100%;
   background-color: #fff; }
@@ -85,7 +85,7 @@
 
 .leaflet-sidebar-content {
   position: absolute;
-  top: 0;
+  top: 80px;
   bottom: 0;
   background-color: rgba(255, 255, 255, 0.95);
   overflow-x: hidden;
