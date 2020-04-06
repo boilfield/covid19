@@ -36,9 +36,9 @@ basemap.addTo(map);
 
 //Zoom Comtroler
 map.zoomControl.remove();
-map.on('click', function (feature, layer) {
-  sidebar.close(panelID);
-});
+// map.on('click', function (feature, layer) {
+//   // sidebar.close(panelID);
+// });
 
 
 
@@ -88,7 +88,7 @@ function addPolygons(data) {
   }
   // The polygons are styled slightly differently on mouse hovers
   var polygonStyle = { color: "#f78c72", fillColor: "#f09d89", weight: 1.5 };
-  var polygonHoverStyle = { color: "#f5eb5d", fillColor: "#f7ea2f", weight: 15 };
+  var polygonHoverStyle = { color: "#f5eb5d", fillColor: "#f7ea2f", weight: 15};
 
   polygonLayer = L.geoJSON(geojsonStates, {
     onEachFeature: function(feature, layer) {
@@ -96,21 +96,21 @@ function addPolygons(data) {
       layer.on({
         mouseout: function(e) {
           e.target.setStyle(polygonStyle);
+          e.target.bindPopup('<h6 style="text-align:center; color:#0000ff; margin-bottom:2px">'+ feature.properties.name +'</h6>');
         },
         mouseover: function(e) {
           e.target.setStyle(polygonHoverStyle);
+          // e.target.bindPopup('<h6 style="text-align:center; color:#0000ff; margin-bottom:2px">'+ feature.properties.name +'</h6>');
+          // var html = '<h6 style="text-align:center; color:#0000ff; margin-bottom:2px">'+ feature.properties.name +'</h6>';
+          // layer.bindPopup(html);
         },
         click: function(e) {
-                    var imgPath = feature.properties.image;
-                    console.log(imgPath);
-                    console.log("http://"+imgPath);
-                    var html = '<a href="http://'+imgPath+'" target="_blank"><img hight="200px" width="200px" src="http://'+imgPath+'"</img></a><br/>';
-                    html +='<h2 style="text-align: center;">Details</h2>';
-                    html += 'Location Name: <b>' + feature.properties.name + '</b><br/>';
-                    html += 'Infected confirmed: <b>' + feature.properties.confirmed + '</b><br/>';
-                    html += 'Deaths By COVID-19: <b>' + feature.properties.deaths + '</b><br/>';
+                    
+                    var html = '<h6 style="text-align:center; color:#0000ff; margin-bottom:2px">'+ feature.properties.name +'</h6>';
+                    html += 'Quarantined: <b>' + feature.properties.quarantine + '</b><br/>';
                     html += 'Recovered: <b>' + feature.properties.recover + '</b><br/>';
-                    html += 'Quarantine: <b>' + feature.properties.quarantine + '</b><br/>';
+                    // html += 'Confirmed: <b>' + feature.properties.confirmed + '</b><br/>';
+                    html += 'Death: <b>' + feature.properties.deaths + '</b><br/>';
                     html += 'Male: <b>' + feature.properties.male + '</b><br/>';
                     html += 'Female: <b>' + feature.properties.female + '</b><br/>';
                     html += 'Child: <b>' + feature.properties.child + '</b><br/>';
@@ -135,7 +135,7 @@ var bounds_group = new L.featureGroup([]);
     var logo = L.control({position: 'bottomleft'});
     logo.onAdd = function(map){
         var div = L.DomUtil.create('div', 'myclass');
-        div.innerHTML= "<img src='boil.png'/> Please Double Click on the Feature";
+        div.innerHTML= "<img src='boil.png'/>";
         return div;
     }
     logo.addTo(map);
