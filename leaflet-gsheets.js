@@ -16,19 +16,20 @@ function init() {
 window.addEventListener("DOMContentLoaded", init);
 
 // Create a new Leaflet map centered on the continental US [23.699, 89.308], 7
-var map = L.map("map").setView([24.067, 90.352], 7);
+var map = L.map("map").setView([24.067, 90.352], 6);
 
 // This is the Carto Positron basemap
 var hash = new L.Hash(map);
 
 var basemap = L.tileLayer(
-  "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png",
+  'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+  // "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png",
   {
     attribution:
       "&copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> &copy; <a href='http://cartodb.com/attributions'>CartoDB</a>",
     subdomains: "abcd",
     maxZoom: 9,
-    minZoom:7
+    minZoom:6
   }
 ); 
 basemap.addTo(map);
