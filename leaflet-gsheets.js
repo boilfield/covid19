@@ -87,8 +87,12 @@ function addPolygons(data) {
     }
   }
   // The polygons are styled slightly differently on mouse hovers
-  var polygonStyle = { color: "#f78c72", fillColor: "#f09d89", weight: 1.5 };
-  var polygonHoverStyle = { color: "#f5eb5d", fillColor: "#f7ea2f", weight: 15};
+  var polygonStyle = { color: "#f78c72", fillColor: "#f78c72" , weight: 1.5 };
+  var polygonHoverStyle = { color: "#f5eb5d", fillColor: "#f7ea2f", weight: 1.5};
+
+
+
+
 
   polygonLayer = L.geoJSON(geojsonStates, {
     onEachFeature: function(feature, layer) {
@@ -100,16 +104,12 @@ function addPolygons(data) {
         },
         mouseover: function(e) {
           e.target.setStyle(polygonHoverStyle);
-          // e.target.bindPopup('<h6 style="text-align:center; color:#0000ff; margin-bottom:2px">'+ feature.properties.name +'</h6>');
-          // var html = '<h6 style="text-align:center; color:#0000ff; margin-bottom:2px">'+ feature.properties.name +'</h6>';
-          // layer.bindPopup(html);
         },
         click: function(e) {
                     
                     var html = '<h6 style="text-align:center; color:#0000ff; margin-bottom:2px">'+ feature.properties.name +'</h6>';
                     html += 'Quarantined: <b>' + feature.properties.quarantine + '</b><br/>';
                     html += 'Recovered: <b>' + feature.properties.recover + '</b><br/>';
-                    // html += 'Confirmed: <b>' + feature.properties.confirmed + '</b><br/>';
                     html += 'Death: <b>' + feature.properties.deaths + '</b><br/>';
                     html += 'Male: <b>' + feature.properties.male + '</b><br/>';
                     html += 'Female: <b>' + feature.properties.female + '</b><br/>';
@@ -139,3 +139,34 @@ var bounds_group = new L.featureGroup([]);
         return div;
     }
     logo.addTo(map);
+
+
+    //Scale
+    L.control.scale().addTo(map);
+
+
+
+    function getColor(d) {
+    return d > 1000 ? '#800026' :
+           d > 500  ? '#BD0026' :
+           d > 200  ? '#E31A1C' :
+           d > 100  ? '#FC4E2A' :
+           d > 50   ? '#FD8D3C' :
+           d > 20   ? '#FEB24C' :
+           d > 10   ? '#FED976' :
+                      '#FFEDA0';
+}
+
+function style(feature) {
+    return {
+        fillColor: getColor(feature.properties.quarantine),
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7
+    };
+}
+
+L.geoJson(geojsonStates, {style: style}).addTo(map);
+
