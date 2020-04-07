@@ -99,7 +99,11 @@ function addPolygons(data) {
 
       layer.on({
         mouseout: function(e) {
-          e.target.setStyle(polygonStyle);
+          e.target.setStyle({  // Need to manually set each property except `fillColor`
+            color: polygonStyle.color,
+            weight: polygonStyle.weight,
+            fillColor: feature.fill_color,  // Use saved color
+          });
           e.target.bindPopup('<h6 style="text-align:center; color:#0000ff; margin-bottom:2px">'+ feature.properties.name +'</h6>');
         },
         mouseover: function(e) {
@@ -120,6 +124,22 @@ function addPolygons(data) {
     },
     style: polygonStyle
   }).addTo(map);
+
+  // Set different polygon fill colors based on number of quarantined
+  polygonLayer.eachLayer(function (layer) {
+    let d = layer.feature.properties.quarantine;
+    let fc = d > 1000 ? '#800026' :
+          d > 500  ? '#BD0026' :
+          d > 200  ? '#E31A1C' :
+          d > 100  ? '#FC4E2A' :
+          d > 50   ? '#FD8D3C' :
+          d > 20   ? '#FEB24C' :
+          d > 10   ? '#FED976' :
+          '#FFEDA0';
+    layer.setStyle({fillColor: fc});
+    layer.feature.fill_color = fc;  // Save color to use again after mouseout
+  });
+
 }
 
 //bound box
