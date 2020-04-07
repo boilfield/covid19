@@ -190,3 +190,50 @@ function style(feature) {
 
 // L.geoJson(geojsonStates, {style: style}).addTo(map);
 
+let legend = L.control({position: "bottomright"});
+legend.onAdd = function (map) {
+  let cont_div = L.DomUtil.create('div', 'info legend');
+  cont_div.style.backgroundColor = "rgba(255, 255, 255, 0.4)";
+  cont_div.style.padding = "10px";
+  cont_div.innerHTML = `
+    <div><b>Quarantine color code</b></div>
+    <style>
+      .legend-cb {
+        height: 0.8em;
+        width: 10px;
+        display: inline-block;
+        margin-right: 5px;
+      }
+    </style>
+    <div>
+      <span class="legend-cb" style="background-color: #800026"></span>
+      <span>n > 1000</span>
+    </div>
+    <div>
+      <span class="legend-cb" style="background-color: #BD0026"></span>
+      <span>999 > n > 500</span>
+    </div>
+    <div>
+      <span class="legend-cb" style="background-color: #E31A1C"></span>
+      <span>499 > n > 100</span>
+    </div>
+    <div>
+      <span class="legend-cb" style="background-color: #FC4E2A"></span>
+      <span>99 > n > 50</span>
+    </div>
+    <div>
+      <span class="legend-cb" style="background-color: #FD8D3C"></span>
+      <span>49 > n > 20</span>
+    </div>
+    <div>
+      <span class="legend-cb" style="background-color: #FEB24C"></span>
+      <span>19 > n > 10</span>
+    </div>
+    <div>
+      <span class="legend-cb" style="background-color: #FED976"></span>
+      <span>9 > n</span>
+    </div>
+  `;
+  return cont_div;
+}
+legend.addTo(map);
