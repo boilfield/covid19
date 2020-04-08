@@ -121,6 +121,13 @@ function addPolygons(data) {
                     layer.bindPopup(html);
                 }
       });
+
+      let label = L.marker(layer.getBounds().getCenter(), {
+      icon: L.divIcon({
+        className: 'label',
+        html: feature.properties.name,
+      })
+    }).addTo(map);
     },
     style: polygonStyle
   }).addTo(map);
