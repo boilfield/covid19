@@ -200,7 +200,7 @@ var bounds_group = new L.featureGroup([]);
 let legend = L.control({position: "bottomright"});
 legend.onAdd = function (map) {
   let cont_div = L.DomUtil.create('div', 'info legend');
-  cont_div.style.backgroundColor = "rgba(255, 255, 255, 0.4)";
+  cont_div.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
   cont_div.style.padding = "10px";
   cont_div.innerHTML = `
     <div><b>Quarantine color code</b></div>
