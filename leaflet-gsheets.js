@@ -87,8 +87,8 @@ function addPolygons(data) {
     }
   }
   // The polygons are styled slightly differently on mouse hovers
-  var polygonStyle = { color: "#f78c72", fillColor: "#f78c72" , weight: 1.5 };
-  var polygonHoverStyle = { color: "#f5eb5d", fillColor: "#f7ea2f", weight: 1.5};
+  var polygonStyle = { color: "#f78c72", fillColor: "#f78c72" , weight: 1.5, fillOpacity: 1};
+  var polygonHoverStyle = { color: "#f5eb5d", fillColor: "#f7ea2f", weight: 1.5, fillOpacity: 1};
 
 
 
@@ -99,7 +99,11 @@ function addPolygons(data) {
 
       layer.on({
         mouseout: function(e) {
-          e.target.setStyle(polygonStyle);
+          e.target.setStyle({  // Need to manually set each property except `fillColor`
+            color: polygonStyle.color,
+            weight: polygonStyle.weight,
+            fillColor: feature.fill_color,  // Use saved color
+          });
           e.target.bindPopup('<h6 style="text-align:center; color:#0000ff; margin-bottom:2px">'+ feature.properties.name +'</h6>');
         },
         mouseover: function(e) {
@@ -117,9 +121,32 @@ function addPolygons(data) {
                     layer.bindPopup(html);
                 }
       });
+
+      let label = L.marker(layer.getBounds().getCenter(), {
+      icon: L.divIcon({
+        className: 'label',
+        html: feature.properties.name,
+      })
+    }).addTo(map);
     },
     style: polygonStyle
   }).addTo(map);
+
+  // Set different polygon fill colors based on number of quarantined
+  polygonLayer.eachLayer(function (layer) {
+    let d = layer.feature.properties.quarantine;
+    let fc = d > 1000 ? '#800026' :
+          d > 500  ? '#BD0026' :
+          d > 200  ? '#E31A1C' :
+          d > 100  ? '#FC4E2A' :
+          d > 50   ? '#FD8D3C' :
+          d > 20   ? '#FEB24C' :
+          d > 10   ? '#FED976' :
+          '#FFEDA0';
+    layer.setStyle({fillColor: fc});
+    layer.feature.fill_color = fc;  // Save color to use again after mouseout
+  });
+
 }
 
 //bound box
@@ -146,27 +173,74 @@ var bounds_group = new L.featureGroup([]);
 
 
 
-    function getColor(d) {
-    return d > 1000 ? '#800026' :
-           d > 500  ? '#BD0026' :
-           d > 200  ? '#E31A1C' :
-           d > 100  ? '#FC4E2A' :
-           d > 50   ? '#FD8D3C' :
-           d > 20   ? '#FEB24C' :
-           d > 10   ? '#FED976' :
-                      '#FFEDA0';
+//     function getColor(d) {
+//     return d > 1000 ? '#800026' :
+//            d > 500  ? '#BD0026' :
+//            d > 200  ? '#E31A1C' :
+//            d > 100  ? '#FC4E2A' :
+//            d > 50   ? '#FD8D3C' :
+//            d > 20   ? '#FEB24C' :
+//            d > 10   ? '#FED976' :
+//                       '#FFEDA0';
+// }
+
+// function style(feature) {
+//     return {
+//         fillColor: getColor(feature.properties.quarantine),
+//         weight: 2,
+//         opacity: 1,
+//         color: 'white',
+//         dashArray: '3',
+//         fillOpacity: 0.7
+//     };
+// }
+
+// L.geoJson(geojsonStates, {style: style}).addTo(map);
+
+let legend = L.control({position: "bottomright"});
+legend.onAdd = function (map) {
+  let cont_div = L.DomUtil.create('div', 'info legend');
+  cont_div.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+  cont_div.style.padding = "10px";
+  cont_div.innerHTML = `
+    <div><b>Quarantine color code</b></div>
+    <style>
+      .legend-cb {
+        height: 0.8em;
+        width: 10px;
+        display: inline-block;
+        margin-right: 5px;
+      }
+    </style>
+    <div>
+      <span class="legend-cb" style="background-color: #800026"></span>
+      <span>n > 1000</span>
+    </div>
+    <div>
+      <span class="legend-cb" style="background-color: #BD0026"></span>
+      <span>999 > n > 500</span>
+    </div>
+    <div>
+      <span class="legend-cb" style="background-color: #E31A1C"></span>
+      <span>499 > n > 100</span>
+    </div>
+    <div>
+      <span class="legend-cb" style="background-color: #FC4E2A"></span>
+      <span>99 > n > 50</span>
+    </div>
+    <div>
+      <span class="legend-cb" style="background-color: #FD8D3C"></span>
+      <span>49 > n > 20</span>
+    </div>
+    <div>
+      <span class="legend-cb" style="background-color: #FEB24C"></span>
+      <span>19 > n > 10</span>
+    </div>
+    <div>
+      <span class="legend-cb" style="background-color: #FED976"></span>
+      <span>9 > n</span>
+    </div>
+  `;
+  return cont_div;
 }
-
-function style(feature) {
-    return {
-        fillColor: getColor(feature.properties.quarantine),
-        weight: 2,
-        opacity: 1,
-        color: 'white',
-        dashArray: '3',
-        fillOpacity: 0.7
-    };
-}
-
-L.geoJson(geojsonStates, {style: style}).addTo(map);
-
+legend.addTo(map);

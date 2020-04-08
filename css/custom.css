@@ -459,3 +459,7 @@ body {
   /*margin: 0;*/
   border-color: #ff0000;
 }
+
+.leaflet-marker-icon.label {
+    color: #000;
+}
