@@ -177,16 +177,16 @@ var bounds_group = new L.featureGroup([]);
 //                       '#FFEDA0';
 // }
 
-function style(feature) {
-    return {
-        fillColor: getColor(feature.properties.quarantine),
-        weight: 2,
-        opacity: 1,
-        color: 'white',
-        dashArray: '3',
-        fillOpacity: 0.7
-    };
-}
+// function style(feature) {
+//     return {
+//         fillColor: getColor(feature.properties.quarantine),
+//         weight: 2,
+//         opacity: 1,
+//         color: 'white',
+//         dashArray: '3',
+//         fillOpacity: 0.7
+//     };
+// }
 
 // L.geoJson(geojsonStates, {style: style}).addTo(map);
 
