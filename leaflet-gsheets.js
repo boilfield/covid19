@@ -87,8 +87,8 @@ function addPolygons(data) {
     }
   }
   // The polygons are styled slightly differently on mouse hovers
-  var polygonStyle = { color: "#f78c72", fillColor: "#f78c72" , weight: 1.5 };
-  var polygonHoverStyle = { color: "#f5eb5d", fillColor: "#f7ea2f", weight: 1.5};
+  var polygonStyle = { color: "#f78c72", fillColor: "#f78c72" , weight: 1.5, fillOpacity: 1};
+  var polygonHoverStyle = { color: "#f5eb5d", fillColor: "#f7ea2f", weight: 1.5, fillOpacity: 1};
 
 
 
