@@ -169,7 +169,7 @@ var bounds_group = new L.featureGroup([]);
 
 
     //Scale
-    // L.control.scale().addTo(map);
+    L.control.scale().addTo(map);
 
 
 
@@ -244,40 +244,3 @@ legend.onAdd = function (map) {
   return cont_div;
 }
 legend.addTo(map);
-
-let table = L.control({position: "bottomleft"});
-table.onAdd = function (map) {
-  let cont_div = L.DomUtil.create('div', 'info legend');
-  cont_div.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-  cont_div.style.padding = "10px";
-  cont_div.innerHTML = `
-    <div><h4>Bangladesh</h4></div>
-    <style>
-      .legend-cb {
-        height: 0.8em;
-        width: 10px;
-        display: inline-block;
-        margin-right: 5px;
-      }
-    </style>
-    <div>
-      <h6>Confirmed</span>
-    </div>
-    <div>
-    
-    </div>
-    <div>
-      <span>Deaths</span>
-    </div>
-    <div>
-
-    </div>
-    <div>
-      <span>Recovered</span>
-    </div>
-    <div>
-    </div>
-  `;
-  return cont_div;
-}
-table.addTo(map);
