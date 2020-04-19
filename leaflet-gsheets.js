@@ -16,7 +16,7 @@ function init() {
 window.addEventListener("DOMContentLoaded", init);
 
 // Create a new Leaflet map centered on the continental US [23.699, 89.308], 7
-var map = L.map("map").setView([24.067, 90.352], 6);
+var map = L.map("map").setView([24.067, 90.352], 7);
 
 // This is the Carto Positron basemap
 var hash = new L.Hash(map);
@@ -26,7 +26,7 @@ var basemap = L.tileLayer(
   // "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png",
   {
     attribution:
-      "&copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> &copy; <a href='http://cartodb.com/attributions'>CartoDB</a>",
+      "&copy; Map Data <a href='https://www.iedcr.gov.bd/' target='_blank'>IEDCR</a>",
     subdomains: "abcd",
     maxZoom: 9,
     minZoom:6
@@ -81,6 +81,7 @@ function addPolygons(data) {
           male: data[row].male,
           female: data[row].female,
           child: data[row].child,
+          web: data[row].web,
           image: data[row].image
         }
       });
@@ -104,20 +105,23 @@ function addPolygons(data) {
             weight: polygonStyle.weight,
             fillColor: feature.fill_color,  // Use saved color
           });
-          e.target.bindPopup('<h6 style="text-align:center; color:#0000ff; margin-bottom:2px">'+ feature.properties.name +'</h6>');
+
+          // e.target.bindPopup('<h6 style="text-align:center; color:#0000ff; margin-bottom:2px">'+ feature.properties.confirmed +'</h6>');
         },
         mouseover: function(e) {
           e.target.setStyle(polygonHoverStyle);
+
         },
         click: function(e) {
                     
-                    var html = '<h6 style="text-align:center; color:#0000ff; margin-bottom:2px">'+ feature.properties.name +'</h6>';
-                    html += 'Quarantined: <b>' + feature.properties.quarantine + '</b><br/>';
+                    // var html = '<h6 style="text-align:center; color:#0000ff; margin-bottom:2px">'+ feature.properties.name +'</h6>';
+                    var html = 'Confirmed: <b>' + feature.properties.confirmed + '</b><br/>';
                     html += 'Recovered: <b>' + feature.properties.recover + '</b><br/>';
                     html += 'Death: <b>' + feature.properties.deaths + '</b><br/>';
-                    html += 'Male: <b>' + feature.properties.male + '</b><br/>';
-                    html += 'Female: <b>' + feature.properties.female + '</b><br/>';
-                    html += 'Child: <b>' + feature.properties.child + '</b><br/>';
+                    html += '<h6 style="text-align:center; color:#fff000; margin-bottom:2px">' + feature.properties.web +'</h6>';
+                    // html += 'Male: <b>' + feature.properties.male + '</b><br/>';
+                    // html += 'Female: <b>' + feature.properties.female + '</b><br/>';
+                    // html += 'Child: <b>' + feature.properties.child + '</b><br/>';
                     layer.bindPopup(html);
                 }
       });
@@ -125,24 +129,27 @@ function addPolygons(data) {
       let label = L.marker(layer.getBounds().getCenter(), {
       icon: L.divIcon({
         className: 'label',
-        html: feature.properties.name,
+        html: feature.properties.name +'<br/><h6 style="text-align:center; color:#ff0000; margin-bottom:2px"> ' + feature.properties.confirmed +' </h6>',
       })
     }).addTo(map);
     },
     style: polygonStyle
   }).addTo(map);
 
+
+
   // Set different polygon fill colors based on number of quarantined
   polygonLayer.eachLayer(function (layer) {
-    let d = layer.feature.properties.quarantine;
+    let d = layer.feature.properties.confirmed;
     let fc = d > 1000 ? '#800026' :
           d > 500  ? '#BD0026' :
-          d > 200  ? '#E31A1C' :
-          d > 100  ? '#FC4E2A' :
-          d > 50   ? '#FD8D3C' :
-          d > 20   ? '#FEB24C' :
-          d > 10   ? '#FED976' :
-          '#FFEDA0';
+          // d > 200  ? '#E31A1C' :
+          d > 100  ? '#E31A1C' :
+          d > 50   ? '#FC4E2A' :
+          d > 20   ? '#FD8D3C' :
+          d > 10   ? '#FEB24C' :
+          d > 0    ? '#FED976' :
+          '#FFFFFF';
     layer.setStyle({fillColor: fc});
     layer.feature.fill_color = fc;  // Save color to use again after mouseout
   });
@@ -158,11 +165,12 @@ var bounds_group = new L.featureGroup([]);
             map.setMaxBounds(map.getBounds());
         }setBounds();
 
+
     //logo position: bottomright, topright, topleft, bottomleft
     var logo = L.control({position: 'bottomleft'});
     logo.onAdd = function(map){
         var div = L.DomUtil.create('div', 'myclass');
-        div.innerHTML= "<img src='boil.png'/>";
+        div.innerHTML= "<a href='https://boiledbhoot.org/' target='_blank'>Powered by <img src='boil.png'/></a>";
         return div;
     }
     logo.addTo(map);
@@ -173,111 +181,52 @@ var bounds_group = new L.featureGroup([]);
 
 
 
-//     function getColor(d) {
-//     return d > 1000 ? '#800026' :
-//            d > 500  ? '#BD0026' :
-//            d > 200  ? '#E31A1C' :
-//            d > 100  ? '#FC4E2A' :
-//            d > 50   ? '#FD8D3C' :
-//            d > 20   ? '#FEB24C' :
-//            d > 10   ? '#FED976' :
-//                       '#FFEDA0';
-// }
-
-// function style(feature) {
-//     return {
-//         fillColor: getColor(feature.properties.quarantine),
-//         weight: 2,
-//         opacity: 1,
-//         color: 'white',
-//         dashArray: '3',
-//         fillOpacity: 0.7
-//     };
-// }
-
-// L.geoJson(geojsonStates, {style: style}).addTo(map);
-
 let legend = L.control({position: "bottomright"});
 legend.onAdd = function (map) {
   let cont_div = L.DomUtil.create('div', 'info legend');
   cont_div.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
   cont_div.style.padding = "10px";
   cont_div.innerHTML = `
-    <div><b>Quarantine color code</b></div>
+    <div><b>Confirmed Cases</b></div>
     <style>
       .legend-cb {
         height: 0.8em;
         width: 10px;
         display: inline-block;
         margin-right: 5px;
+        text-align: center;
       }
     </style>
     <div>
       <span class="legend-cb" style="background-color: #800026"></span>
-      <span>n > 1000</span>
+      <span>1000+ person</span>
     </div>
     <div>
       <span class="legend-cb" style="background-color: #BD0026"></span>
-      <span>999 > n > 500</span>
+      <span>500-999 person</span>
     </div>
     <div>
       <span class="legend-cb" style="background-color: #E31A1C"></span>
-      <span>499 > n > 100</span>
+      <span>100-499 person</span>
     </div>
     <div>
       <span class="legend-cb" style="background-color: #FC4E2A"></span>
-      <span>99 > n > 50</span>
+      <span>50-99 person</span>
     </div>
     <div>
       <span class="legend-cb" style="background-color: #FD8D3C"></span>
-      <span>49 > n > 20</span>
+      <span>20-49 person</span>
     </div>
     <div>
       <span class="legend-cb" style="background-color: #FEB24C"></span>
-      <span>19 > n > 10</span>
+      <span>10-19 person</span>
     </div>
     <div>
       <span class="legend-cb" style="background-color: #FED976"></span>
-      <span>9 > n</span>
+      <span>1-9 person</span>
     </div>
   `;
   return cont_div;
 }
 legend.addTo(map);
 
-let table = L.control({position: "bottomleft"});
-table.onAdd = function (map) {
-  let cont_div = L.DomUtil.create('div', 'info legend');
-  cont_div.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-  cont_div.style.padding = "10px";
-  cont_div.innerHTML = `
-    <div><h4>Bangladesh</h4></div>
-    <style>
-      .legend-cb {
-        height: 0.8em;
-        width: 10px;
-        display: inline-block;
-        margin-right: 5px;
-      }
-    </style>
-    <div>
-      <h6>Confirmed</span>
-    </div>
-    <div>
-    
-    </div>
-    <div>
-      <span>Deaths</span>
-    </div>
-    <div>
-
-    </div>
-    <div>
-      <span>Recovered</span>
-    </div>
-    <div>
-    </div>
-  `;
-  return cont_div;
-}
-table.addTo(map);

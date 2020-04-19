@@ -90,7 +90,7 @@ a:focus {
 }
 
 .navbar-custom a {
-    color: #E8566A;
+    color: #FFF; /*#E8566A*/
 }
 
 .navbar-custom .nav li a {
@@ -101,7 +101,7 @@ a:focus {
 
 .navbar-custom .nav li a:hover {
     outline: 0;
-    color: rgba(255,255,255,.8);
+    color: rgba(255,0,0,.8);
     background-color: transparent;
 }
 
@@ -463,3 +463,4 @@ body {
 .leaflet-marker-icon.label {
     color: #000;
 }
+
