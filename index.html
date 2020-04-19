@@ -15,6 +15,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/blueimp-gallery.min.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
+    <link href="css/L.Control.Locate.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -41,9 +42,24 @@
             margin: 0;
         }
         #map {
+            position:absolute;
+            z-index:0;
+
             height: 100%;
             width: 100%;
         }
+
+      marquee{
+      color: #fff;
+      font-size: 15px;
+      font-weight: 800;
+      position:absolute;
+      z-index:1;
+      top:90%;
+      right:20%;
+      left: 20%;
+      }
+
     </style>
 
 
@@ -128,12 +144,17 @@
         </div>
     </nav>
 
-          <div id="map"></div>
+<!--     <div id='chartbox'> -->
+
+    <marquee>ন্যাশনাল কল সেন্টার ৩৩৩ * স্বাস্থ্য বাতায়ন ১৬২৬৩ * আইইডিসিআর ১০৬৫৫ * বিশেষজ্ঞ হেলথ লাইন ০৯৬১১৬ ৭৭৭৭৭ * ন্যাশনাল হেল্পলাইন ১০৯ </marquee>
+
+    <div id="map"></div>
     <script src="js/leaflet.js"></script>
     <script src="js/leaflet-sidebar.js"></script>
     <script src="js/leaflet.awesome-markers.min.js"></script>
     <script src="js/tabletop.min.js"></script>
     <script src="js/leaflet-hash.js"></script>
+    <script src="js/L.Control.Locate.min.js"></script>
     <script src="leaflet-gsheets.js"></script>
 
 
