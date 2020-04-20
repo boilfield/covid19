@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>COVID-19 | Dhaka</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/blueimp-gallery.min.css" rel="stylesheet">
+    <link href="css/custom_dhaka.css" rel="stylesheet">
+    <link href="css/L.Control.Locate.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+  <script src="https://d3js.org/topojson.v1.min.js"></script>
+  <script src="https://d3js.org/d3-tile.v0.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/leaflet.esri/1.0.4/esri-leaflet.js"></script>
+
+  <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        #map {
+            position:absolute;
+            z-index:0;
+
+            height: 100%;
+            width: 100%;
+        }
+
+      marquee{
+      color: #fff;
+      font-size: 15px;
+      font-weight: 800;
+      position:absolute;
+      z-index:1;
+      top:90%;
+      right:20%;
+      left: 20%;
+      }
+
+      #mydiv {
+        position: absolute;
+        z-index: 2;
+        top:50%;
+        left: 1%;
+        padding-right: 10px;
+        background-color: rgba(0, 0, 0, 0.5);
+        text-align: center;
+/*        border: 1px solid #d3d3d3;*/
+      }
+
+      #mydivheader {
+        padding: 10px;
+        cursor: move;
+        z-index: 10;
+/*        background-color: #2196F3;*/
+        color: #fff;
+      }
+
+    </style>
+
+
+
+
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+
+  <!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
+  <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+      <!-- The container for the modal slides -->
+      <div class="slides"></div>
+      <!-- Controls for the borderless lightbox -->
+      <h3 class="title"></h3>
+      <a class="prev">‹</a>
+      <a class="next">›</a>
+      <a class="close">×</a>
+
+      <ol class="indicator"></ol>
+      <!-- The modal dialog, which will be used to wrap the lightbox content -->
+      <div class="modal fade">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" aria-hidden="true">&times;</button>
+                      <h4 class="modal-title"></h4>
+                  </div>
+                  <div class="modal-body next"></div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-default pull-left prev">
+                          <i class="glyphicon glyphicon-chevron-left"></i>
+                          Previous
+                      </button>
+                      <button type="button" class="btn btn-primary next">
+                          Next
+                          <i class="glyphicon glyphicon-chevron-right"></i>
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="dhaka.html">
+                    <i><img src="logo.png" style="width: 30px;height: 30px"></i>  <span class="light">COVID 19, Dhaka</span>
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="dhaka.html"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="index.html">Bangladesh</a>
+                    </li>
+<!--                     <li>
+                        <a class="page-scroll" href="pages/photos.html">Photos</a>
+                    </li> -->
+<!--                     <li>
+                        <a class="page-scroll" href="pages/news.html">News</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="pages/donation.html">Donation</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="pages/source.html">Source</a>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<!--     <div id='chartbox'> -->
+
+ <!--    <marquee>ন্যাশনাল কল সেন্টার ৩৩৩ * স্বাস্থ্য বাতায়ন ১৬২৬৩ * আইইডিসিআর ১০৬৫৫ * বিশেষজ্ঞ হেলথ লাইন ০৯৬১১৬ ৭৭৭৭৭ * ন্যাশনাল হেল্পলাইন ১০৯ </marquee> -->
+
+<!--     <div id="mydiv">
+      <div id="mydivheader">Total</div>
+      <h6 style="margin-bottom: 0px; color: #FD8D3C">Confermed</h6>
+      <h6 style="margin-bottom: 0px; color: green">Recovered</h6>
+      <h6 style="margin-bottom: 0px; color: red">Death</h6>
+    </div>
+ -->
+
+    <div id="map"></div>
+    <script src="js/leaflet.js"></script>
+    <script src="js/leaflet-sidebar.js"></script>
+    <script src="js/leaflet.awesome-markers.min.js"></script>
+    <script src="js/tabletop.min.js"></script>
+    <script src="js/leaflet-hash.js"></script>
+    <script src="js/L.Control.Locate.min.js"></script>
+    <script src="leaflet-dhaka.js"></script>
+    <script src="js/drag.js"></script>
+
+
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/jquery.blueimp-gallery.min.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
