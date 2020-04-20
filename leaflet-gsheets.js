@@ -19,7 +19,7 @@ function init() {
 window.addEventListener("DOMContentLoaded", init);
 
 // Create a new Leaflet map centered on the continental US [23.699, 89.308], 7
-var map = L.map("map").setView([24.067, 90.352], 7);
+var map = L.map("map").setView([23.373, 90.308], 7);
 
 // This is the Carto Positron basemap
 var hash = new L.Hash(map);
@@ -163,12 +163,13 @@ function addPolygons(data) {
 
 //bound box
 var bounds_group = new L.featureGroup([]);
-        function setBounds() {
-            if (bounds_group.getLayers().length) {
-                map.fitBounds(bounds_group.getBounds());
-            }
-            map.setMaxBounds(map.getBounds());
-        }setBounds();
+function setBounds() {
+  if (bounds_group.getLayers().length) {
+    map.fitBounds(bounds_group.getBounds());
+  }
+  map.setMaxBounds([[19.197,86.847],[27.713,93.768]]);
+}
+setBounds();
 
 
     //logo position: bottomright, topright, topleft, bottomleft
