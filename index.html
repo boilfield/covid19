@@ -60,6 +60,25 @@
       left: 20%;
       }
 
+      #mydiv {
+        position: absolute;
+        z-index: 2;
+        top:50%;
+        left: 1%;
+        padding-right: 10px;
+        background-color: rgba(0, 0, 0, 0.5);
+        text-align: center;
+/*        border: 1px solid #d3d3d3;*/
+      }
+
+      #mydivheader {
+        padding: 10px;
+        cursor: move;
+        z-index: 10;
+/*        background-color: #2196F3;*/
+        color: #fff;
+      }
+
     </style>
 
 
@@ -148,6 +167,14 @@
 
     <marquee>ন্যাশনাল কল সেন্টার ৩৩৩ * স্বাস্থ্য বাতায়ন ১৬২৬৩ * আইইডিসিআর ১০৬৫৫ * বিশেষজ্ঞ হেলথ লাইন ০৯৬১১৬ ৭৭৭৭৭ * ন্যাশনাল হেল্পলাইন ১০৯ </marquee>
 
+    <div id="mydiv">
+      <div id="mydivheader">Total</div>
+      <h6 style="margin-bottom: 0px; color: #FD8D3C">Confermed</h6>
+      <h6 style="margin-bottom: 0px; color: green">Recovered</h6>
+      <h6 style="margin-bottom: 0px; color: red">Death</h6>
+    </div>
+
+
     <div id="map"></div>
     <script src="js/leaflet.js"></script>
     <script src="js/leaflet-sidebar.js"></script>
@@ -156,6 +183,7 @@
     <script src="js/leaflet-hash.js"></script>
     <script src="js/L.Control.Locate.min.js"></script>
     <script src="leaflet-gsheets.js"></script>
+    <script src="js/drag.js"></script>
 
 
     <script src="js/jquery-1.11.3.min.js"></script>
