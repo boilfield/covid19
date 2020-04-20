@@ -2,6 +2,8 @@ let total_conf = 0;
 let total_recv = 0;
 let total_dead = 0;
 
+let map_lang = localStorage.getItem("map_lang") || "bn";
+
 // init() is called as soon as the page loads
 function init() {
   // PASTE YOUR URLs HERE
@@ -79,7 +81,7 @@ function addPolygons(data) {
           coordinates: coords
         },
         properties: {
-          name: data[row].name,
+          name: map_lang==="bn" ? data[row].name_bd : data[row].name,
           confirmed: data[row].confirmed,
           deaths: data[row].deaths,
           recover: data[row].recover,
