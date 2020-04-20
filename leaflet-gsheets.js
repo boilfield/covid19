@@ -122,20 +122,14 @@ function addPolygons(data) {
         mouseover: function(e) {
           e.target.setStyle(polygonHoverStyle);
 
-        },
-        click: function(e) {
-                    
-                    // var html = '<h6 style="text-align:center; color:#0000ff; margin-bottom:2px">'+ feature.properties.name +'</h6>';
-                    var html = 'Confirmed: <b>' + feature.properties.confirmed + '</b><br/>';
-                    html += 'Recovered: <b>' + feature.properties.recover + '</b><br/>';
-                    html += 'Death: <b>' + feature.properties.deaths + '</b><br/>';
-                    html += '<h6 class="more-button">' + feature.properties.web +'</h6>';
-                    // html += 'Male: <b>' + feature.properties.male + '</b><br/>';
-                    // html += 'Female: <b>' + feature.properties.female + '</b><br/>';
-                    // html += 'Child: <b>' + feature.properties.child + '</b><br/>';
-                    layer.bindPopup(html);
-                }
+        }
       });
+
+      var html = 'Confirmed: <b>' + feature.properties.confirmed + '</b><br/>';
+      html += 'Recovered: <b>' + feature.properties.recover + '</b><br/>';
+      html += 'Death: <b>' + feature.properties.deaths + '</b><br/>';
+      html += '<h6 class="more-button">' + feature.properties.web +'</h6>';
+      layer.bindPopup(html);
 
       let label = L.marker(layer.getBounds().getCenter(), {
       icon: L.divIcon({
