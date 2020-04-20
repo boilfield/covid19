@@ -1,3 +1,6 @@
+let total_conf = 0;
+let total_recv = 0;
+let total_dead = 0;
 
 // init() is called as soon as the page loads
 function init() {
@@ -66,6 +69,9 @@ function addPolygons(data) {
     // The Sheets data has a column 'include' that specifies if that row should be mapped
     if (data[row].include == "y") {
       var coords = JSON.parse(data[row].geometry);
+      total_conf += parseInt(data[row].confirmed);
+      total_recv += parseInt(data[row].recover);
+      total_dead += parseInt(data[row].deaths);
       geojsonStates.features.push({
         type: "Feature",
         geometry: {
@@ -87,6 +93,11 @@ function addPolygons(data) {
       });
     }
   }
+
+  document.getElementById("total_conf").textContent = total_conf;
+  document.getElementById("total_recv").textContent = total_recv;
+  document.getElementById("total_dead").textContent = total_dead;
+
   // The polygons are styled slightly differently on mouse hovers
   var polygonStyle = { color: "#f78c72", fillColor: "#f78c72" , weight: 1.5, fillOpacity: 1};
   var polygonHoverStyle = { color: "#f5eb5d", fillColor: "#f7ea2f", weight: 1.5, fillOpacity: 1};
@@ -118,7 +129,7 @@ function addPolygons(data) {
                     var html = 'Confirmed: <b>' + feature.properties.confirmed + '</b><br/>';
                     html += 'Recovered: <b>' + feature.properties.recover + '</b><br/>';
                     html += 'Death: <b>' + feature.properties.deaths + '</b><br/>';
-                    html += '<h6 style="text-align:center; color:#fff000; margin-bottom:2px">' + feature.properties.web +'</h6>';
+                    html += '<h6 class="more-button">' + feature.properties.web +'</h6>';
                     // html += 'Male: <b>' + feature.properties.male + '</b><br/>';
                     // html += 'Female: <b>' + feature.properties.female + '</b><br/>';
                     // html += 'Child: <b>' + feature.properties.child + '</b><br/>';
@@ -170,7 +181,7 @@ var bounds_group = new L.featureGroup([]);
     var logo = L.control({position: 'bottomleft'});
     logo.onAdd = function(map){
         var div = L.DomUtil.create('div', 'myclass');
-        div.innerHTML= "<a href='https://boiledbhoot.org/' target='_blank'>Powered by <img src='boil.png'/></a>";
+        div.innerHTML= "<a href='https://boiledbhoot.org/' target='_blank'>Powered and maintained by <img height='25px' src='boil.png'/></a>";
         return div;
     }
     logo.addTo(map);
@@ -199,31 +210,31 @@ legend.onAdd = function (map) {
     </style>
     <div>
       <span class="legend-cb" style="background-color: #800026"></span>
-      <span>1000+ person</span>
+      <span>1000+ people</span>
     </div>
     <div>
       <span class="legend-cb" style="background-color: #BD0026"></span>
-      <span>500-999 person</span>
+      <span>500-999 people</span>
     </div>
     <div>
       <span class="legend-cb" style="background-color: #E31A1C"></span>
-      <span>100-499 person</span>
+      <span>100-499 people</span>
     </div>
     <div>
       <span class="legend-cb" style="background-color: #FC4E2A"></span>
-      <span>50-99 person</span>
+      <span>50-99 people</span>
     </div>
     <div>
       <span class="legend-cb" style="background-color: #FD8D3C"></span>
-      <span>20-49 person</span>
+      <span>20-49 people</span>
     </div>
     <div>
       <span class="legend-cb" style="background-color: #FEB24C"></span>
-      <span>10-19 person</span>
+      <span>10-19 people</span>
     </div>
     <div>
       <span class="legend-cb" style="background-color: #FED976"></span>
-      <span>1-9 person</span>
+      <span>1-9 people</span>
     </div>
   `;
   return cont_div;

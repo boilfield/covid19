@@ -10,15 +10,14 @@
     <meta name="author" content="">
 
     <title>COVID-19 | Bangladesh</title>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/blueimp-gallery.min.css" rel="stylesheet">
-    <link href="css/custom.css" rel="stylesheet">
-    <link href="css/L.Control.Locate.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/blueimp-gallery.min.css" rel="stylesheet">
+    <link href="../css/custom_cg.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
 
@@ -28,59 +27,6 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
-  <script src="https://d3js.org/d3.v3.min.js"></script>
-  <script src="https://d3js.org/topojson.v1.min.js"></script>
-  <script src="https://d3js.org/d3-tile.v0.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/leaflet.esri/1.0.4/esri-leaflet.js"></script>
-
-  <style>
-        body {
-            padding: 0;
-            margin: 0;
-        }
-        #map {
-            position:absolute;
-            z-index:0;
-            height: 100%;
-            width: 100%;
-        }
-
-      marquee{
-      color: #fff;
-      font-size: 15px;
-      font-weight: 800;
-      position:absolute;
-      z-index:1;
-      bottom: 0;
-      width: 70vw;
-      left: 15vw;
-      background-color: rgba(0, 0, 0, 0.5);
-      }
-
-      #mydiv {
-        position: absolute;
-        z-index: 2;
-        bottom: 40px;
-        padding: 20px 10px;
-        background-color: rgba(0, 0, 0, 0.5);
-        text-align: center;
-        margin-left: 10px;
-      }
-
-      #mydivheader {
-        padding: 10px;
-        cursor: move;
-        z-index: 10;
-/*        background-color: #2196F3;*/
-        color: #fff;
-      }
-
-    </style>
-
-
 
 
 </head>
@@ -130,8 +76,8 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="index.html">
-                    <i><img src="logo.png" style="width: 30px;height: 30px"></i>  <span class="light">COVID 19, Bangladesh</span>
+                <a class="navbar-brand page-scroll" href="../index.html">
+                    <i><img src="../logo.png" style="width: 30px;height: 30px"></i>  <span class="light">COVID 19, Bangladesh</span>
                 </a>
             </div>
 
@@ -140,19 +86,19 @@
                 <ul class="nav navbar-nav">
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                     <li class="hidden">
-                        <a href="index.html"></a>
+                        <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="pages/dashboard.html">Dashboard</a>
+                        <a class="page-scroll" href="dashboard.html">Dashboard</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="pages/news.html">News</a>
+                        <a class="page-scroll" href="news.html">News</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="pages/engagement.html">Engage</a>
+                        <a class="page-scroll" href="engagement.html">Engage</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="pages/source.html">Source</a>
+                        <a class="page-scroll" href="source.html">Source</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="https://www.worldometers.info/coronavirus/" target="_blank">Global</a>
@@ -162,34 +108,42 @@
         </div>
     </nav>
 
-<!--     <div id='chartbox'> -->
+ <!-- News Section -->
 
-    <marquee>ন্যাশনাল কল সেন্টার ৩৩৩ * স্বাস্থ্য বাতায়ন ১৬২৬৩ * আইইডিসিআর ১০৬৫৫ * বিশেষজ্ঞ হেলথ লাইন ০৯৬১১৬ ৭৭৭৭৭ * ন্যাশনাল হেল্পলাইন ১০৯ </marquee>
 
-    <div id="mydiv">
-      <div id="mydivheader">TOTAL</div>
-      <h6 style="margin-bottom: 0px; color: #FD8D3C">Confirmed: <span id="total_conf" class="total-info-bd"></span></h6>
-      <h6 style="margin-bottom: 0px; color: green">Recovered: <span id="total_recv" class="total-info-bd"></span></h6>
-      <h6 style="margin-bottom: 0px; color: red">Dead: <span id="total_dead" class="total-info-bd"></span></h6>
+  <section id="web" class="content-section"></section>
+
+
+
+    <!-- Footer -->
+    <br>
+
+    <div class="attr-footer">
+      <a href='https://boiledbhoot.org/' target='_blank'>
+        Powered and maintained by
+        <img height='25px' src='../boil.png'/>
+      </a>
     </div>
 
 
-    <div id="map"></div>
+
+
+
+
+<!--      <div id="map"></div>
     <script src="js/leaflet.js"></script>
     <script src="js/leaflet-sidebar.js"></script>
     <script src="js/leaflet.awesome-markers.min.js"></script>
     <script src="js/tabletop.min.js"></script>
     <script src="js/leaflet-hash.js"></script>
-    <script src="js/L.Control.Locate.min.js"></script>
     <script src="leaflet-gsheets.js"></script>
-    <script src="js/drag.js"></script>
+ -->
 
-
-    <script src="js/jquery-1.11.3.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.easing.min.js"></script>
-    <script src="js/jquery.blueimp-gallery.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="../js/jquery-1.11.3.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.easing.min.js"></script>
+    <script src="../js/jquery.blueimp-gallery.min.js"></script>
+    <script src="../js/main.js"></script>
 
 </body>
 
