@@ -168,7 +168,7 @@ var bounds_group = new L.featureGroup([]);
     var logo = L.control({position: 'bottomleft'});
     logo.onAdd = function(map){
         var div = L.DomUtil.create('div', 'myclass');
-        div.innerHTML= "<a href='https://boiledbhoot.org/' target='_blank'>Powered & maintaied by <img src='boil.png'/></a>";
+        div.innerHTML= "<a href='https://boiledbhoot.org/' target='_blank'>Powered & maintaied by <img height='25px' src='boil.png'/></a>";
         return div;
     }
     logo.addTo(map);
