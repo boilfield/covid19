@@ -2,8 +2,6 @@ let total_conf = 0;
 let total_recv = 0;
 let total_dead = 0;
 
-let map_lang = localStorage.getItem("map_lang") || "bn";
-
 // init() is called as soon as the page loads
 function init() {
   // PASTE YOUR URLs HERE
@@ -127,10 +125,10 @@ function addPolygons(data) {
         }
       });
 
-      var html = 'Confirmed: <b>' + feature.properties.confirmed + '</b><br/>';
-      html += 'Recovered: <b>' + feature.properties.recover + '</b><br/>';
-      html += 'Death: <b>' + feature.properties.deaths + '</b><br/>';
-      html += '<h6 class="more-button">' + feature.properties.web +'</h6>';
+      var html = (map_lang === "bn" ? "নিশ্চিত: <b>" : 'Confirmed: <b>') + feature.properties.confirmed + '</b><br/>';
+      html += (map_lang === "bn" ? "সুস্থ: <b>" : 'Recovered: <b>') + feature.properties.recover + '</b><br/>';
+      html += (map_lang === "bn" ? "মৃত: <b>" : 'Death: <b>') + feature.properties.deaths + '</b><br/>';
+      html += '<h6 class="more-button">' + (feature.properties.web && map_lang === "bn" ? "<a href='../dhaka.html' target='_blank'>বিস্তারিত তথ্য</a>" : feature.properties.web) +'</h6>';
       layer.bindPopup(html);
 
       let label = L.marker(layer.getBounds().getCenter(), {
@@ -194,8 +192,8 @@ legend.onAdd = function (map) {
   let cont_div = L.DomUtil.create('div', 'info legend');
   cont_div.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
   cont_div.style.padding = "10px";
-  cont_div.innerHTML = `
-    <div><b>Confirmed Cases</b></div>
+  cont_div.innerHTML = "<div><b>" + (map_lang === "bn" ? "নিশ্চিত কেসের সংখ্যা" : "Confirmed Cases") + "</b></div>" +
+    `
     <style>
       .legend-cb {
         height: 0.8em;
@@ -207,31 +205,45 @@ legend.onAdd = function (map) {
     </style>
     <div>
       <span class="legend-cb" style="background-color: #800026"></span>
-      <span>1000+ people</span>
+    ` +
+      "<span>" + (map_lang === "bn" ? "১০০০+ জন" : "1000+ people") + "</span>" +
+    `
     </div>
     <div>
       <span class="legend-cb" style="background-color: #BD0026"></span>
-      <span>500-999 people</span>
+    ` +
+      "<span>" + (map_lang === "bn" ? "৫০০-৯৯৯ জন" : "500-999 people") + "</span>" +
+    `
     </div>
     <div>
       <span class="legend-cb" style="background-color: #E31A1C"></span>
-      <span>100-499 people</span>
+    ` +
+      "<span>" + (map_lang === "bn" ? "১০০-৪৯৯ জন" : "100-499 people") + "</span>" +
+    `
     </div>
     <div>
       <span class="legend-cb" style="background-color: #FC4E2A"></span>
-      <span>50-99 people</span>
+    ` +
+      "<span>" + (map_lang === "bn" ? "৫০-৯৯ জন" : "50-99 people") + "</span>" +
+    `
     </div>
     <div>
       <span class="legend-cb" style="background-color: #FD8D3C"></span>
-      <span>20-49 people</span>
+    ` +
+      "<span>" + (map_lang === "bn" ? "২০-৪৯ জন" : "20-49 people") + "</span>" +
+    `
     </div>
     <div>
       <span class="legend-cb" style="background-color: #FEB24C"></span>
-      <span>10-19 people</span>
+    ` +
+      "<span>" + (map_lang === "bn" ? "১০-১৯ জন" : "10-19 people") + "</span>" +
+    `
     </div>
     <div>
       <span class="legend-cb" style="background-color: #FED976"></span>
-      <span>1-9 people</span>
+    ` +
+      "<span>" + (map_lang === "bn" ? "১-৯ জন" : "1-9 people") + "</span>" +
+    `
     </div>
   `;
   return cont_div;
