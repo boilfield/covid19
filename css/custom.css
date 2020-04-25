@@ -97,12 +97,13 @@ a:focus {
     -webkit-transition: background .3s ease-in-out;
     -moz-transition: background .3s ease-in-out;
     transition: background .3s ease-in-out;
+    background-color: transparent;
 }
 
 .navbar-custom .nav li a:hover {
-    outline: 0;
-    color: rgba(255,0,0,.8);
-    background-color: transparent;
+    /*outline: 0;*/
+    /*color: rgba(255,0,0,.8);*/
+    font-weight: 700;
 }
 
 .navbar-custom .nav li a:focus,
@@ -115,17 +116,9 @@ a:focus {
     outline: 0;
 }
 
-.navbar-custom .nav li.active a {
-    background-color: rgba(255,255,255,.3);
-}
-
-.navbar-custom .nav li.active a:hover {
-    color: #fff;
-}
-
-@media(min-width:768px) {
+@media(min-width:992px) {
     .navbar-custom {
-        padding: 20px 0;
+        padding: 10px 0;
         border-bottom: 0;
         letter-spacing: 1px;
         background: 0 0;
@@ -464,3 +457,39 @@ body {
     color: #000;
 }
 
+
+
+
+/* Override / later addition */
+
+.leaflet-popup .leaflet-popup-content-wrapper,
+.leaflet-popup .leaflet-popup-tip {
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 3px -3px 14px rgba(0, 0, 0, 0.4);
+}
+
+.leaflet-popup .leaflet-popup-content-wrapper {
+    border-radius: 0;
+}
+
+.leaflet-popup .leaflet-popup-content {
+    color: #fff;
+    line-height: 1.7;
+}
+
+.more-button {
+    text-align:center;
+    margin: 10px 0 5px;
+}
+
+.leaflet-popup .more-button a {
+    color: #fff;
+}
+
+.leaflet-popup .more-button a:hover {
+    color: #ccc;
+}
+
+#map {
+    font-size: 14px;
+}

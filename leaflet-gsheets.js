@@ -1,3 +1,6 @@
+let total_conf = 0;
+let total_recv = 0;
+let total_dead = 0;
 
 // init() is called as soon as the page loads
 function init() {
@@ -16,7 +19,7 @@ function init() {
 window.addEventListener("DOMContentLoaded", init);
 
 // Create a new Leaflet map centered on the continental US [23.699, 89.308], 7
-var map = L.map("map").setView([24.067, 90.352], 7);
+var map = L.map("map").setView([23.373, 90.308], 7);
 
 // This is the Carto Positron basemap
 var hash = new L.Hash(map);
@@ -66,6 +69,9 @@ function addPolygons(data) {
     // The Sheets data has a column 'include' that specifies if that row should be mapped
     if (data[row].include == "y") {
       var coords = JSON.parse(data[row].geometry);
+      total_conf += parseInt(data[row].confirmed);
+      total_recv += parseInt(data[row].recover);
+      total_dead += parseInt(data[row].deaths);
       geojsonStates.features.push({
         type: "Feature",
         geometry: {
@@ -73,7 +79,7 @@ function addPolygons(data) {
           coordinates: coords
         },
         properties: {
-          name: data[row].name,
+          name: map_lang==="bn" ? data[row].name_bd : data[row].name,
           confirmed: data[row].confirmed,
           deaths: data[row].deaths,
           recover: data[row].recover,
@@ -87,6 +93,11 @@ function addPolygons(data) {
       });
     }
   }
+
+  document.getElementById("total_conf").textContent = total_conf;
+  document.getElementById("total_recv").textContent = total_recv;
+  document.getElementById("total_dead").textContent = total_dead;
+
   // The polygons are styled slightly differently on mouse hovers
   var polygonStyle = { color: "#f78c72", fillColor: "#f78c72" , weight: 1.5, fillOpacity: 1};
   var polygonHoverStyle = { color: "#f5eb5d", fillColor: "#f7ea2f", weight: 1.5, fillOpacity: 1};
@@ -111,20 +122,14 @@ function addPolygons(data) {
         mouseover: function(e) {
           e.target.setStyle(polygonHoverStyle);
 
-        },
-        click: function(e) {
-                    
-                    // var html = '<h6 style="text-align:center; color:#0000ff; margin-bottom:2px">'+ feature.properties.name +'</h6>';
-                    var html = 'Confirmed: <b>' + feature.properties.confirmed + '</b><br/>';
-                    html += 'Recovered: <b>' + feature.properties.recover + '</b><br/>';
-                    html += 'Death: <b>' + feature.properties.deaths + '</b><br/>';
-                    html += '<h6 style="text-align:center; color:#fff000; margin-bottom:2px">' + feature.properties.web +'</h6>';
-                    // html += 'Male: <b>' + feature.properties.male + '</b><br/>';
-                    // html += 'Female: <b>' + feature.properties.female + '</b><br/>';
-                    // html += 'Child: <b>' + feature.properties.child + '</b><br/>';
-                    layer.bindPopup(html);
-                }
+        }
       });
+
+      var html = (map_lang === "bn" ? "নিশ্চিত: <b>" : 'Confirmed: <b>') + feature.properties.confirmed + '</b><br/>';
+      html += (map_lang === "bn" ? "সুস্থ: <b>" : 'Recovered: <b>') + feature.properties.recover + '</b><br/>';
+      html += (map_lang === "bn" ? "মৃত: <b>" : 'Death: <b>') + feature.properties.deaths + '</b><br/>';
+      html += '<h6 class="more-button">' + (feature.properties.web && map_lang === "bn" ? "<a href='../dhaka.html' target='_blank'>বিস্তারিত তথ্য</a>" : feature.properties.web) +'</h6>';
+      layer.bindPopup(html);
 
       let label = L.marker(layer.getBounds().getCenter(), {
       icon: L.divIcon({
@@ -158,19 +163,20 @@ function addPolygons(data) {
 
 //bound box
 var bounds_group = new L.featureGroup([]);
-        function setBounds() {
-            if (bounds_group.getLayers().length) {
-                map.fitBounds(bounds_group.getBounds());
-            }
-            map.setMaxBounds(map.getBounds());
-        }setBounds();
+function setBounds() {
+  if (bounds_group.getLayers().length) {
+    map.fitBounds(bounds_group.getBounds());
+  }
+  map.setMaxBounds([[19.197,86.847],[27.713,93.768]]);
+}
+setBounds();
 
 
     //logo position: bottomright, topright, topleft, bottomleft
     var logo = L.control({position: 'bottomleft'});
     logo.onAdd = function(map){
         var div = L.DomUtil.create('div', 'myclass');
-        div.innerHTML= "<a href='https://boiledbhoot.org/' target='_blank'>Powered by <img src='boil.png'/></a>";
+        div.innerHTML= "<a href='https://boiledbhoot.org/' target='_blank'>Powered and maintained by <img height='25px' src='boil.png'/></a>";
         return div;
     }
     logo.addTo(map);
@@ -186,8 +192,8 @@ legend.onAdd = function (map) {
   let cont_div = L.DomUtil.create('div', 'info legend');
   cont_div.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
   cont_div.style.padding = "10px";
-  cont_div.innerHTML = `
-    <div><b>Confirmed Cases</b></div>
+  cont_div.innerHTML = "<div><b>" + (map_lang === "bn" ? "নিশ্চিত কেসের সংখ্যা" : "Confirmed Cases") + "</b></div>" +
+    `
     <style>
       .legend-cb {
         height: 0.8em;
@@ -199,31 +205,45 @@ legend.onAdd = function (map) {
     </style>
     <div>
       <span class="legend-cb" style="background-color: #800026"></span>
-      <span>1000+ person</span>
+    ` +
+      "<span>" + (map_lang === "bn" ? "১০০০+ জন" : "1000+ people") + "</span>" +
+    `
     </div>
     <div>
       <span class="legend-cb" style="background-color: #BD0026"></span>
-      <span>500-999 person</span>
+    ` +
+      "<span>" + (map_lang === "bn" ? "৫০০-৯৯৯ জন" : "500-999 people") + "</span>" +
+    `
     </div>
     <div>
       <span class="legend-cb" style="background-color: #E31A1C"></span>
-      <span>100-499 person</span>
+    ` +
+      "<span>" + (map_lang === "bn" ? "১০০-৪৯৯ জন" : "100-499 people") + "</span>" +
+    `
     </div>
     <div>
       <span class="legend-cb" style="background-color: #FC4E2A"></span>
-      <span>50-99 person</span>
+    ` +
+      "<span>" + (map_lang === "bn" ? "৫০-৯৯ জন" : "50-99 people") + "</span>" +
+    `
     </div>
     <div>
       <span class="legend-cb" style="background-color: #FD8D3C"></span>
-      <span>20-49 person</span>
+    ` +
+      "<span>" + (map_lang === "bn" ? "২০-৪৯ জন" : "20-49 people") + "</span>" +
+    `
     </div>
     <div>
       <span class="legend-cb" style="background-color: #FEB24C"></span>
-      <span>10-19 person</span>
+    ` +
+      "<span>" + (map_lang === "bn" ? "১০-১৯ জন" : "10-19 people") + "</span>" +
+    `
     </div>
     <div>
       <span class="legend-cb" style="background-color: #FED976"></span>
-      <span>1-9 person</span>
+    ` +
+      "<span>" + (map_lang === "bn" ? "১-৯ জন" : "1-9 people") + "</span>" +
+    `
     </div>
   `;
   return cont_div;
