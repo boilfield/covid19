@@ -78,6 +78,51 @@
         color: #fff;
       }
 
+      #repbox{
+        height: 120px;
+        width: 350px;
+        background-color: rgba(0, 0, 0, 0.5);
+        position:absolute;
+        z-index:6;
+        bottom: 0;
+        right: 40vw;
+        margin-bottom: 20px;
+      }
+      #rephead{
+        height: 35px;
+        width: 350px;
+        position:absolute;
+        z-index:7;
+        background-color: rgba(255, 100, 255, 0.5);
+      }
+      #reptbox{
+        height: 20px;
+        width: 110px;
+        position:absolute;
+        z-index:8;
+        margin-top: 0px;
+        background-color: rgba(255, 100, 100, 0.5);
+        border: solid red 1px;
+      }
+      #repibox{
+        height: 65px;
+        width: 110px;
+        position:absolute;
+        z-index:8;
+        margin-top: 0px;
+        background-color: rgba(125, 100, 100, 0.5);
+        border: solid red 1px;
+      }
+      #repibox1{
+        height: 21px;
+        width: 110px;
+        position:absolute;
+        z-index:8;
+        margin-top: 0px;
+        background-color: rgba(255, 100, 100, 0.5);
+        border: solid red 1px;
+      }
+
     </style>
 
 
@@ -168,13 +213,57 @@
 <!--     <div id='chartbox'> -->
 
     <marquee>ন্যাশনাল কল সেন্টার ৩৩৩ * স্বাস্থ্য বাতায়ন ১৬২৬৩ * আইইডিসিআর ১০৬৫৫ * বিশেষজ্ঞ হেলথ লাইন ০৯৬১১৬ ৭৭৭৭৭ * ন্যাশনাল হেল্পলাইন ১০৯ </marquee>
+    <div id="repbox">
+      <div id="rephead">
+        <h2 style="text-align: center; margin-bottom: 2px;">Total Status</h2>
+        <div id="reptbox" style="width:  130px">
+          <h5 style="text-align: center; margin-top: 2px;"></h5>
+        </div>
+        <div id="reptbox" style="margin-left: 130px">
+          <h5 style="text-align: center; margin-top: 2px;">Today</h5>
+        </div>
+        <div id="reptbox" style="margin-left: 240px">
+          <h5 style="text-align: center; margin-top: 2px;">Total</h5>
+        </div>
+        <div id="repibox" style="width:  130px; margin-top: 20px;">
+          <div id="repibox1" style="width:  130px;">
+            <h5 style="text-align: center; margin-top: 2px;">Confirmed</h5>
+          </div>
+          <div id="repibox1" style="width:  130px; margin-top: 21px">
+            <h5 style="text-align: center; margin-top: 2px;">Recovered</h5>
+          </div>
+          <div id="repibox1" style="width:  130px; height: 23px; margin-top: 42px;">
+            <h5 style="text-align: center; margin-top: 2px;">Dead</h5>
+          </div>
+        </div>
+        <div id="repibox" style="margin-left: 130px; margin-top: 20px; ">
+          <div id="repibox1"></div>
+          <div id="repibox1" style="margin-top: 21px"></div>
+          <div id="repibox1" style="height: 23px; margin-top: 42px;"></div>
+        </div>
+        <div id="repibox" style="margin-left: 240px; margin-top: 20px;">
+          <div id="repibox1">
+            <h5 style="margin-bottom: 0px; color: #fff; text-align: center; margin-top: 2px;" > <span id="total_conf" class="total-info-bd"></span></h5>
+          </div>
+          <div id="repibox1" style="margin-top: 21px">
+            <h5 style="margin-bottom: 0px; color: #fff; text-align: center; margin-top: 2px;"> <span id="total_recv" class="total-info-bd"></span></h5>
+          </div>
+          <div id="repibox1" style="height: 23px; margin-top: 42px;">
+            <h5 style="margin-bottom: 0px; color: #fff; text-align: center; margin-top: 2px;"> <span id="total_dead" class="total-info-bd"></span></h5>
+          </div>
+        </div>
+      </div>
 
-    <div id="mydiv">
+
+    </div>
+
+   <!--  <div id="mydiv">
       <div id="mydivheader">TOTAL</div>
+
       <h6 style="margin-bottom: 0px; color: #FD8D3C">Confirmed: <span id="total_conf" class="total-info-bd"></span></h6>
       <h6 style="margin-bottom: 0px; color: green">Recovered: <span id="total_recv" class="total-info-bd"></span></h6>
       <h6 style="margin-bottom: 0px; color: red">Dead: <span id="total_dead" class="total-info-bd"></span></h6>
-    </div>
+    </div> -->
 
     <script type="text/javascript">
       let map_lang = "en";
@@ -182,6 +271,13 @@
 
 
     <div id="map"></div>
+
+
+
+
+
+
+
     <script src="js/leaflet.js"></script>
     <script src="js/leaflet-sidebar.js"></script>
     <script src="js/leaflet.awesome-markers.min.js"></script>
