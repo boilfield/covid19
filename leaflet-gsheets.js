@@ -264,7 +264,7 @@ let stat_table_html = `
     <table class="map-stat-table">
       <tr>
         <th id="mst_heading_status">Status</th>
-        <th id="mst_heading_today">Today</th>
+        <th id="mst_heading_today">24 hr</th>
         <th id="mst_heading_total">Total</th>
       </tr>
       <tr class="mst-row-conf">
@@ -294,7 +294,7 @@ let stat_table = L.marker([21, 89], {
 
 if (map_lang === "bn") {
   document.getElementById("mst_heading_status").innerText = "অবস্থা";
-  document.getElementById("mst_heading_today").innerText = "আজ";
+  document.getElementById("mst_heading_today").innerText = "২৪ ঘণ্টা";
   document.getElementById("mst_heading_total").innerText = "মোট";
   document.getElementById("mst_label_conf").innerText = "নিশ্চিত";
   document.getElementById("mst_label_rcov").innerText = "সুস্থ";
