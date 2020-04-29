@@ -44,10 +44,6 @@ basemap.addTo(map);
 
 //Zoom Comtroler
 map.zoomControl.remove();
-// map.on('click', function (feature, layer) {
-//   // sidebar.close(panelID);
-// });
- // L.control.locate().addTo(map);
 
 
 
