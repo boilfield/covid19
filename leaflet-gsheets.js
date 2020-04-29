@@ -222,37 +222,37 @@ legend.onAdd = function (map) {
     <div>
       <span class="legend-cb" style="background-color: #BD0026"></span>
     ` +
-      "<span>" + (map_lang === "bn" ? "৫০০-৯৯৯ জন" : "500-999 people") + "</span>" +
+      "<span>" + (map_lang === "bn" ? "৫০০–৯৯৯ জন" : "500-999 people") + "</span>" +
     `
     </div>
     <div>
       <span class="legend-cb" style="background-color: #E31A1C"></span>
     ` +
-      "<span>" + (map_lang === "bn" ? "১০০-৪৯৯ জন" : "100-499 people") + "</span>" +
+      "<span>" + (map_lang === "bn" ? "১০০–৪৯৯ জন" : "100-499 people") + "</span>" +
     `
     </div>
     <div>
       <span class="legend-cb" style="background-color: #FC4E2A"></span>
     ` +
-      "<span>" + (map_lang === "bn" ? "৫০-৯৯ জন" : "50-99 people") + "</span>" +
+      "<span>" + (map_lang === "bn" ? "৫০–৯৯ জন" : "50-99 people") + "</span>" +
     `
     </div>
     <div>
       <span class="legend-cb" style="background-color: #FD8D3C"></span>
     ` +
-      "<span>" + (map_lang === "bn" ? "২০-৪৯ জন" : "20-49 people") + "</span>" +
+      "<span>" + (map_lang === "bn" ? "২০–৪৯ জন" : "20-49 people") + "</span>" +
     `
     </div>
     <div>
       <span class="legend-cb" style="background-color: #FEB24C"></span>
     ` +
-      "<span>" + (map_lang === "bn" ? "১০-১৯ জন" : "10-19 people") + "</span>" +
+      "<span>" + (map_lang === "bn" ? "১০–১৯ জন" : "10-19 people") + "</span>" +
     `
     </div>
     <div>
       <span class="legend-cb" style="background-color: #FED976"></span>
     ` +
-      "<span>" + (map_lang === "bn" ? "১-৯ জন" : "1-9 people") + "</span>" +
+      "<span>" + (map_lang === "bn" ? "১–৯ জন" : "1-9 people") + "</span>" +
     `
     </div>
   `;
