@@ -13,7 +13,6 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/blueimp-gallery.min.css" rel="stylesheet">
     <link href="../css/custom.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
@@ -86,42 +85,6 @@
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" oncontextmenu="return false;">
 
-
-  <!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
-  <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
-      <!-- The container for the modal slides -->
-      <div class="slides"></div>
-      <!-- Controls for the borderless lightbox -->
-      <h3 class="title"></h3>
-      <a class="prev">‹</a>
-      <a class="next">›</a>
-      <a class="close">×</a>
-
-      <ol class="indicator"></ol>
-      <!-- The modal dialog, which will be used to wrap the lightbox content -->
-      <div class="modal fade">
-          <div class="modal-dialog">
-              <div class="modal-content">
-                  <div class="modal-header">
-                      <button type="button" class="close" aria-hidden="true">&times;</button>
-                      <h4 class="modal-title"></h4>
-                  </div>
-                  <div class="modal-body next"></div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-default pull-left prev">
-                          <i class="glyphicon glyphicon-chevron-left"></i>
-                          Previous
-                      </button>
-                      <button type="button" class="btn btn-primary next">
-                          Next
-                          <i class="glyphicon glyphicon-chevron-right"></i>
-                      </button>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-
     <!-- Navigation -->
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container">
@@ -129,8 +92,9 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="index.html">
-                    <i><img src="../logo.png" style="width: 30px;height: 30px"></i>  <span class="light">COVID 19, Bangladesh</span>
+                <a class="navbar-brand page-scroll" href="/index.html">
+                    <i><img class="logo" src="../icon.svg"></i>
+                    <span class="light">COVID-19, Bangladesh</span>
                 </a>
             </div>
 
@@ -142,16 +106,16 @@
                         <a href="index.html"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="pages/dashboard.html">Dashboard</a>
+                        <a class="page-scroll" href="../pages/dashboard.html">Dashboard</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="pages/news.html">News</a>
+                        <a class="page-scroll" href="../pages/news.html">News</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="pages/engagement.html">Engage</a>
+                        <a class="page-scroll" href="../pages/engagement.html">Engage</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="pages/source.html">Source</a>
+                        <a class="page-scroll" href="../pages/source.html">Source</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="https://www.worldometers.info/coronavirus/" target="_blank">Global</a>
@@ -190,7 +154,6 @@
     <script src="../js/jquery-1.11.3.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/jquery.easing.min.js"></script>
-    <script src="../js/jquery.blueimp-gallery.min.js"></script>
     <script src="../js/main.js"></script>
 
     <script language="JavaScript">
