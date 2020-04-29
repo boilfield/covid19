@@ -59,3 +59,44 @@ legend_toggler.addEventListener("click", function () {
         toggle_map_legend(1);
     }
 })();
+
+
+// Convert integer from English to Bengali
+function bn_num(num) {
+    if (!parseInt(num)) {
+        return num === "0" ? "০" : num;
+    }
+
+    let p = (num + "").length - 1;
+    let bn_num = "";
+
+    while (p >= 0) {
+        n = num % 10;
+        n = n === 0
+            ? "০"
+            : n ===1
+                ? "১"
+                : n ===2
+                    ? "২"
+                    : n ===3
+                        ? "৩"
+                        : n ===4
+                            ? "৪"
+                            : n ===5
+                                ? "৫"
+                                : n ===6
+                                    ? "৬"
+                                    : n ===7
+                                        ? "৭"
+                                        : n ===8
+                                            ? "৮"
+                                            : n ===9
+                                                ? "৯"
+                                                : "";
+        bn_num = n + bn_num;
+        num = Math.floor(num / 10);
+        --p;
+    }
+
+    return bn_num;
+}

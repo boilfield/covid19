@@ -100,13 +100,13 @@ function addPolygons(data) {
     }
   }
 
-  document.getElementById("mst_conf_today").innerText = today_conf;
-  document.getElementById("mst_rcov_today").innerText = today_rcov;
-  document.getElementById("mst_dead_today").innerText = today_dead;
+  document.getElementById("mst_conf_today").innerText = map_lang === "bn" ? bn_num(today_conf) : today_conf;
+  document.getElementById("mst_rcov_today").innerText = map_lang === "bn" ? bn_num(today_rcov) : today_rcov;
+  document.getElementById("mst_dead_today").innerText = map_lang === "bn" ? bn_num(today_dead) : today_dead;
 
-  document.getElementById("mst_conf_total").innerText = total_conf;
-  document.getElementById("mst_rcov_total").innerText = total_recv;
-  document.getElementById("mst_dead_total").innerText = total_dead;
+  document.getElementById("mst_conf_total").innerText = map_lang === "bn" ? bn_num(total_conf) : total_conf;
+  document.getElementById("mst_rcov_total").innerText = map_lang === "bn" ? bn_num(total_recv) : total_recv;
+  document.getElementById("mst_dead_total").innerText = map_lang === "bn" ? bn_num(total_dead) : total_dead;
 
   // The polygons are styled slightly differently on mouse hovers
   var polygonStyle = { color: "#f78c72", fillColor: "#f78c72" , weight: 1.5, fillOpacity: 1};
@@ -135,16 +135,16 @@ function addPolygons(data) {
         }
       });
 
-      var html = (map_lang === "bn" ? "নিশ্চিত: <b>" : 'Confirmed: <b>') + feature.properties.confirmed + '</b><br/>';
-      html += (map_lang === "bn" ? "সুস্থ: <b>" : 'Recovered: <b>') + feature.properties.recover + '</b><br/>';
-      html += (map_lang === "bn" ? "মৃত: <b>" : 'Death: <b>') + feature.properties.deaths + '</b><br/>';
+      var html = (map_lang === "bn" ? ("নিশ্চিত: <b>" + bn_num(feature.properties.confirmed)) : ('Confirmed: <b>' + feature.properties.confirmed)) + '</b><br/>';
+      html += (map_lang === "bn" ? ("সুস্থ: <b>" + bn_num(feature.properties.recover)) : ('Recovered: <b>' + feature.properties.recover)) + '</b><br/>';
+      html += (map_lang === "bn" ? ("মৃত: <b>" + bn_num(feature.properties.deaths)) : ('Death: <b>' + feature.properties.deaths)) + '</b><br/>';
       html += '<h6 class="more-button">' + (feature.properties.web && map_lang === "bn" ? "<a href='../dhaka.html' target='_blank'>বিস্তারিত তথ্য</a>" : feature.properties.web) +'</h6>';
       layer.bindPopup(html);
 
       let label = L.marker(layer.getBounds().getCenter(), {
       icon: L.divIcon({
         className: 'label',
-        html: feature.properties.name +'<br/><h6 style="text-align:center; color:#ff0000; margin-bottom:2px"> ' + feature.properties.confirmed +' </h6>',
+        html: feature.properties.name +'<br/><h6 style="text-align:center; color:#ff0000; margin-bottom:2px"> ' + (map_lang === "bn" ? bn_num(feature.properties.confirmed) : feature.properties.confirmed) +' </h6>',
       })
     }).addTo(map);
     },
@@ -286,7 +286,7 @@ let stat_table = L.marker([21, 89], {
 if (map_lang === "bn") {
   document.getElementById("mst_heading_status").innerText = "অবস্থা";
   document.getElementById("mst_heading_today").innerText = "২৪ ঘণ্টা";
-  document.getElementById("mst_heading_total").innerText = "মোট";
+  document.getElementById("mst_heading_total").innerText = "সর্বমোট";
   document.getElementById("mst_label_conf").innerText = "নিশ্চিত";
   document.getElementById("mst_label_rcov").innerText = "সুস্থ";
   document.getElementById("mst_label_dead").innerText = "মৃত";
