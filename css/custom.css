@@ -680,3 +680,20 @@ nav.navbar .navbar-collapse {
     margin-right: 5px;
     text-align: center;
 }
+
+.map-dist-label-cont {
+    text-align: center;
+}
+
+.map-dist-label-name {
+    margin-bottom: 2px;
+}
+
+.map-dist-label-num {
+    color: #000;
+    font-size: 1.25em;
+    padding: 1px 3px;
+    border-radius: 7px;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: inline-block;
+}

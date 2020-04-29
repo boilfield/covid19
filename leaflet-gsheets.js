@@ -141,12 +141,20 @@ function addPolygons(data) {
       html += '<h6 class="more-button">' + (feature.properties.web && map_lang === "bn" ? "<a href='../dhaka.html' target='_blank'>বিস্তারিত তথ্য</a>" : feature.properties.web) +'</h6>';
       layer.bindPopup(html);
 
+      let dist_label_html = "<div class='map-dist-label-cont'>" +
+        "<div class='map-dist-label-name'>" +
+        feature.properties.name +
+        "</div>" +
+        "<div class='map-dist-label-num'>" +
+        (map_lang === "bn" ? bn_num(feature.properties.confirmed) : feature.properties.confirmed) +
+        "</div></div>";
+
       let label = L.marker(layer.getBounds().getCenter(), {
-      icon: L.divIcon({
-        className: 'label',
-        html: feature.properties.name +'<br/><h6 style="text-align:center; color:#ff0000; margin-bottom:2px"> ' + (map_lang === "bn" ? bn_num(feature.properties.confirmed) : feature.properties.confirmed) +' </h6>',
-      })
-    }).addTo(map);
+        icon: L.divIcon({
+          className: 'label',
+          html: dist_label_html,
+        })
+      }).addTo(map);
     },
     style: polygonStyle
   }).addTo(map);
