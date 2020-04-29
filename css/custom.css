@@ -571,3 +571,52 @@ nav.navbar .navbar-header,
 nav.navbar .navbar-collapse {
     pointer-events: auto;
 }
+
+.map-lang-button {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: fixed;
+    top: 9px;
+    right: 20px;
+    z-index: 9999;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+@media (max-width: 768px) {
+    .map-lang-button {
+        top: 12px;
+        left: 50%;
+        right: unset;
+    }
+}
+
+@media (min-width: 992px) {
+    .map-lang-button {
+        top: 18px;
+    }
+}
+
+.map-lang-button .button {
+    margin: 0 3px;
+    display: inline-block;
+    width: 22px;
+    background-color: #aaa;
+    height: 12px;
+    border-radius: 20px;
+    vertical-align: middle;
+    box-shadow: 0 0 3px #000 inset;
+}
+
+.map-lang-button .button::before {
+    height: 12px;
+    width: 12px;
+    display: inline-block;
+    border-radius: 20px;
+    background-color: #eee;
+    content: "";
+    vertical-align: super;
+}
+
+.map-lang-button a {
+    color: #fff;
+}
