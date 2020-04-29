@@ -2,6 +2,11 @@ let total_conf = 0;
 let total_recv = 0;
 let total_dead = 0;
 
+let today_conf = 0;
+let today_recv = 0;
+let today_dead = 0;
+
+
 // init() is called as soon as the page loads
 function init() {
   // PASTE YOUR URLs HERE
@@ -69,9 +74,12 @@ function addPolygons(data) {
     // The Sheets data has a column 'include' that specifies if that row should be mapped
     if (data[row].include == "y") {
       var coords = JSON.parse(data[row].geometry);
-      total_conf += parseInt(data[row].confirmed);
-      total_recv += parseInt(data[row].recover);
-      total_dead += parseInt(data[row].deaths);
+      total_conf += parseInt(data[row].cases);
+      total_recv += parseInt(data[row].rcov);
+      total_dead += parseInt(data[row].death);
+      today_conf += parseInt(data[row].todayconf);
+      today_recv += parseInt(data[row].todayrcov);
+      today_dead += parseInt(data[row].todaydeath);
       geojsonStates.features.push({
         type: "Feature",
         geometry: {
@@ -88,7 +96,9 @@ function addPolygons(data) {
           female: data[row].female,
           child: data[row].child,
           web: data[row].web,
-          image: data[row].image
+          image: data[row].image,
+          tocon: data[row].tocon,
+
         }
       });
     }
@@ -97,6 +107,10 @@ function addPolygons(data) {
   document.getElementById("total_conf").textContent = total_conf;
   document.getElementById("total_recv").textContent = total_recv;
   document.getElementById("total_dead").textContent = total_dead;
+
+  document.getElementById("today_conf").textContent = today_conf;
+  document.getElementById("today_recv").textContent = today_recv;
+  document.getElementById("today_dead").textContent = today_dead;
 
   // The polygons are styled slightly differently on mouse hovers
   var polygonStyle = { color: "#f78c72", fillColor: "#f78c72" , weight: 1.5, fillOpacity: 1};
