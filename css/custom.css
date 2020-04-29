@@ -537,3 +537,28 @@ body {
 .mst-row-dead {
     color: crimson;
 }
+
+@media (min-width: 768px) {
+    .navbar-nav > li {
+        background-color: rgba(0, 0, 0, 0.7);
+        margin: 0 2px;
+    }
+
+    .navbar-nav > li:hover {
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .navbar-nav > li > a {
+        color: #fff;
+    }
+
+    .navbar-nav > li > a:hover {
+        color: #000;
+    }
+}
+
+.navbar-brand {
+    padding: 0 15px;
+    height: unset;
+    line-height: 50px;
+}
