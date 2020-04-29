@@ -138,7 +138,7 @@ function addPolygons(data) {
       var html = (map_lang === "bn" ? ("নিশ্চিত: <b>" + bn_num(feature.properties.confirmed)) : ('Confirmed: <b>' + feature.properties.confirmed)) + '</b><br/>';
       html += (map_lang === "bn" ? ("সুস্থ: <b>" + bn_num(feature.properties.recover)) : ('Recovered: <b>' + feature.properties.recover)) + '</b><br/>';
       html += (map_lang === "bn" ? ("মৃত: <b>" + bn_num(feature.properties.deaths)) : ('Death: <b>' + feature.properties.deaths)) + '</b><br/>';
-      html += '<h6 class="more-button">' + (feature.properties.web && map_lang === "bn" ? "<a href='../dhaka.html' target='_blank'>বিস্তারিত তথ্য</a>" : feature.properties.web) +'</h6>';
+      html += '<h6 class="more-button">' + (feature.properties.web && map_lang === "bn" ? "<a href='dhaka.html' target='_blank'>বিস্তারিত তথ্য</a>" : "<a href='../dhaka.html' target='_blank'>Details</a>") +'</h6>';
       layer.bindPopup(html);
 
       let dist_label_html = "<div class='map-dist-label-cont'>" +
@@ -194,7 +194,7 @@ setBounds();
     var logo = L.control({position: 'bottomleft'});
     logo.onAdd = function(map){
         var div = L.DomUtil.create('div', 'myclass');
-        div.innerHTML= "<a href='https://boiledbhoot.org/' target='_blank'>Powered and maintained by <img height='25px' src='" + (map_lang === "bn" ? "../boil.png" : "boil.png") + "'/></a>";
+        div.innerHTML= "<a href='https://boiledbhoot.org/' target='_blank'>Powered and maintained by <img height='25px' src='" + (map_lang === "bn" ? "boil.png" : "../boil.png") + "'/></a>";
         return div;
     }
     logo.addTo(map);
