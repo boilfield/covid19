@@ -502,6 +502,7 @@ body {
     border-collapse: separate;
     border-spacing: 0 2px;
     color: #fff;
+    font-size: 1.05em;
 }
 
 .map-stat-table * {
@@ -523,7 +524,7 @@ body {
 }
 
 .mst-row-conf {
-    color: #fd8d3c;
+    color: orange;
 }
 
 .mst-row-rcov {
@@ -531,7 +532,7 @@ body {
 }
 
 .mst-row-dead {
-    color: crimson;
+    color: orangered;
 }
 
 @media (min-width: 768px) {
