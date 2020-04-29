@@ -3,7 +3,7 @@ let total_recv = 0;
 let total_dead = 0;
 
 let today_conf = 0;
-let today_recv = 0;
+let today_rcov = 0;
 let today_dead = 0;
 
 
@@ -44,10 +44,6 @@ basemap.addTo(map);
 
 //Zoom Comtroler
 map.zoomControl.remove();
-// map.on('click', function (feature, layer) {
-//   // sidebar.close(panelID);
-// });
- // L.control.locate().addTo(map);
 
 
 
@@ -78,7 +74,7 @@ function addPolygons(data) {
       total_recv += parseInt(data[row].rcov);
       total_dead += parseInt(data[row].death);
       today_conf += parseInt(data[row].todayconf);
-      today_recv += parseInt(data[row].todayrcov);
+      today_rcov += parseInt(data[row].todayrcov);
       today_dead += parseInt(data[row].todaydeath);
       geojsonStates.features.push({
         type: "Feature",
@@ -104,13 +100,13 @@ function addPolygons(data) {
     }
   }
 
-  document.getElementById("total_conf").textContent = total_conf;
-  document.getElementById("total_recv").textContent = total_recv;
-  document.getElementById("total_dead").textContent = total_dead;
+  document.getElementById("mst_conf_today").innerText = today_conf;
+  document.getElementById("mst_rcov_today").innerText = today_rcov;
+  document.getElementById("mst_dead_today").innerText = today_dead;
 
-  document.getElementById("today_conf").textContent = today_conf;
-  document.getElementById("today_recv").textContent = today_recv;
-  document.getElementById("today_dead").textContent = today_dead;
+  document.getElementById("mst_conf_total").innerText = total_conf;
+  document.getElementById("mst_rcov_total").innerText = total_recv;
+  document.getElementById("mst_dead_total").innerText = total_dead;
 
   // The polygons are styled slightly differently on mouse hovers
   var polygonStyle = { color: "#f78c72", fillColor: "#f78c72" , weight: 1.5, fillOpacity: 1};
@@ -190,7 +186,7 @@ setBounds();
     var logo = L.control({position: 'bottomleft'});
     logo.onAdd = function(map){
         var div = L.DomUtil.create('div', 'myclass');
-        div.innerHTML= "<a href='https://boiledbhoot.org/' target='_blank'>Powered and maintained by <img height='25px' src='boil.png'/></a>";
+        div.innerHTML= "<a href='https://boiledbhoot.org/' target='_blank'>Powered and maintained by <img height='25px' src='" + (map_lang === "bn" ? "../boil.png" : "boil.png") + "'/></a>";
         return div;
     }
     logo.addTo(map);
@@ -264,3 +260,43 @@ legend.onAdd = function (map) {
 }
 legend.addTo(map);
 
+let stat_table_html = `
+    <table class="map-stat-table">
+      <tr>
+        <th id="mst_heading_status">Status</th>
+        <th id="mst_heading_today">24 hr</th>
+        <th id="mst_heading_total">Total</th>
+      </tr>
+      <tr class="mst-row-conf">
+        <td id="mst_label_conf">Confirmed</td>
+        <td id="mst_conf_today">0</td>
+        <td id="mst_conf_total">0</td>
+      </tr>
+      <tr class="mst-row-rcov">
+        <td id="mst_label_rcov">Recovered</td>
+        <td id="mst_rcov_today">0</td>
+        <td id="mst_rcov_total">0</td>
+      </tr>
+      <tr class="mst-row-dead">
+        <td id="mst_label_dead">Dead</td>
+        <td id="mst_dead_today">0</td>
+        <td id="mst_dead_total">0</td>
+      </tr>
+    </table>
+`;
+
+let stat_table = L.marker([21, 89], {
+    icon: L.divIcon({
+        className: "map-stat-table",
+        html: stat_table_html,
+    }),
+}).addTo(map);
+
+if (map_lang === "bn") {
+  document.getElementById("mst_heading_status").innerText = "অবস্থা";
+  document.getElementById("mst_heading_today").innerText = "২৪ ঘণ্টা";
+  document.getElementById("mst_heading_total").innerText = "মোট";
+  document.getElementById("mst_label_conf").innerText = "নিশ্চিত";
+  document.getElementById("mst_label_rcov").innerText = "সুস্থ";
+  document.getElementById("mst_label_dead").innerText = "মৃত";
+}

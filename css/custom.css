@@ -493,3 +493,126 @@ body {
 #map {
     font-size: 14px;
 }
+
+.label.leaflet-marker-icon.leaflet-interactive {
+    pointer-events: none;
+}
+
+.map-stat-table {
+    border-collapse: separate;
+    border-spacing: 0 2px;
+    color: #fff;
+}
+
+.map-stat-table * {
+    text-align: center;
+}
+
+.map-stat-table tr:first-child {
+    background-color: rgba(0, 0, 0, 0.9);
+    line-height: 2.5em;
+    font-variant: small-caps;
+}
+
+.map-stat-table tr:not(:first-child) {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.map-stat-table td {
+    padding: 0 20px;
+}
+
+.mst-row-conf {
+    color: #fd8d3c;
+}
+
+.mst-row-rcov {
+    color: limegreen;
+}
+
+.mst-row-dead {
+    color: crimson;
+}
+
+@media (min-width: 768px) {
+    .navbar-nav > li {
+        background-color: rgba(0, 0, 0, 0.7);
+        margin: 0 2px;
+    }
+
+    .navbar-nav > li:hover {
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .navbar-nav > li > a {
+        color: #fff;
+    }
+
+    .navbar-nav > li > a:hover {
+        color: #000;
+    }
+}
+
+.navbar-brand {
+    padding: 0 15px;
+    height: unset;
+    line-height: 50px;
+}
+
+nav.navbar {
+    pointer-events: none;
+}
+
+nav.navbar .navbar-header,
+nav.navbar .navbar-collapse {
+    pointer-events: auto;
+}
+
+.map-lang-button {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: fixed;
+    top: 9px;
+    right: 20px;
+    z-index: 9999;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+@media (max-width: 768px) {
+    .map-lang-button {
+        top: 12px;
+        left: 50%;
+        right: unset;
+    }
+}
+
+@media (min-width: 992px) {
+    .map-lang-button {
+        top: 18px;
+    }
+}
+
+.map-lang-button .button {
+    margin: 0 3px;
+    display: inline-block;
+    width: 22px;
+    background-color: #aaa;
+    height: 12px;
+    border-radius: 20px;
+    vertical-align: middle;
+    box-shadow: 0 0 3px #000 inset;
+}
+
+.map-lang-button .button::before {
+    height: 12px;
+    width: 12px;
+    display: inline-block;
+    border-radius: 20px;
+    background-color: #eee;
+    content: "";
+    vertical-align: super;
+}
+
+.map-lang-button a {
+    color: #fff;
+}

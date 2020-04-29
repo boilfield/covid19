@@ -15,10 +15,9 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/blueimp-gallery.min.css" rel="stylesheet">
     <link href="../css/custom.css" rel="stylesheet">
-    <link href="../css/L.Control.Locate.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
 
@@ -85,7 +84,7 @@
 
 </head>
 
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" oncontextmenu="return false;">
 
 
   <!-- The Bootstrap Image Gallery lightbox, should be a child element of the document body -->
@@ -143,9 +142,6 @@
                         <a href="index.html"></a>
                     </li>
                     <li>
-                        <a href="../index.html">ইংরেজি</a>
-                    </li>
-                    <li>
                         <a class="page-scroll" href="../pages/dashboard.html">ড্যাশবোর্ড</a>
                     </li>
                     <li>
@@ -167,29 +163,28 @@
 
 <!--     <div id='chartbox'> -->
 
-    <marquee>ন্যাশনাল কল সেন্টার ৩৩৩ * স্বাস্থ্য বাতায়ন ১৬২৬৩ * আইইডিসিআর ১০৬৫৫ * বিশেষজ্ঞ হেলথ লাইন ০৯৬১১৬ ৭৭৭৭৭ * ন্যাশনাল হেল্পলাইন ১০৯ </marquee>
-
-    <div id="mydiv">
-      <div id="mydivheader">সর্বমোট</div>
-      <h6 style="margin-bottom: 0px; color: #FD8D3C">নিশ্চিত: <span id="total_conf" class="total-info-bd"></span></h6>
-      <h6 style="margin-bottom: 0px; color: green">সুস্থ: <span id="total_recv" class="total-info-bd"></span></h6>
-      <h6 style="margin-bottom: 0px; color: red">মৃত: <span id="total_dead" class="total-info-bd"></span></h6>
-    </div>
+    <marquee scrollamount=3>ন্যাশনাল কল সেন্টার ৩৩৩ * স্বাস্থ্য বাতায়ন ১৬২৬৩ * আইইডিসিআর ১০৬৫৫ * বিশেষজ্ঞ হেলথ লাইন ০৯৬১১৬ ৭৭৭৭৭ * ন্যাশনাল হেল্পলাইন ১০৯ </marquee>
 
     <script type="text/javascript">
       let map_lang = "bn";
     </script>
 
-
     <div id="map"></div>
+
+    <div class="map-lang-button">
+      <a href="../index.html">
+        ইং
+        <div class="button" style="padding-left: 9px;"></div>
+        বাং
+      </a>
+    </div>
+
     <script src="../js/leaflet.js"></script>
     <script src="../js/leaflet-sidebar.js"></script>
     <script src="../js/leaflet.awesome-markers.min.js"></script>
     <script src="../js/tabletop.min.js"></script>
     <script src="../js/leaflet-hash.js"></script>
-    <script src="../js/L.Control.Locate.min.js"></script>
     <script src="../leaflet-gsheets.js"></script>
-    <script src="../js/drag.js"></script>
 
 
     <script src="../js/jquery-1.11.3.min.js"></script>
@@ -197,6 +192,50 @@
     <script src="../js/jquery.easing.min.js"></script>
     <script src="../js/jquery.blueimp-gallery.min.js"></script>
     <script src="../js/main.js"></script>
+
+    <script language="JavaScript">
+    /**
+    * Disable right-click of mouse, F12 key, and save key combinations on page
+    * By Arthur Gareginyan (https://www.arthurgareginyan.com)
+    * For full source code, visit https://mycyberuniverse.com
+    */
+    window.onload = function() {
+        document.addEventListener("contextmenu", function(e){
+            e.preventDefault();
+        }, false);
+        document.addEventListener("keydown", function(e) {
+            // "I" key
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+                disabledEvent(e);
+            }
+            // "J" key
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+                disabledEvent(e);
+            }
+            // "S" key + macOS
+            if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+                disabledEvent(e);
+            }
+            // "U" key
+            if (e.ctrlKey && e.keyCode == 85) {
+                disabledEvent(e);
+            }
+            // "F12" key
+            if (event.keyCode == 123) {
+                disabledEvent(e);
+            }
+        }, false);
+        function disabledEvent(e){
+            if (e.stopPropagation){
+                e.stopPropagation();
+            } else if (window.event){
+                window.event.cancelBubble = true;
+            }
+            e.preventDefault();
+            return false;
+        }
+    };
+    </script>
 
 </body>
 
