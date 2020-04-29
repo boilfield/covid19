@@ -267,31 +267,40 @@ legend.addTo(map);
 let stat_table_html = `
     <table class="map-stat-table">
       <tr>
-        <th>Status</th>
-        <th>Today</th>
-        <th>Total</th>
+        <th id="mst_heading_status">Status</th>
+        <th id="mst_heading_today">Today</th>
+        <th id="mst_heading_total">Total</th>
       </tr>
       <tr class="mst-row-conf">
-        <td>Confirmed</td>
+        <td id="mst_label_conf">Confirmed</td>
         <td id="mst_conf_today">0</td>
         <td id="mst_conf_total">0</td>
       </tr>
       <tr class="mst-row-rcov">
-        <td>Recovered</td>
+        <td id="mst_label_rcov">Recovered</td>
         <td id="mst_rcov_today">0</td>
         <td id="mst_rcov_total">0</td>
       </tr>
       <tr class="mst-row-dead">
-        <td>Dead</td>
+        <td id="mst_label_dead">Dead</td>
         <td id="mst_dead_today">0</td>
         <td id="mst_dead_total">0</td>
       </tr>
     </table>
 `;
 
-let stat_table = L.marker([21, 88.75], {
+let stat_table = L.marker([21, 89], {
     icon: L.divIcon({
         className: "map-stat-table",
         html: stat_table_html,
     }),
 }).addTo(map);
+
+if (map_lang === "bn") {
+  document.getElementById("mst_heading_status").innerText = "অবস্থা";
+  document.getElementById("mst_heading_today").innerText = "আজ";
+  document.getElementById("mst_heading_total").innerText = "মোট";
+  document.getElementById("mst_label_conf").innerText = "নিশ্চিত";
+  document.getElementById("mst_label_rcov").innerText = "সুস্থ";
+  document.getElementById("mst_label_dead").innerText = "মৃত";
+}
