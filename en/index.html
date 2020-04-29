@@ -9,8 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>কোভিড-১৯ | বাংলাদেশ</title>
-    <link rel="shortcut icon" href="favicon.ico" type="../image/x-icon">
+    <title>COVID-19 | Bangladesh</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/blueimp-gallery.min.css" rel="stylesheet">
@@ -130,7 +130,7 @@
                     <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand page-scroll" href="index.html">
-                    <i><img src="../logo.png" style="width: 30px;height: 30px"></i>  <span class="light">কোভিড-১৯, বাংলাদেশ</span>
+                    <i><img src="../logo.png" style="width: 30px;height: 30px"></i>  <span class="light">COVID 19, Bangladesh</span>
                 </a>
             </div>
 
@@ -142,19 +142,19 @@
                         <a href="index.html"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="../pages/dashboard.html">ড্যাশবোর্ড</a>
+                        <a class="page-scroll" href="pages/dashboard.html">Dashboard</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="../pages/news.html">খবর</a>
+                        <a class="page-scroll" href="pages/news.html">News</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="../pages/engagement.html">অংশগ্রহণ</a>
+                        <a class="page-scroll" href="pages/engagement.html">Engage</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="../pages/source.html">তথ্যসূত্র</a>
+                        <a class="page-scroll" href="pages/source.html">Source</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="https://www.worldometers.info/coronavirus/" target="_blank">বৈশ্বিক অবস্থা</a>
+                        <a class="page-scroll" href="https://www.worldometers.info/coronavirus/" target="_blank">Global</a>
                     </li>
                 </ul>
             </div>
@@ -163,19 +163,19 @@
 
 <!--     <div id='chartbox'> -->
 
-    <marquee scrollamount=3>ন্যাশনাল কল সেন্টার ৩৩৩ * স্বাস্থ্য বাতায়ন ১৬২৬৩ * আইইডিসিআর ১০৬৫৫ * বিশেষজ্ঞ হেলথ লাইন ০৯৬১১৬ ৭৭৭৭৭ * ন্যাশনাল হেল্পলাইন ১০৯ </marquee>
+    <marquee>ন্যাশনাল কল সেন্টার ৩৩৩ * স্বাস্থ্য বাতায়ন ১৬২৬৩ * আইইডিসিআর ১০৬৫৫ * বিশেষজ্ঞ হেলথ লাইন ০৯৬১১৬ ৭৭৭৭৭ * ন্যাশনাল হেল্পলাইন ১০৯ </marquee>
 
     <script type="text/javascript">
-      let map_lang = "bn";
+      let map_lang = "en";
     </script>
 
     <div id="map"></div>
 
     <div class="map-lang-button">
-      <a href="../index.html">
-        ইং
+      <a href="../index.html" style="font-variant: small-caps; font-size: 0.9em;" title="Click to switch language">
+        Bn
         <div class="button" style="padding-left: 9px;"></div>
-        বাং
+        En
       </a>
     </div>
 
@@ -194,48 +194,49 @@
     <script src="../js/main.js"></script>
 
     <script language="JavaScript">
-    /**
+  /**
     * Disable right-click of mouse, F12 key, and save key combinations on page
     * By Arthur Gareginyan (https://www.arthurgareginyan.com)
     * For full source code, visit https://mycyberuniverse.com
     */
-    window.onload = function() {
-        document.addEventListener("contextmenu", function(e){
-            e.preventDefault();
-        }, false);
-        document.addEventListener("keydown", function(e) {
-            // "I" key
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
-                disabledEvent(e);
-            }
-            // "J" key
-            if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
-                disabledEvent(e);
-            }
-            // "S" key + macOS
-            if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
-                disabledEvent(e);
-            }
-            // "U" key
-            if (e.ctrlKey && e.keyCode == 85) {
-                disabledEvent(e);
-            }
-            // "F12" key
-            if (event.keyCode == 123) {
-                disabledEvent(e);
-            }
-        }, false);
-        function disabledEvent(e){
-            if (e.stopPropagation){
-                e.stopPropagation();
-            } else if (window.event){
-                window.event.cancelBubble = true;
-            }
-            e.preventDefault();
-            return false;
-        }
-    };
-    </script>
+  window.onload = function() {
+    document.addEventListener("contextmenu", function(e){
+      e.preventDefault();
+    }, false);
+    document.addEventListener("keydown", function(e) {
+    //document.onkeydown = function(e) {
+      // "I" key
+      if (e.ctrlKey && e.shiftKey && e.keyCode == 73) {
+        disabledEvent(e);
+      }
+      // "J" key
+      if (e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+        disabledEvent(e);
+      }
+      // "S" key + macOS
+      if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+        disabledEvent(e);
+      }
+      // "U" key
+      if (e.ctrlKey && e.keyCode == 85) {
+        disabledEvent(e);
+      }
+      // "F12" key
+      if (event.keyCode == 123) {
+        disabledEvent(e);
+      }
+    }, false);
+    function disabledEvent(e){
+      if (e.stopPropagation){
+        e.stopPropagation();
+      } else if (window.event){
+        window.event.cancelBubble = true;
+      }
+      e.preventDefault();
+      return false;
+    }
+  };
+</script>
 
 </body>
 

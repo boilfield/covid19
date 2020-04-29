@@ -502,6 +502,7 @@ body {
     border-collapse: separate;
     border-spacing: 0 2px;
     color: #fff;
+    font-size: 1.05em;
 }
 
 .map-stat-table * {
@@ -523,7 +524,7 @@ body {
 }
 
 .mst-row-conf {
-    color: #fd8d3c;
+    color: orange;
 }
 
 .mst-row-rcov {
@@ -531,7 +532,7 @@ body {
 }
 
 .mst-row-dead {
-    color: crimson;
+    color: orangered;
 }
 
 @media (min-width: 768px) {
@@ -615,4 +616,85 @@ nav.navbar .navbar-collapse {
 
 .map-lang-button a {
     color: #fff;
+}
+
+.legend.info {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.legend-cont {
+    overflow: hidden;
+    transition: all 1s ease;
+    margin: 0 10px;
+}
+
+.legend-cont > :first-child {
+    margin-top: 10px;
+}
+
+.legend-cont > :last-child {
+    margin-bottom: 10px;
+}
+
+.legend-toggler,
+.legend-toggler::before {
+    position: absolute;
+}
+
+.legend-toggler {
+    background-color: #333;
+    border-radius: 50%;
+    height: 22px;
+    width: 22px;
+    margin: -10px;
+    transform: rotate(90deg);
+    box-shadow: 0 0 2px #000;
+    opacity: 1;
+}
+
+.legend-toggler::before {
+    content: "\00bb";
+    font-size: 1.5em;
+    margin: -7px 0 0 5px;
+}
+
+.legend-toggler:hover {
+    color: #aaa;
+    cursor: pointer;
+}
+
+.legend-toggler-label {
+    font-size: 0.9em;
+    text-align: center;
+    max-height: 0;
+    overflow: hidden;
+}
+
+.legend-toggler-label > div {
+    margin: 5px;
+}
+
+.legend-cb {
+    height: 0.8em;
+    width: 10px;
+    display: inline-block;
+    margin-right: 5px;
+    text-align: center;
+}
+
+.map-dist-label-cont {
+    text-align: center;
+}
+
+.map-dist-label-name {
+    margin-bottom: 2px;
+}
+
+.map-dist-label-num {
+    color: #000;
+    font-size: 1.25em;
+    padding: 1px 3px;
+    border-radius: 7px;
+    background-color: rgba(255, 255, 255, 0.5);
+    display: inline-block;
 }
