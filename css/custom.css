@@ -497,3 +497,43 @@ body {
 .label.leaflet-marker-icon.leaflet-interactive {
     pointer-events: none;
 }
+
+.map-stat-table {
+    border-collapse: separate;
+    border-spacing: 0 2px;
+    color: #fff;
+}
+
+.map-stat-table * {
+    text-align: center;
+}
+
+.map-stat-table tr:first-child {
+    background-color: rgba(0, 0, 0, 0.9);
+    font-size: 0.9em;
+    line-height: 2.5em;
+}
+
+.map-stat-table tr:not(:first-child) {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.map-stat-table th {
+    text-transform: uppercase;
+}
+
+.map-stat-table td {
+    padding: 0 20px;
+}
+
+.mst-row-conf {
+    color: #fd8d3c;
+}
+
+.mst-row-rcov {
+    color: limegreen;
+}
+
+.mst-row-dead {
+    color: crimson;
+}

@@ -3,7 +3,7 @@ let total_recv = 0;
 let total_dead = 0;
 
 let today_conf = 0;
-let today_recv = 0;
+let today_rcov = 0;
 let today_dead = 0;
 
 
@@ -78,7 +78,7 @@ function addPolygons(data) {
       total_recv += parseInt(data[row].rcov);
       total_dead += parseInt(data[row].death);
       today_conf += parseInt(data[row].todayconf);
-      today_recv += parseInt(data[row].todayrcov);
+      today_rcov += parseInt(data[row].todayrcov);
       today_dead += parseInt(data[row].todaydeath);
       geojsonStates.features.push({
         type: "Feature",
@@ -104,13 +104,13 @@ function addPolygons(data) {
     }
   }
 
-  document.getElementById("total_conf").textContent = total_conf;
-  document.getElementById("total_recv").textContent = total_recv;
-  document.getElementById("total_dead").textContent = total_dead;
+  document.getElementById("mst_conf_today").innerText = today_conf;
+  document.getElementById("mst_rcov_today").innerText = today_rcov;
+  document.getElementById("mst_dead_today").innerText = today_dead;
 
-  document.getElementById("today_conf").textContent = today_conf;
-  document.getElementById("today_recv").textContent = today_recv;
-  document.getElementById("today_dead").textContent = today_dead;
+  document.getElementById("mst_conf_total").innerText = total_conf;
+  document.getElementById("mst_rcov_total").innerText = total_recv;
+  document.getElementById("mst_dead_total").innerText = total_dead;
 
   // The polygons are styled slightly differently on mouse hovers
   var polygonStyle = { color: "#f78c72", fillColor: "#f78c72" , weight: 1.5, fillOpacity: 1};
@@ -264,3 +264,34 @@ legend.onAdd = function (map) {
 }
 legend.addTo(map);
 
+let stat_table_html = `
+    <table class="map-stat-table">
+      <tr>
+        <th>Status</th>
+        <th>Today</th>
+        <th>Total</th>
+      </tr>
+      <tr class="mst-row-conf">
+        <td>Confirmed</td>
+        <td id="mst_conf_today">0</td>
+        <td id="mst_conf_total">0</td>
+      </tr>
+      <tr class="mst-row-rcov">
+        <td>Recovered</td>
+        <td id="mst_rcov_today">0</td>
+        <td id="mst_rcov_total">0</td>
+      </tr>
+      <tr class="mst-row-dead">
+        <td>Dead</td>
+        <td id="mst_dead_today">0</td>
+        <td id="mst_dead_total">0</td>
+      </tr>
+    </table>
+`;
+
+let stat_table = L.marker([21, 88.75], {
+    icon: L.divIcon({
+        className: "map-stat-table",
+        html: stat_table_html,
+    }),
+}).addTo(map);
