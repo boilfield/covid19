@@ -510,16 +510,12 @@ body {
 
 .map-stat-table tr:first-child {
     background-color: rgba(0, 0, 0, 0.9);
-    font-size: 0.9em;
     line-height: 2.5em;
+    font-variant: small-caps;
 }
 
 .map-stat-table tr:not(:first-child) {
     background-color: rgba(0, 0, 0, 0.7);
-}
-
-.map-stat-table th {
-    text-transform: uppercase;
 }
 
 .map-stat-table td {
