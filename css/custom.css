@@ -562,3 +562,12 @@ body {
     height: unset;
     line-height: 50px;
 }
+
+nav.navbar {
+    pointer-events: none;
+}
+
+nav.navbar .navbar-header,
+nav.navbar .navbar-collapse {
+    pointer-events: auto;
+}
