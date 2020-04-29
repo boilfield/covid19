@@ -16,17 +16,16 @@ function init() {
 window.addEventListener("DOMContentLoaded", init);
 
 // Create a new Leaflet map centered on the continental US [23.699, 89.308], 7
-var map = L.map("map").setView([23.7929, 90.4175], 12);
+var map = L.map("map").setView([23.7929, 90.4175], 11);
 
 // This is the Carto Positron basemap
 var hash = new L.Hash(map);
 
-var basemap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-    maxZoom: 18,
-    minZoom:9,
-    attribution: 'Map data &copy; <a href="https://www.iedcr.gov.bd/" target="_blank">IEDCR</a> contributors, ' +
-      'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    id: 'mapbox.light'
+var basemap = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+{ attribution:"&copy; Map Data <a href='https://www.iedcr.gov.bd/' target='_blank'>IEDCR</a>",
+    subdomains: "abcd",
+     maxZoom: 15,
+    minZoom:11    
   });
 basemap.addTo(map);
 
