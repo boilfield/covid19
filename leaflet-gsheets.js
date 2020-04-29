@@ -200,19 +200,10 @@ setBounds();
 let legend = L.control({position: "bottomright"});
 legend.onAdd = function (map) {
   let cont_div = L.DomUtil.create('div', 'info legend');
-  cont_div.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-  cont_div.style.padding = "10px";
-  cont_div.innerHTML = "<div><b>" + (map_lang === "bn" ? "নিশ্চিত কেসের সংখ্যা" : "Confirmed Cases") + "</b></div>" +
+  cont_div.innerHTML = "<div id='legend_toggler' class='legend-toggler'></div>" +
+    "<div id='legend_toggler_label' class='legend-toggler-label'><div>Show color codes</div></div>" +
+    "<div class='legend-cont'><div><b>" + (map_lang === "bn" ? "নিশ্চিত কেসের সংখ্যা" : "Confirmed Cases") + "</b></div>" +
     `
-    <style>
-      .legend-cb {
-        height: 0.8em;
-        width: 10px;
-        display: inline-block;
-        margin-right: 5px;
-        text-align: center;
-      }
-    </style>
     <div>
       <span class="legend-cb" style="background-color: #800026"></span>
     ` +
@@ -254,7 +245,7 @@ legend.onAdd = function (map) {
     ` +
       "<span>" + (map_lang === "bn" ? "১–৯ জন" : "1-9 people") + "</span>" +
     `
-    </div>
+    </div></div>
   `;
   return cont_div;
 }
@@ -299,4 +290,5 @@ if (map_lang === "bn") {
   document.getElementById("mst_label_conf").innerText = "নিশ্চিত";
   document.getElementById("mst_label_rcov").innerText = "সুস্থ";
   document.getElementById("mst_label_dead").innerText = "মৃত";
+  document.getElementById("legend_toggler_label").innerText = "কালার কোড দেখুন";
 }

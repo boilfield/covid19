@@ -616,3 +616,67 @@ nav.navbar .navbar-collapse {
 .map-lang-button a {
     color: #fff;
 }
+
+.legend.info {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.legend-cont {
+    overflow: hidden;
+    transition: all 1s ease;
+    margin: 0 10px;
+}
+
+.legend-cont > :first-child {
+    margin-top: 10px;
+}
+
+.legend-cont > :last-child {
+    margin-bottom: 10px;
+}
+
+.legend-toggler,
+.legend-toggler::before {
+    position: absolute;
+}
+
+.legend-toggler {
+    background-color: #333;
+    border-radius: 50%;
+    height: 22px;
+    width: 22px;
+    margin: -10px;
+    transform: rotate(90deg);
+    box-shadow: 0 0 2px #000;
+    opacity: 1;
+}
+
+.legend-toggler::before {
+    content: "\00bb";
+    font-size: 1.5em;
+    margin: -7px 0 0 5px;
+}
+
+.legend-toggler:hover {
+    color: #aaa;
+    cursor: pointer;
+}
+
+.legend-toggler-label {
+    font-size: 0.9em;
+    text-align: center;
+    max-height: 0;
+    overflow: hidden;
+}
+
+.legend-toggler-label > div {
+    margin: 5px;
+}
+
+.legend-cb {
+    height: 0.8em;
+    width: 10px;
+    display: inline-block;
+    margin-right: 5px;
+    text-align: center;
+}
