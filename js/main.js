@@ -31,16 +31,18 @@ function toggle_map_legend(showLegend) {
 }
 
 let legend_toggler = document.getElementById("legend_toggler");
-legend_toggler.addEventListener("click", function () {
-    let css_tr = legend_toggler.style.transform;
+if (legend_toggler) {
+    legend_toggler.addEventListener("click", function () {
+        let css_tr = legend_toggler.style.transform;
 
-    // Show or hide/collapse map legend
-    if (!css_tr || css_tr === "rotate(90deg)") {
-        toggle_map_legend(1);
-    } else {
-        toggle_map_legend(0);
-    }
-});
+        // Show or hide/collapse map legend
+        if (!css_tr || css_tr === "rotate(90deg)") {
+            toggle_map_legend(1);
+        } else {
+            toggle_map_legend(0);
+        }
+    });
+}
 
 // Keep map legend initially collapsed for screen width < 600px
 (function () {
