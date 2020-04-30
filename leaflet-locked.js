@@ -81,43 +81,50 @@ var geojsonStates = {
 var polygonStyle = { color: "#f78c72", fillColor: "#f78c72" , weight: 1.5, fillOpacity: 1};
 var polygonHoverStyle = { color: "#f5eb5d", fillColor: "#f7ea2f", weight: 1.5, fillOpacity: 1};
 
-
-
-//polygon data mouse function
 polygonLayer = L.geoJSON(geojsonStates, {
-    onEachFeature: function(feature, layer) {
 
-      layer.on({
-        mouseout: function(e) {
-          e.target.setStyle({  // Need to manually set each property except `fillColor`
-            color: polygonStyle.color,
-            weight: polygonStyle.weight,
-            fillColor: feature.fill_color,  // Use saved color
-          });
+  style: polygonStyle,
 
-          // e.target.bindPopup('<h6 style="text-align:center; color:#0000ff; margin-bottom:2px">'+ feature.properties.confirmed +'</h6>');
-        },
-        mouseover: function(e) {
-          e.target.setStyle(polygonHoverStyle);
+  onEachFeature: function(feature, layer) {
 
-        },
-        click: function(e) {
-                    // var html = '<h6 style="text-align:center; color:#0000ff; margin-bottom:2px">'+ feature.properties.name +'</h6>';
-                    var html = '<b style="text-align:center; color:#0000ff;">' + feature.properties.name + '</b><br/>';
-                    html += '<b style="text-align:center;">' + feature.properties.level + '</b>';
-                    // html += 'Death: <b>' + feature.properties.deaths + '</b><br/>';
-                    // html += '<h6 style="text-align:center; color:#fff000; margin-bottom:2px">' + feature.properties.web +'</h6>';
-                    // html += 'Male: <b>' + feature.properties.male + '</b><br/>';
-                    // html += 'Female: <b>' + feature.properties.female + '</b><br/>';
-                    // html += 'Child: <b>' + feature.properties.child + '</b><br/>';
-                    layer.bindPopup(html);
-                }
-      });
-    },
-    style: polygonStyle
+    layer.on({
+
+      mouseout: function() {
+        layer.setStyle({  // Need to manually set each property except `fillColor`
+          color: polygonStyle.color,
+          weight: polygonStyle.weight,
+          fillColor: feature.fill_color,  // Use saved color
+        });
+        layer.closePopup();
+      },
+
+      mouseover: function() {
+        layer.setStyle(polygonHoverStyle);
+        layer.openPopup();
+      }
+
+    });
+
+    let popup_html = "<div class='map-upz-lockdown-cont'>" +
+      "<div class='map-upz-lockdown-name'>" +
+      feature.properties.name +
+      "</div>" +
+      "<div class='map-upz-lockdown-level'>" +
+      (feature.properties.level && (
+        feature.properties.level === "Partial Locked Down"
+          ? "Partial lockdown"
+          : (feature.properties.level === "Full Locked Down"
+            ? "Full lockdown"
+            : feature.properties.level)
+        )
+      ) +
+      "</div>" +
+      "</div>";
+    layer.bindPopup(popup_html);
+
+  }
+
 }).addTo(map);
-
-
 
 // Set different polygon fill colors based on number of quarantined
 polygonLayer.eachLayer(function (layer) {
