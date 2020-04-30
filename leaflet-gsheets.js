@@ -183,9 +183,14 @@ setBounds();
 
     //logo position: bottomright, topright, topleft, bottomleft
     var logo = L.control({position: 'bottomleft'});
+    let credit_html = "<a href='https://boiledbhoot.org/' target='_blank'>" +
+      (map_lang === "bn" ? "নির্মাণ ও তত্ত্বাবধানে" : "Powered and maintained by") +
+      "<img class='credit-logo' height='25px' src='" +
+      (map_lang === "bn" ? "boil.png" : "../boil.png")
+      + "'/></a>";
     logo.onAdd = function(map){
-        var div = L.DomUtil.create('div', 'myclass');
-        div.innerHTML= "<a href='https://boiledbhoot.org/' target='_blank'>Powered and maintained by <img height='25px' src='" + (map_lang === "bn" ? "boil.png" : "../boil.png") + "'/></a>";
+        var div = L.DomUtil.create('div', 'credit');
+        div.innerHTML= credit_html;
         return div;
     }
     logo.addTo(map);
