@@ -27,11 +27,15 @@ var map = L.map("map").setView([23.373, 90.308], 7);
 // This is the Carto Positron basemap
 var hash = new L.Hash(map);
 
+let attr_html = "&copy;" +
+  (map_lang === "bn" ? " মানচিত্রের তথ্য: " : " Map Data: ") +
+  "<a href='https://www.iedcr.gov.bd/' target='_blank'>" +
+  (map_lang === "bn" ? "আইইডিসিআর" : "IEDCR") +
+  "</a>";
 var basemap = L.tileLayer(
   'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
   {
-    attribution:
-      "&copy; Map Data <a href='https://www.iedcr.gov.bd/' target='_blank'>IEDCR</a>",
+    attribution: attr_html,
     subdomains: "abcd",
     maxZoom: 9,
     minZoom:6
