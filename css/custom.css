@@ -702,3 +702,11 @@ nav.navbar .navbar-collapse {
 .navbar-brand img.logo {
     height: 40px;
 }
+
+.navbar-custom span.light {
+    text-transform: none;
+}
+
+img.credit-logo {
+    margin-left: 5px;
+}
