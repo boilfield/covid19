@@ -7,8 +7,6 @@ function init() {
  
   var polyURL =
     "https://docs.google.com/spreadsheets/d/1CVAPcNM5sOUQnKv8vJ2kcSgtvq3d6AzQcdURcEWYtoQ/edit?usp=sharing";
-  // var pointsURL =
-  //   //"https://docs.google.com/spreadsheets/d/1kjJVPF0LyaiaDYF8z_x23UulGciGtBALQ1a1pK0coRM/edit?usp=sharing";
 
   Tabletop.init({ key: polyURL, callback: addPolygons, simpleSheet: true });
   // Tabletop.init({ key: pointsURL, callback: addPoints, simpleSheet: true }); // simpleSheet assumes there is only one table and automatically sends its data
@@ -31,10 +29,6 @@ basemap.addTo(map);
 
 //Zoom Comtroler
 map.zoomControl.remove();
-// map.on('click', function (feature, layer) {
-//   // sidebar.close(panelID);
-// });
- // L.control.locate().addTo(map);
 
 
 
@@ -100,12 +94,9 @@ function addPolygons(data) {
             weight: polygonStyle.weight,
             fillColor: feature.fill_color,  // Use saved color
           });
-
-          // e.target.bindPopup('<h6 style="text-align:center; color:#0000ff; margin-bottom:2px">'+ feature.properties.confirmed +'</h6>');
         },
         mouseover: function(e) {
           e.target.setStyle(polygonHoverStyle);
-
         },
         click: function(e) {
                     // var html = '<h6 style="text-align:center; color:#0000ff; margin-bottom:2px">'+ feature.properties.name +'</h6>';
@@ -138,7 +129,6 @@ function addPolygons(data) {
   polygonLayer.eachLayer(function (layer) {
     let d = layer.feature.properties.confirmed;
     let fc = d > 500 ? '#800026' :
-          // d > 500  ? '#BD0026' :
           // d > 200  ? '#E31A1C' :
           d > 100  ? '#BD0026' :
           d > 50   ? '#FC4E2A' :
@@ -171,10 +161,6 @@ var bounds_group = new L.featureGroup([]);
         return div;
     }
     logo.addTo(map);
-
-
-    //Scale
-    // L.control.scale().addTo(map);
 
 
 

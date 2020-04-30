@@ -15,8 +15,6 @@ function init() {
  
   var polyURL =
     "https://docs.google.com/spreadsheets/d/1vsCq5u22w6IjKXyoOWQefDcPzgf9IIRswXs4ActkziU/edit?usp=sharing";
-  // var pointsURL =
-  //   //"https://docs.google.com/spreadsheets/d/1kjJVPF0LyaiaDYF8z_x23UulGciGtBALQ1a1pK0coRM/edit?usp=sharing";
 
   Tabletop.init({ key: polyURL, callback: addPolygons, simpleSheet: true });
   // Tabletop.init({ key: pointsURL, callback: addPoints, simpleSheet: true }); // simpleSheet assumes there is only one table and automatically sends its data
@@ -29,12 +27,15 @@ var map = L.map("map").setView([23.373, 90.308], 7);
 // This is the Carto Positron basemap
 var hash = new L.Hash(map);
 
+let attr_html = "&copy;" +
+  (map_lang === "bn" ? " মানচিত্রের তথ্য: " : " Map Data: ") +
+  "<a href='https://www.iedcr.gov.bd/' target='_blank'>" +
+  (map_lang === "bn" ? "আইইডিসিআর" : "IEDCR") +
+  "</a>";
 var basemap = L.tileLayer(
   'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-  // "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png",
   {
-    attribution:
-      "&copy; Map Data <a href='https://www.iedcr.gov.bd/' target='_blank'>IEDCR</a>",
+    attribution: attr_html,
     subdomains: "abcd",
     maxZoom: 9,
     minZoom:6
@@ -93,8 +94,6 @@ function addPolygons(data) {
           child: data[row].child,
           web: data[row].web,
           image: data[row].image,
-          tocon: data[row].tocon,
-
         }
       });
     }
@@ -126,19 +125,16 @@ function addPolygons(data) {
             weight: polygonStyle.weight,
             fillColor: feature.fill_color,  // Use saved color
           });
-
-          // e.target.bindPopup('<h6 style="text-align:center; color:#0000ff; margin-bottom:2px">'+ feature.properties.confirmed +'</h6>');
         },
         mouseover: function(e) {
           e.target.setStyle(polygonHoverStyle);
-
         }
       });
 
       var html = (map_lang === "bn" ? ("নিশ্চিত: <b>" + bn_num(feature.properties.confirmed)) : ('Confirmed: <b>' + feature.properties.confirmed)) + '</b><br/>';
       html += (map_lang === "bn" ? ("সুস্থ: <b>" + bn_num(feature.properties.recover)) : ('Recovered: <b>' + feature.properties.recover)) + '</b><br/>';
       html += (map_lang === "bn" ? ("মৃত: <b>" + bn_num(feature.properties.deaths)) : ('Death: <b>' + feature.properties.deaths)) + '</b><br/>';
-      html += '<h6 class="more-button">' + (feature.properties.web && map_lang === "bn" ? "<a href='dhaka.html' target='_blank'>বিস্তারিত তথ্য</a>" : "<a href='../dhaka.html' target='_blank'>Details</a>") +'</h6>';
+      html += '<h6 class="more-button">' + (!feature.properties.web ? "" : (map_lang === "bn" ? "<a href='dhaka.html' target='_blank'>বিস্তারিত তথ্য</a>" : "<a href='../dhaka.html' target='_blank'>Details</a>")) +'</h6>';
       layer.bindPopup(html);
 
       let dist_label_html = "<div class='map-dist-label-cont'>" +
@@ -166,7 +162,6 @@ function addPolygons(data) {
     let d = layer.feature.properties.confirmed;
     let fc = d > 1000 ? '#800026' :
           d > 500  ? '#BD0026' :
-          // d > 200  ? '#E31A1C' :
           d > 100  ? '#E31A1C' :
           d > 50   ? '#FC4E2A' :
           d > 20   ? '#FD8D3C' :
@@ -192,16 +187,17 @@ setBounds();
 
     //logo position: bottomright, topright, topleft, bottomleft
     var logo = L.control({position: 'bottomleft'});
+    let credit_html = "<a href='https://boiledbhoot.org/' target='_blank'>" +
+      (map_lang === "bn" ? "নির্মাণ ও তত্ত্বাবধানে" : "Powered and maintained by") +
+      "<img class='credit-logo' height='25px' src='" +
+      (map_lang === "bn" ? "boil.png" : "../boil.png")
+      + "'/></a>";
     logo.onAdd = function(map){
-        var div = L.DomUtil.create('div', 'myclass');
-        div.innerHTML= "<a href='https://boiledbhoot.org/' target='_blank'>Powered and maintained by <img height='25px' src='" + (map_lang === "bn" ? "boil.png" : "../boil.png") + "'/></a>";
+        var div = L.DomUtil.create('div', 'credit');
+        div.innerHTML= credit_html;
         return div;
     }
     logo.addTo(map);
-
-
-    //Scale
-    // L.control.scale().addTo(map);
 
 
 
