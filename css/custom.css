@@ -532,7 +532,7 @@ body {
 }
 
 .mst-row-dead {
-    color: orangered;
+    color: #ef091d;
 }
 
 @media (min-width: 768px) {
