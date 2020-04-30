@@ -477,3 +477,7 @@ body {
     margin: 40px 0 20px;
     text-align: center;
 }
+
+.navbar-custom span.light {
+    text-transform: none;
+}
