@@ -481,3 +481,26 @@ body {
 .navbar-custom span.light {
     text-transform: none;
 }
+
+.leaflet-popup .leaflet-popup-content-wrapper,
+.leaflet-popup .leaflet-popup-tip {
+    background-color: rgba(0, 0, 0, 0.8);
+    box-shadow: 3px -3px 14px rgba(0, 0, 0, 0.4);
+}
+
+.leaflet-popup .leaflet-popup-content-wrapper {
+    border-radius: 0;
+}
+
+.leaflet-popup .leaflet-popup-content {
+    color: #fff;
+    line-height: 1.7;
+}
+
+.map-upz-lockdown-cont {
+    text-align: center;
+}
+
+.map-upz-lockdown-name {
+    font-weight: 700;
+}

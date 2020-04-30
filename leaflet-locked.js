@@ -105,8 +105,21 @@ polygonLayer = L.geoJSON(geojsonStates, {
 
     });
 
-    let popup_html = "<div>" + feature.properties.name + "</div>" +
-    "<div>" + feature.properties.level + "</div>";
+    let popup_html = "<div class='map-upz-lockdown-cont'>" +
+      "<div class='map-upz-lockdown-name'>" +
+      feature.properties.name +
+      "</div>" +
+      "<div class='map-upz-lockdown-level'>" +
+      (feature.properties.level && (
+        feature.properties.level === "Partial Locked Down"
+          ? "Partial lockdown"
+          : (feature.properties.level === "Full Locked Down"
+            ? "Full lockdown"
+            : feature.properties.level)
+        )
+      ) +
+      "</div>" +
+      "</div>";
     layer.bindPopup(popup_html);
 
   }
