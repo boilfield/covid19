@@ -15,8 +15,6 @@ function init() {
  
   var polyURL =
     "https://docs.google.com/spreadsheets/d/1vsCq5u22w6IjKXyoOWQefDcPzgf9IIRswXs4ActkziU/edit?usp=sharing";
-  // var pointsURL =
-  //   //"https://docs.google.com/spreadsheets/d/1kjJVPF0LyaiaDYF8z_x23UulGciGtBALQ1a1pK0coRM/edit?usp=sharing";
 
   Tabletop.init({ key: polyURL, callback: addPolygons, simpleSheet: true });
   // Tabletop.init({ key: pointsURL, callback: addPoints, simpleSheet: true }); // simpleSheet assumes there is only one table and automatically sends its data
@@ -31,7 +29,6 @@ var hash = new L.Hash(map);
 
 var basemap = L.tileLayer(
   'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-  // "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png",
   {
     attribution:
       "&copy; Map Data <a href='https://www.iedcr.gov.bd/' target='_blank'>IEDCR</a>",
@@ -93,8 +90,6 @@ function addPolygons(data) {
           child: data[row].child,
           web: data[row].web,
           image: data[row].image,
-          tocon: data[row].tocon,
-
         }
       });
     }
@@ -126,12 +121,9 @@ function addPolygons(data) {
             weight: polygonStyle.weight,
             fillColor: feature.fill_color,  // Use saved color
           });
-
-          // e.target.bindPopup('<h6 style="text-align:center; color:#0000ff; margin-bottom:2px">'+ feature.properties.confirmed +'</h6>');
         },
         mouseover: function(e) {
           e.target.setStyle(polygonHoverStyle);
-
         }
       });
 
@@ -166,7 +158,6 @@ function addPolygons(data) {
     let d = layer.feature.properties.confirmed;
     let fc = d > 1000 ? '#800026' :
           d > 500  ? '#BD0026' :
-          // d > 200  ? '#E31A1C' :
           d > 100  ? '#E31A1C' :
           d > 50   ? '#FC4E2A' :
           d > 20   ? '#FD8D3C' :
@@ -198,10 +189,6 @@ setBounds();
         return div;
     }
     logo.addTo(map);
-
-
-    //Scale
-    // L.control.scale().addTo(map);
 
 
 
