@@ -702,3 +702,7 @@ nav.navbar .navbar-collapse {
 .navbar-brand img.logo {
     height: 40px;
 }
+
+.navbar-custom span.light {
+    text-transform: none;
+}
