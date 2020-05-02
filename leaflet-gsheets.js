@@ -28,12 +28,12 @@ var map = L.map("map").setView([23.373, 90.308], 7);
 var hash = new L.Hash(map);
 
 let attr_html = "&copy;" +
-  (map_lang === "bn" ? " মানচিত্রের তথ্য: " : " Map Data: ") +
-  "<a href='https://osm.org/' target='_blank'>" +
-  (map_lang === "bn" ? "ওপেনস্ট্রিটম্যাপ" : "OpenStreetMap") +
-  "</a>, " +
+  (map_lang === "bn" ? " মানচিত্রের তথ্যের উৎস: " : " Map Data courtesy: ") +
   "<a href='https://www.iedcr.gov.bd/' target='_blank'>" +
   (map_lang === "bn" ? "আইইডিসিআর" : "IEDCR") +
+  "</a>, " +
+  "<a href='https://osm.org/' target='_blank'>" +
+  (map_lang === "bn" ? "ওপেনস্ট্রিটম্যাপ" : "OpenStreetMap") +
   "</a>";
 var basemap = L.tileLayer(
   'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
