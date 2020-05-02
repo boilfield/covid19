@@ -577,6 +577,7 @@ nav.navbar .navbar-collapse {
     z-index: 9999;
     border-radius: 5px;
     padding: 5px 10px;
+    font-variant: small-caps;
 }
 
 @media (max-width: 768px) {
