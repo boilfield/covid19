@@ -29,6 +29,9 @@ var hash = new L.Hash(map);
 
 let attr_html = "&copy;" +
   (map_lang === "bn" ? " মানচিত্রের তথ্য: " : " Map Data: ") +
+  "<a href='https://osm.org/' target='_blank'>" +
+  (map_lang === "bn" ? "ওপেনস্ট্রিটম্যাপ" : "OpenStreetMap") +
+  "</a>, " +
   "<a href='https://www.iedcr.gov.bd/' target='_blank'>" +
   (map_lang === "bn" ? "আইইডিসিআর" : "IEDCR") +
   "</a>";
