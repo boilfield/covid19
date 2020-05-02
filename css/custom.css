@@ -710,3 +710,37 @@ nav.navbar .navbar-collapse {
 img.credit-logo {
     margin-left: 5px;
 }
+
+.credit.leaflet-control {
+    margin-bottom: 2px;
+}
+
+.leaflet-control-attribution.leaflet-control {
+    margin-bottom: 5px;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+#map {
+    position:absolute;
+    z-index:0;
+    height: 100%;
+    width: 100%;
+}
+
+marquee {
+  font-size: 15px;
+  position:absolute;
+  margin-bottom: 29px;
+  z-index:1;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.info.legend {
+    margin-bottom: 38px;
+    margin-right: 8px;
+}
