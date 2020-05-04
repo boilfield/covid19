@@ -13,8 +13,10 @@ function init() {
     // PASTE YOUR URLs HERE
     // these URLs come from Google Sheets 'shareable link' form
     // the first is the polygon layer and the second the points
-    var polyURL = "https://docs.google.com/spreadsheets/d/1vsCq5u22w6IjKXyoOWQefDcPzgf9IIRswXs4ActkziU/edit?usp=sharing";
-    Tabletop.init({ key: polyURL, callback: addPolygons, simpleSheet: true });
+    var conf_URL = "https://docs.google.com/spreadsheets/d/1vsCq5u22w6IjKXyoOWQefDcPzgf9IIRswXs4ActkziU/edit?usp=sharing";
+    var lockdown_URL ="https://docs.google.com/spreadsheets/d/1WG9Sikm2PUkKdmsm2tm8iCZEiqpKKXTf9E5-O8xzTCA/edit?usp=sharing";
+    Tabletop.init({ key: conf_URL, callback: add_conf_polygons, simpleSheet: true });
+    Tabletop.init({ key: lockdown_URL, callback: add_lockdown_polygons, simpleSheet: true });
 }
 window.addEventListener("DOMContentLoaded", init);
 
@@ -49,22 +51,25 @@ basemap.addTo(map);
 
 
 // These are declared outisde the functions so that the functions can check if they already exist
-var polygonLayer;
+var conf_layer;
+
+// Create layer group to hide/reveal all district labels while switching layers.
+let conf_num_group = L.layerGroup().addTo(map);
 
 // The form of data must be a JSON representation of a table as returned by Tabletop.js
-// addPolygons first checks if the map layer has already been assigned, and if so, deletes it and makes a fresh one
+// add_conf_polygons first checks if the map layer has already been assigned, and if so, deletes it and makes a fresh one
 // The assumption is that the locally stored JSONs will load before Tabletop.js can pull the external data from Google Sheets
-function addPolygons(data) {
+function add_conf_polygons(data) {
 
     // If the layer exists, remove it and continue to make a new one with data
-    if (polygonLayer != null) {
-        polygonLayer.remove();
+    if (conf_layer != null) {
+        conf_layer.remove();
     }
 
     // Need to convert the Tabletop.js JSON into a GeoJSON
     // Start with an empty GeoJSON of type FeatureCollection
     // All the rows will be inserted into a single GeoJSON
-    var geojsonStates = {
+    var geojson_conf_states = {
         type: "FeatureCollection",
         features: []
     };
@@ -79,7 +84,7 @@ function addPolygons(data) {
             today_conf += parseInt(data[row].todayconf);
             today_rcov += parseInt(data[row].todayrcov);
             today_dead += parseInt(data[row].todaydeath);
-            geojsonStates.features.push({
+            geojson_conf_states.features.push({
                 type: "Feature",
                 geometry: {
                     type: "MultiPolygon",
@@ -119,7 +124,7 @@ function addPolygons(data) {
 
 
 
-    polygonLayer = L.geoJSON(geojsonStates, {
+    conf_layer = L.geoJSON(geojson_conf_states, {
 
         onEachFeature: function(feature, layer) {
 
@@ -155,7 +160,9 @@ function addPolygons(data) {
                     className: 'label',
                     html: dist_label_html,
                 })
-            }).addTo(map);
+            });
+
+            conf_num_group.addLayer(label);
 
         },
 
@@ -166,7 +173,7 @@ function addPolygons(data) {
 
 
     // Set different polygon fill colors based on number
-    polygonLayer.eachLayer(function (layer) {
+    conf_layer.eachLayer(function (layer) {
         let d = layer.feature.properties.confirmed;
 
         let fc = d > 1000 ? '#800026' :
@@ -182,6 +189,130 @@ function addPolygons(data) {
         layer.feature.fill_color = fc;  // Save color to use again after mouseout
     });
 
+}
+
+
+
+var lock_layer;
+
+function add_lockdown_polygons(data) {
+
+    if (lock_layer != null) {
+        lock_layer.remove();
+    }
+
+    var geojson_lockdown_states = {
+        type: "FeatureCollection",
+        features: []
+    };
+
+    for (var row in data) {
+        if (data[row].include == "y") {
+            var coords = JSON.parse(data[row].geometry);
+            geojson_lockdown_states.features.push({
+                type: "Feature",
+                geometry: {
+                    type: "MultiPolygon",
+                    coordinates: coords
+                },
+                properties: {
+                    name: data[row].name,
+                    confirmed: data[row].lock_code,
+                    level: data[row].level,
+                }
+            });
+        }
+    }
+
+    var polygonStyle = { color: "#f78c72", fillColor: "#f78c72" , weight: 1.5, fillOpacity: 1};
+    var polygonHoverStyle = { color: "#f5eb5d", fillColor: "#f7ea2f", weight: 1.5, fillOpacity: 1};
+
+    lock_layer = L.geoJSON(geojson_lockdown_states, {
+
+        style: polygonStyle,
+
+        onEachFeature: function(feature, layer) {
+
+            layer.on({
+
+                mouseout: function() {
+                    layer.setStyle({
+                        color: polygonStyle.color,
+                        weight: polygonStyle.weight,
+                        fillColor: feature.fill_color,
+                    });
+                    layer.closePopup();
+                },
+
+                mouseover: function() {
+                    layer.setStyle(polygonHoverStyle);
+                    layer.openPopup();
+                }
+
+            });
+
+            let popup_html = "<div class='map-upz-lockdown-cont'>" +
+                "<div class='map-upz-lockdown-name'>" +
+                feature.properties.name +
+                "</div>" +
+                "<div class='map-upz-lockdown-level'>" +
+                (feature.properties.level && (
+                    feature.properties.level === "Partial Locked Down"
+                    ? "Partial lockdown"
+                    : (feature.properties.level === "Full Locked Down"
+                        ? "Full lockdown"
+                        : feature.properties.level)
+                    )
+                ) +
+                "</div>" +
+                "</div>";
+            layer.bindPopup(popup_html);
+
+        }
+
+    });
+
+    lock_layer.eachLayer(function (layer) {
+        let d = layer.feature.properties.confirmed;
+        let fc = d > 2 ? '#800026' : d > 1 ? '#FEB24C' : '#FFFFFF';
+        layer.setStyle({fillColor: fc});
+        layer.feature.fill_color = fc;
+    });
+
+
+
+    let layer_switch = document.querySelector(".layer-switch-area");
+    layer_switch.style.display = "block";
+
+}
+
+
+
+// Remove current data layer, and add target layer. (Add/remove district labels
+// as necessary.)
+// Then remove "active" class from all layer names, and add it to clicked name.
+function change_map_layer(el) {
+    if (el.value === "lock") {
+        conf_layer.remove();
+        conf_num_group.remove();
+        lock_layer.addTo(map);
+
+        let layers = document.querySelectorAll(".layer-switch-area > .wrap");
+        for (let i = 0; i < layers.length; ++i) {
+            layers[i].classList.remove("active");
+        }
+        el.parentNode.classList.add("active");
+    } else if (el.value === "conf") {
+        lock_layer.remove();
+        conf_layer.addTo(map);
+        conf_num_group.addTo(map);
+
+        let layers = document.querySelectorAll(".layer-switch-area > .wrap");
+        for (let i = 0; i < layers.length; ++i) {
+            layers[i].classList.remove("active");
+        }
+        el.parentNode.classList.add("active");
+    }
 }
 
 
@@ -326,4 +457,6 @@ if (map_lang === "bn") {
     document.getElementById("mst_label_rcov").innerText = "সুস্থ";
     document.getElementById("mst_label_dead").innerText = "মৃত";
     document.getElementById("legend_toggler_label").innerText = "কালার কোড দেখুন";
+    document.querySelector(".map-layer-conf > label").innerText = "সংক্রমণের মানচিত্র";
+    document.querySelector(".map-layer-lock > label").innerText = "লকডাউনের মানচিত্র";
 }

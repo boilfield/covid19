@@ -8,7 +8,6 @@
 body {
     width: 100%;
     height: 100%;
-    font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #fff;
     background-color: #000;
 }
@@ -744,4 +743,50 @@ marquee {
 .info.legend {
     margin-bottom: 38px;
     margin-right: 8px;
+}
+
+.layer-switch-area {
+    display: none;
+    position: fixed;
+    bottom: 60px;
+    left: 10px;
+    font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+.layer-switch-area input[type="radio"] {
+    position: absolute;
+    right: 5px;
+    margin-top: 6px;
+}
+
+.layer-switch-area label {
+    display: block;
+    font-weight: 300;
+    margin-bottom: 0;
+    padding: 5px;
+    padding-right: 25px;
+}
+
+.layer-switch-area input[type="radio"]:hover,
+.layer-switch-area label:hover {
+    cursor: pointer;
+}
+
+.layer-switch-area .wrap {
+    border: 1px solid #fff;
+    border-bottom: none;
+}
+
+.layer-switch-area .wrap:last-child {
+    border-bottom: 1px solid #fff;
+}
+
+.layer-switch-area .wrap:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.layer-switch-area .wrap.active {
+    background-color: rgba(255, 255, 255, 0.7);
+    color: #000;
 }

@@ -89,6 +89,17 @@
         </a>
     </div>
 
+    <div class="layer-switch-area">
+        <div class="map-layer-conf wrap active">
+            <input id="map_layer_conf" type="radio" name="layer" value="conf" onchange="change_map_layer(this)" checked="true">
+            <label for="map_layer_conf">Affected map</label>
+        </div>
+        <div class="map-layer-lock wrap">
+            <input id="map_layer_lock" type="radio" name="layer" value="lock" onchange="change_map_layer(this)">
+            <label for="map_layer_lock">Lockdown map</label>
+        </div>
+    </div>
+
     <script src="js/leaflet.js"></script>
     <script src="js/tabletop.min.js"></script>
     <script src="js/leaflet-hash.js"></script>
