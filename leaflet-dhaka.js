@@ -14,13 +14,21 @@ function init() {
 window.addEventListener("DOMContentLoaded", init);
 
 // Create a new Leaflet map centered on the continental US [23.699, 89.308], 7
-var map = L.map("map").setView([23.7929, 90.4175], 11);
+var map = L.map("map").setView([23.7926, 90.4175], 11);
 
 // This is the Carto Positron basemap
 var hash = new L.Hash(map);
 
+let attr_html = "&copy;" +
+  (map_lang === "bn" ? " মানচিত্রের তথ্যের উৎস: " : " Map Data courtesy: ") +
+  "<a href='https://www.iedcr.gov.bd/' target='_blank'>" +
+  (map_lang === "bn" ? "আইইডিসিআর" : "IEDCR") +
+  "</a>, " +
+  "<a href='https://osm.org/' target='_blank'>" +
+  (map_lang === "bn" ? "ওপেনস্ট্রিটম্যাপ" : "OpenStreetMap") +
+  "</a>";
 var basemap = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-{ attribution:"&copy; Map Data <a href='https://www.iedcr.gov.bd/' target='_blank'>IEDCR</a>",
+{ attribution: attr_html,
     subdomains: "abcd",
      maxZoom: 15,
     minZoom:11    
@@ -62,7 +70,7 @@ function addPolygons(data) {
           coordinates: coords
         },
         properties: {
-          name: data[row].name,
+          name: map_lang==="bn" ? data[row].name_bd : data[row].name,
           confirmed: data[row].confirmed,
           deaths: data[row].deaths,
           recover: data[row].recover,
@@ -97,26 +105,27 @@ function addPolygons(data) {
         },
         mouseover: function(e) {
           e.target.setStyle(polygonHoverStyle);
-        },
-        click: function(e) {
-                    // var html = '<h6 style="text-align:center; color:#0000ff; margin-bottom:2px">'+ feature.properties.name +'</h6>';
-                    var html = 'Confirmed: <b>' + feature.properties.confirmed + '</b><br/>';
-                    html += 'Recovered: <b>' + feature.properties.recover + '</b><br/>';
-                    html += 'Death: <b>' + feature.properties.deaths + '</b><br/>';
-                    // html += '<h6 style="text-align:center; color:#fff000; margin-bottom:2px">' + feature.properties.web +'</h6>';
-                    // html += 'Male: <b>' + feature.properties.male + '</b><br/>';
-                    // html += 'Female: <b>' + feature.properties.female + '</b><br/>';
-                    // html += 'Child: <b>' + feature.properties.child + '</b><br/>';
-                    layer.bindPopup(html);
-                }
+        }
       });
 
+      var html = (map_lang === "bn" ? ("নিশ্চিত: <b>" + bn_num(feature.properties.confirmed)) : ('Confirmed: <b>' + feature.properties.confirmed)) + '</b><br/>';
+      html += (map_lang === "bn" ? ("সুস্থ: <b>" + bn_num(feature.properties.recover)) : ('Recovered: <b>' + feature.properties.recover)) + '</b><br/>';
+      html += (map_lang === "bn" ? ("মৃত: <b>" + bn_num(feature.properties.deaths)) : ('Death: <b>' + feature.properties.deaths)) + '</b><br/>';
+      html += '<h6 class="more-button">' + (!feature.properties.web ? "" : (map_lang === "bn" ? "<a href='dhaka.html' target='_blank'>বিস্তারিত তথ্য</a>" : "<a href='../dhaka.html' target='_blank'>Details</a>")) +'</h6>';
+      layer.bindPopup(html);
 
+      let dist_label_html = "<div class='map-dist-label-cont'>" +
+        "<div class='map-dist-label-name'>" +
+        feature.properties.name +
+        "</div>" +
+        "<div class='map-dist-label-num'>" +
+        (map_lang === "bn" ? bn_num(feature.properties.confirmed) : feature.properties.confirmed) +
+        "</div></div>";
 
       let label = L.marker(layer.getBounds().getCenter(), {
       icon: L.divIcon({
         className: 'label',
-        html: feature.properties.name +'<br/><h6 style="text-align:center; color:#ff0000; margin-bottom:2px"> ' + feature.properties.confirmed +' </h6>',
+        html: dist_label_html,
       })
     }).addTo(map);
     },
@@ -155,9 +164,14 @@ var bounds_group = new L.featureGroup([]);
 
     //logo position: bottomright, topright, topleft, bottomleft
     var logo = L.control({position: 'bottomleft'});
+    let credit_html = "<a href='https://boiledbhoot.org/' target='_blank'>" +
+      (map_lang === "bn" ? "নির্মাণ ও তত্ত্বাবধানে" : "Powered and maintained by") +
+      "<img class='credit-logo' height='25px' src='" +
+      (map_lang === "bn" ? "boil.png" : "../boil.png")
+      + "'/></a>";
     logo.onAdd = function(map){
-        var div = L.DomUtil.create('div', 'myclass');
-        div.innerHTML= "<a href='https://boiledbhoot.org/' target='_blank'>Powered & maintaied by <img height='25px' src='boil.png'/></a>";
+        var div = L.DomUtil.create('div', 'credit');
+        div.innerHTML= credit_html;
         return div;
     }
     logo.addTo(map);
@@ -167,41 +181,45 @@ var bounds_group = new L.featureGroup([]);
 let legend = L.control({position: "bottomright"});
 legend.onAdd = function (map) {
   let cont_div = L.DomUtil.create('div', 'info legend');
-  cont_div.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-  cont_div.style.padding = "10px";
-  cont_div.innerHTML = `
-    <div><b>Confirmed Cases</b></div>
-    <style>
-      .legend-cb {
-        height: 0.8em;
-        width: 10px;
-        display: inline-block;
-        margin-right: 5px;
-        text-align: center;
-      }
-    </style>
+  cont_div.innerHTML = "<div id='legend_toggler' class='legend-toggler'></div>" +
+    "<div id='legend_toggler_label' class='legend-toggler-label'><div>Show color codes</div></div>" +
+    "<div class='legend-cont'><div><b>" + (map_lang === "bn" ? "নিশ্চিত কেসের সংখ্যা" : "Confirmed Cases") + "</b></div>" +
+    `
     <div>
       <span class="legend-cb" style="background-color: #800026"></span>
-      <span>500+ person</span>
+    ` +
+      "<span>" + (map_lang === "bn" ? "৫০০+ জন" : "500+ people") + "</span>" +
+    `
     </div>
     <div>
       <span class="legend-cb" style="background-color: #BD0026"></span>
-      <span>101-499 person</span>
+    ` +
+      "<span>" + (map_lang === "bn" ? "১০১–৪৯৯ জন" : "101-499 people") + "</span>" +
+    `
     </div>
     <div>
       <span class="legend-cb" style="background-color: #FC4E2A"></span>
-      <span>51-100 person</span>
+    ` +
+      "<span>" + (map_lang === "bn" ? "৫১–১০০ জন" : "51-100 people") + "</span>" +
+    `
     </div>
     <div>
       <span class="legend-cb" style="background-color: #FD8D3C"></span>
-      <span>21-50 person</span>
+    ` +
+      "<span>" + (map_lang === "bn" ? "২১–৫০ জন" : "21-50 people") + "</span>" +
+    `
     </div>
     <div>
       <span class="legend-cb" style="background-color: #FED976"></span>
-      <span>1-20 person</span>
-    </div>
+    ` +
+      "<span>" + (map_lang === "bn" ? "১–২০ জন" : "1-20 people") + "</span>" +
+    `
+    </div></div>
   `;
   return cont_div;
 }
 legend.addTo(map);
 
+if (map_lang === "bn") {
+  document.getElementById("legend_toggler_label").innerText = "কালার কোড দেখুন";
+}

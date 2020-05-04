@@ -13,7 +13,6 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/custom.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -28,11 +27,7 @@
     <![endif]-->
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
-  <script src="https://d3js.org/d3.v3.min.js"></script>
-  <script src="https://d3js.org/topojson.v1.min.js"></script>
-  <script src="https://d3js.org/d3-tile.v0.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/leaflet.esri/1.0.4/esri-leaflet.js"></script>
+    <link href="css/custom.css" rel="stylesheet">
 
   <style>
         body {
@@ -63,7 +58,7 @@
                     <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand page-scroll" href="dhaka.html">
-                    <i><img src="logo.png" style="width: 30px;height: 30px"></i>  <span class="light">COVID-19, Dhaka</span>
+                    <i><img src="icon.svg" style="width: 30px;height: 30px"></i>  <span class="light">কোভিড-১৯, ঢাকা</span>
                 </a>
             </div>
 
@@ -72,29 +67,46 @@
                 <ul class="nav navbar-nav">
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                     <li class="hidden">
-                        <a href="dhaka.html"></a>
+                        <a href="index.html"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="index.html">Bangladesh</a>
-                    </li>
-<!--                     <li>
-                        <a class="page-scroll" href="pages/photos.html">Photos</a>
-                    </li> -->
-<!--                     <li>
-                        <a class="page-scroll" href="pages/news.html">News</a>
+                        <a class="page-scroll" href="index.html">বাংলাদেশ</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="pages/donation.html">Donation</a>
+                        <a class="page-scroll" href="http://103.247.238.81/webportal/pages/covid19.php" target="_blank">ড্যাশবোর্ড</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="pages/source.html">Source</a>
-                    </li> -->
+                        <a class="page-scroll" href="https://www.worldometers.info/coronavirus/" target="_blank">বৈশ্বিক অবস্থা</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="pages/engagement.html">অংশগ্রহণ</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="pages/source.html">তথ্যসূত্র</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
+    <marquee scrollamount=3>ন্যাশনাল কল সেন্টার: ৩৩৩ * স্বাস্থ্য বাতায়ন: ১৬২৬৩ * আইইডিসিআর: ১০৬৫৫ * বিশেষজ্ঞ হেলথ লাইন: ০৯৬১১৬ ৭৭৭৭৭ * ন্যাশনাল হেল্পলাইন: ১০৯ </marquee>
+
     <div id="map"></div>
+
+    <div class="map-lang-button">
+        <a href="en/dhaka.html" title="ভাষা পরিবর্তন করতে ক্লিক করুন">
+            বাং
+            <div class="button"></div>
+            En
+        </a>
+    </div>
+
+
+
+    <script type="text/javascript">
+        let map_lang = "bn";
+    </script>
+
     <script src="js/leaflet.js"></script>
     <script src="js/tabletop.min.js"></script>
     <script src="js/leaflet-hash.js"></script>
