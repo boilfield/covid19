@@ -194,6 +194,12 @@ setBounds();
       (map_lang === "bn" ? "নির্মাণ ও তত্ত্বাবধানে" : "Powered and maintained by") +
       "<img class='credit-logo' height='25px' src='" +
       (map_lang === "bn" ? "boil.png" : "../boil.png")
+      + "'/></a>" +
+      "&nbsp;" +
+      "<a href='https://osmbdf.org/' target='_blank'>" +
+      (map_lang === "bn" ? "সহযোগিতায়" : "Supported by") +
+      "<img class='credit-logo' height='24px' src='" +
+      (map_lang === "bn" ? "img/logo_osmbdf.png" : "../img/logo_osmbdf.png")
       + "'/></a>";
     logo.onAdd = function(map){
         var div = L.DomUtil.create('div', 'credit');
