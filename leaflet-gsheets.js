@@ -296,6 +296,7 @@ function change_map_layer(el) {
         conf_layer.remove();
         conf_num_group.remove();
         lock_layer.addTo(map);
+        toggle_map_legend(1);
 
         let layers = document.querySelectorAll(".layer-switch-area > .wrap");
         for (let i = 0; i < layers.length; ++i) {
@@ -306,6 +307,7 @@ function change_map_layer(el) {
         lock_layer.remove();
         conf_layer.addTo(map);
         conf_num_group.addTo(map);
+        toggle_map_legend(0);
 
         let layers = document.querySelectorAll(".layer-switch-area > .wrap");
         for (let i = 0; i < layers.length; ++i) {
