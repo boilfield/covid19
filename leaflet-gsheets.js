@@ -461,4 +461,5 @@ if (map_lang === "bn") {
     document.getElementById("legend_toggler_label").innerText = "কালার কোড দেখুন";
     document.querySelector(".map-layer-conf > label").innerText = "সংক্রমণের মানচিত্র";
     document.querySelector(".map-layer-lock > label").innerText = "লকডাউনের মানচিত্র";
+    document.getElementById("self_test_text").innerHTML = "লাইভ করোনা<br>ঝুঁকি পরীক্ষা";
 }
