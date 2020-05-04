@@ -46,8 +46,8 @@ if (legend_toggler) {
 
 // Keep map legend initially collapsed for screen width < 600px
 (function () {
-    if (window.innerWidth < 600) {
-        toggle_map_legend(1);
+    if (window.innerWidth < 576) {
+        toggle_map_legend(0);
     }
 })();
 
