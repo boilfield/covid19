@@ -508,3 +508,17 @@ body {
 section#web {
     overflow: auto;
 }
+
+#loctable {
+    float: left;
+    height: 250px;
+    width: 440px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+#piechart {
+    float: right;
+    height: 250px;
+    width: 250px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
