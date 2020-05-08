@@ -746,7 +746,6 @@ marquee {
 }
 
 .layer-switch-area {
-    display: none;
     position: fixed;
     bottom: 60px;
     left: 10px;
@@ -776,6 +775,7 @@ marquee {
 .layer-switch-area .wrap {
     border: 1px solid #fff;
     border-bottom: none;
+    display: none;
 }
 
 .layer-switch-area .wrap:last-child {

@@ -58,6 +58,7 @@ function toggle_map_legend(showLegend) {
 }
 
 
+
 // Convert integer from English to Bengali
 function bn_num(num) {
     if (!parseInt(num)) {
@@ -100,15 +101,37 @@ function bn_num(num) {
 
 
 
+function show_map_layer_name(id) {
+    let layer_name = document.getElementById(id);
+    if (layer_name) {
+        layer_name.parentNode.style.display = "block";
+    }
+}
+
+
+
 // Remove current data layer, and add target layer. (Add/remove district labels
 // as necessary.)
 // Then remove "active" class from all layer names, and add it to clicked name.
 function change_map_layer(el) {
     if (el.value === "lock") {
-        conf_layer.remove();
-        conf_num_group.remove();
-        lock_layer.addTo(map);
+        conf_layer && conf_layer.remove();
+        conf_num_group && conf_num_group.remove();
+        hospital_layer && hospital_layer.remove();
         toggle_map_legend(0);
+        lock_layer.addTo(map);
+
+        let layers = document.querySelectorAll(".layer-switch-area > .wrap");
+        for (let i = 0; i < layers.length; ++i) {
+            layers[i].classList.remove("active");
+        }
+        el.parentNode.classList.add("active");
+    } else if (el.value === "hosp") {
+        conf_layer && conf_layer.remove();
+        conf_num_group && conf_num_group.remove();
+        lock_layer && lock_layer.remove();
+        toggle_map_legend(0);
+        hospital_layer.addTo(map);
 
         let layers = document.querySelectorAll(".layer-switch-area > .wrap");
         for (let i = 0; i < layers.length; ++i) {
@@ -116,10 +139,11 @@ function change_map_layer(el) {
         }
         el.parentNode.classList.add("active");
     } else if (el.value === "conf") {
-        lock_layer.remove();
+        lock_layer && lock_layer.remove();
+        hospital_layer && hospital_layer.remove();
+        toggle_map_legend(1);
         conf_layer.addTo(map);
         conf_num_group.addTo(map);
-        toggle_map_legend(1);
 
         let layers = document.querySelectorAll(".layer-switch-area > .wrap");
         for (let i = 0; i < layers.length; ++i) {
@@ -134,7 +158,7 @@ function change_map_layer(el) {
 // Add a new map layer name to layer list.
 function add_map_layer_name({input_id, text, input_value}) {
     let name_cont = document.createElement("div");
-    name_cont.classList.add("map-layer-lock", "wrap");
+    name_cont.classList.add(("map-layer-" + input_value), "wrap");
 
     let input = document.createElement("input");
     input.setAttribute("type", "radio");

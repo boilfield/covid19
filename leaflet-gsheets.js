@@ -15,8 +15,10 @@ function init() {
     // the first is the polygon layer and the second the points
     var conf_URL = "https://docs.google.com/spreadsheets/d/1vsCq5u22w6IjKXyoOWQefDcPzgf9IIRswXs4ActkziU/edit?usp=sharing";
     var lockdown_URL ="https://docs.google.com/spreadsheets/d/1WG9Sikm2PUkKdmsm2tm8iCZEiqpKKXTf9E5-O8xzTCA/edit?usp=sharing";
+    var hospital_url = 'https://docs.google.com/spreadsheets/d/1B4Oyx8J_4fzuZET-kHc5RCJMAbpgk7dLOm9N5z42KUA/edit?usp=sharing';
     Tabletop.init({ key: conf_URL, callback: add_conf_polygons, simpleSheet: true });
     Tabletop.init({ key: lockdown_URL, callback: add_lockdown_polygons, simpleSheet: true });
+    Tabletop.init({ key: hospital_url, callback: add_hospital_layer, simpleSheet: true });
 }
 window.addEventListener("DOMContentLoaded", init);
 
@@ -189,6 +191,8 @@ function add_conf_polygons(data) {
         layer.feature.fill_color = fc;  // Save color to use again after mouseout
     });
 
+    show_map_layer_name("map_layer_conf");
+
 }
 
 
@@ -279,20 +283,62 @@ function add_lockdown_polygons(data) {
         layer.feature.fill_color = fc;
     });
 
-
-
-    let layer_switch = document.querySelector(".layer-switch-area");
-    layer_switch.style.display = "block";
-
-
-
-    add_map_layer_name({
-        input_id: "map_layer_lockdown",
-        text: "Lockdown map",
-        input_value: "lock",
-    });
+    show_map_layer_name("map_layer_lockdown");
 
 }
+
+add_map_layer_name({
+    input_id: "map_layer_lockdown",
+    text: "Lockdown map",
+    input_value: "lock",
+});
+
+
+
+let hospital_layer;
+
+function add_hospital_layer(data) {
+
+    if (hospital_layer != null) {
+        hospital_layer.remove();
+    }
+
+    hospital_layer = L.layerGroup();
+
+    for(var row = 0; row < data.length; row++) {
+        var marker = L.marker([data[row].lat, data[row].long]).addTo(hospital_layer);
+
+        marker.feature = {
+            properties: {
+                location: data[row].Facility_Name,
+            }
+        };
+
+        marker.on({
+            click: function(e) {
+                L.DomEvent.stopPropagation(e);
+            }
+        });
+
+        var icon = L.AwesomeMarkers.icon({
+            icon: 'info-sign',
+            iconColor: 'white',
+            prefix: 'glyphicon',
+            extraClasses: 'fa-rotate-0'
+        });
+        marker.setIcon(icon);
+
+    }
+
+    show_map_layer_name("map_layer_hospital");
+
+}
+
+add_map_layer_name({
+    input_id: "map_layer_hospital",
+    text: "Hospital map",
+    input_value: "hosp",
+});
 
 
 
@@ -438,5 +484,6 @@ if (map_lang === "bn") {
     document.getElementById("legend_toggler_label").innerText = "কালার কোড দেখুন";
     document.querySelector(".map-layer-conf > label").innerText = "সংক্রমণের মানচিত্র";
     document.querySelector(".map-layer-lock > label").innerText = "লকডাউনের মানচিত্র";
+    document.querySelector(".map-layer-hosp > label").innerText = "হাসপাতালের মানচিত্র";
     document.getElementById("self_test_text").innerHTML = "লাইভ করোনা<br>ঝুঁকি পরীক্ষা";
 }
