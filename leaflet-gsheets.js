@@ -295,54 +295,42 @@ add_map_layer_name({
 
 
 
-let hospital_layer;
-
 let hosp_layer_icon_group = L.layerGroup();
 
 function add_hospital_layer(data) {
 
-    if (hospital_layer != null) {
-        hospital_layer.remove();
-    }
-
-    let geojson = {
-        type: "FeatureCollection",
-        features: []
-    };
-
-    // Create array of features from data.
     for (let i = 0; i < data.length; ++i) {
-        geojson.features.push({
-            type: "Feature",
-            geometry: {
-                type: "Point",
-                coordinates: [
-                    parseFloat(data[i].lat),
-                    parseFloat(data[i].long),
-                ],
-            },
-            properties: {
-                facility_name: data[i].facility_name,
-                med_team: data[i].med_team,
-                isol_unit: data[i].isol_unit,
-                sep_opd: data[i].sep_opd,
-            },
-        });
-    }
 
-    // Set map icon to POIs.
-    hospital_layer = L.geoJson(geojson, {
-        onEachFeature: function (feature, layer) {
-            let hosp_label_html = '<i class="glyphicon glyphicon-info-sign"></i>';
-            let label = L.marker(feature.geometry.coordinates, {
-                icon: L.divIcon({
-                    className: 'hosp-label',
-                    html: hosp_label_html,
-                })
-            });
-            hosp_layer_icon_group.addLayer(label);
-        }
-    });
+        let lat_long = [
+            parseFloat(data[i].lat),
+            parseFloat(data[i].long),
+        ];
+
+        let label_html = '<i class="map-hosp-icon glyphicon glyphicon-info-sign"></i>';
+        let label = L.marker(lat_long, {
+            icon: L.divIcon({
+                className: "hosp-label",
+                html: label_html,
+            }),
+        });
+
+        let popup_html = `
+            <div class="map-hosp-cont">
+                <div class="map-hosp-name">
+                    ${data[i].facility_name}
+                </div>
+                <div class="map-hosp-detail">
+                    ${ data[i].med_team === "yes" ? '<div class="map-hosp-tick">Medical team</div>' : '' }
+                    ${ data[i].isol_unit === "yes" ? '<div class="map-hosp-tick">Isolation unit</div>' : '' }
+                    ${ data[i].sep_opd === "yes" ? '<div class="map-hosp-tick">Separate OPD for RTI patients</div>' : '' }
+                </div>
+            </div>
+        `;
+        label.bindPopup(popup_html);
+
+        hosp_layer_icon_group.addLayer(label);
+
+    }
 
     show_map_layer_name("map_layer_hospital");
 
