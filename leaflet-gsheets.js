@@ -284,37 +284,14 @@ function add_lockdown_polygons(data) {
     let layer_switch = document.querySelector(".layer-switch-area");
     layer_switch.style.display = "block";
 
-}
 
 
+    add_map_layer_name({
+        input_id: "map_layer_lockdown",
+        text: "Lockdown map",
+        input_value: "lock",
+    });
 
-// Remove current data layer, and add target layer. (Add/remove district labels
-// as necessary.)
-// Then remove "active" class from all layer names, and add it to clicked name.
-function change_map_layer(el) {
-    if (el.value === "lock") {
-        conf_layer.remove();
-        conf_num_group.remove();
-        lock_layer.addTo(map);
-        toggle_map_legend(0);
-
-        let layers = document.querySelectorAll(".layer-switch-area > .wrap");
-        for (let i = 0; i < layers.length; ++i) {
-            layers[i].classList.remove("active");
-        }
-        el.parentNode.classList.add("active");
-    } else if (el.value === "conf") {
-        lock_layer.remove();
-        conf_layer.addTo(map);
-        conf_num_group.addTo(map);
-        toggle_map_legend(1);
-
-        let layers = document.querySelectorAll(".layer-switch-area > .wrap");
-        for (let i = 0; i < layers.length; ++i) {
-            layers[i].classList.remove("active");
-        }
-        el.parentNode.classList.add("active");
-    }
 }
 
 
