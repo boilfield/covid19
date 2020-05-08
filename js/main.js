@@ -1,4 +1,31 @@
 
+window.addEventListener("DOMContentLoaded", function () {
+
+    // Keep map legend initially collapsed for screen width < 576px
+    let legend = document.querySelector(".info.legend .legend-cont");;
+    if (window.innerWidth < 576 && legend) {
+        toggle_map_legend(0);
+    }
+
+    // Show/collapse map legend based on user interaction.
+    let legend_toggler = document.getElementById("legend_toggler");
+    if (legend_toggler) {
+        legend_toggler.addEventListener("click", function () {
+            let css_tr = legend_toggler.style.transform;
+
+            // Show or hide/collapse map legend
+            if (!css_tr || css_tr === "rotate(90deg)") {
+                toggle_map_legend(0);
+            } else {
+                toggle_map_legend(1);
+            }
+        });
+    }
+
+});
+
+
+
 // jQuery to collapse the navbar on scroll
 $(window).scroll(function() {
     if ($(".navbar").offset().top > 50) {
@@ -29,28 +56,6 @@ function toggle_map_legend(showLegend) {
         }, 500);
     }
 }
-
-let legend_toggler = document.getElementById("legend_toggler");
-if (legend_toggler) {
-    legend_toggler.addEventListener("click", function () {
-        let css_tr = legend_toggler.style.transform;
-
-        // Show or hide/collapse map legend
-        if (!css_tr || css_tr === "rotate(90deg)") {
-            toggle_map_legend(0);
-        } else {
-            toggle_map_legend(1);
-        }
-    });
-}
-
-// Keep map legend initially collapsed for screen width < 600px
-(function () {
-    let legend = document.querySelector(".info.legend .legend-cont");;
-    if (window.innerWidth < 576 && legend) {
-        toggle_map_legend(0);
-    }
-})();
 
 
 // Convert integer from English to Bengali
