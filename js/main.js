@@ -118,6 +118,7 @@ function change_map_layer(el) {
         conf_layer && conf_layer.remove();
         conf_num_group && conf_num_group.remove();
         hospital_layer && hospital_layer.remove();
+        hosp_layer_icon_group && hosp_layer_icon_group.remove();
         toggle_map_legend(0);
         lock_layer.addTo(map);
 
@@ -132,6 +133,7 @@ function change_map_layer(el) {
         lock_layer && lock_layer.remove();
         toggle_map_legend(0);
         hospital_layer.addTo(map);
+        hosp_layer_icon_group.addTo(map);
 
         let layers = document.querySelectorAll(".layer-switch-area > .wrap");
         for (let i = 0; i < layers.length; ++i) {
@@ -141,6 +143,7 @@ function change_map_layer(el) {
     } else if (el.value === "conf") {
         lock_layer && lock_layer.remove();
         hospital_layer && hospital_layer.remove();
+        hosp_layer_icon_group && hosp_layer_icon_group.remove();
         toggle_map_legend(1);
         conf_layer.addTo(map);
         conf_num_group.addTo(map);

@@ -297,38 +297,52 @@ add_map_layer_name({
 
 let hospital_layer;
 
+let hosp_layer_icon_group = L.layerGroup();
+
 function add_hospital_layer(data) {
 
     if (hospital_layer != null) {
         hospital_layer.remove();
     }
 
-    hospital_layer = L.layerGroup();
+    let geojson = {
+        type: "FeatureCollection",
+        features: []
+    };
 
-    for(var row = 0; row < data.length; row++) {
-        var marker = L.marker([data[row].lat, data[row].long]).addTo(hospital_layer);
-
-        marker.feature = {
+    // Create array of features from data.
+    for (let i = 0; i < data.length; ++i) {
+        geojson.features.push({
+            type: "Feature",
+            geometry: {
+                type: "Point",
+                coordinates: [
+                    parseFloat(data[i].lat),
+                    parseFloat(data[i].long),
+                ],
+            },
             properties: {
-                location: data[row].Facility_Name,
-            }
-        };
-
-        marker.on({
-            click: function(e) {
-                L.DomEvent.stopPropagation(e);
-            }
+                facility_name: data[i].facility_name,
+                med_team: data[i].med_team,
+                isol_unit: data[i].isol_unit,
+                sep_opd: data[i].sep_opd,
+            },
         });
-
-        var icon = L.AwesomeMarkers.icon({
-            icon: 'info-sign',
-            iconColor: 'white',
-            prefix: 'glyphicon',
-            extraClasses: 'fa-rotate-0'
-        });
-        marker.setIcon(icon);
-
     }
+
+    // Set map icon to POIs.
+    hospital_layer = L.geoJson(geojson, {
+        onEachFeature: function (feature, layer) {
+            let hosp_label_html = '<i class="glyphicon glyphicon-info-sign"></i>';
+            let label = L.marker(feature.geometry.coordinates, {
+                icon: L.divIcon({
+                    className: 'hosp-label',
+                    html: hosp_label_html,
+                })
+            });
+            hosp_layer_icon_group.addLayer(label);
+        }
+    });
 
     show_map_layer_name("map_layer_hospital");
 
