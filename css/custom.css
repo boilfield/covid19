@@ -571,25 +571,31 @@ nav.navbar .navbar-collapse {
 .map-lang-button {
     border: 1px solid rgba(255, 255, 255, 0.3);
     position: fixed;
-    top: 9px;
-    right: 20px;
+    top: 60px;
+    right: 7px;
     z-index: 9999;
     border-radius: 5px;
     padding: 5px 10px;
     font-variant: small-caps;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 992px) {
     .map-lang-button {
-        top: 12px;
-        left: 50%;
-        right: unset;
+        top: 68px;
     }
 }
 
-@media (min-width: 992px) {
+@media (max-width: 767px) {
     .map-lang-button {
-        top: 18px;
+        top: 12px;
+        right: 60px;
+    }
+}
+
+@media (max-width: 411px) {
+    .map-lang-button {
+        top: 65px;
+        right: 7px;
     }
 }
 
