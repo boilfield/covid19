@@ -16,7 +16,7 @@ function init() {
     var conf_URL = "https://docs.google.com/spreadsheets/d/1vsCq5u22w6IjKXyoOWQefDcPzgf9IIRswXs4ActkziU/edit?usp=sharing";
     var lockdown_URL ="https://docs.google.com/spreadsheets/d/1WG9Sikm2PUkKdmsm2tm8iCZEiqpKKXTf9E5-O8xzTCA/edit?usp=sharing";
     var hospital_url = 'https://docs.google.com/spreadsheets/d/1B4Oyx8J_4fzuZET-kHc5RCJMAbpgk7dLOm9N5z42KUA/edit?usp=sharing';
-    Tabletop.init({ key: conf_URL, callback: add_conf_polygons, simpleSheet: true });
+    Tabletop.init({ key: conf_URL, callback: add_conf_polygons, simpleSheet: true, wanted: ["map"] });
     Tabletop.init({ key: lockdown_URL, callback: add_lockdown_polygons, simpleSheet: true });
     Tabletop.init({ key: hospital_url, callback: add_hospital_layer, simpleSheet: true });
 }
