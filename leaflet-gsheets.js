@@ -301,10 +301,15 @@ function add_hospital_layer(data) {
 
     for (let i = 0; i < data.length; ++i) {
 
-        let lat_long = [
-            parseFloat(data[i].lat),
-            parseFloat(data[i].long),
-        ];
+        let lat_long,
+            lat = parseFloat(data[i].lat),
+            long = parseFloat(data[i].long);
+
+        // Don't add marker if invalid lat-long.
+        lat_long = lat && long ? [lat, long] : null;
+        if (!lat_long) {
+            continue;
+        }
 
         let label_html = '<i class="map-hosp-icon glyphicon glyphicon-info-sign"></i>';
         let label = L.marker(lat_long, {
