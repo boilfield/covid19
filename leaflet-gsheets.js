@@ -191,7 +191,10 @@ function add_conf_polygons(data) {
         layer.feature.fill_color = fc;  // Save color to use again after mouseout
     });
 
-    show_map_layer_name("map_layer_conf");
+    // Don't show name in layer list if layer is empty.
+    if (conf_layer.getLayers().length > 0 || conf_num_group.getLayers().length > 0) {
+        show_map_layer_name("map_layer_conf");
+    }
 
 }
 
@@ -283,7 +286,10 @@ function add_lockdown_polygons(data) {
         layer.feature.fill_color = fc;
     });
 
-    show_map_layer_name("map_layer_lockdown");
+    // Don't show name in layer list if layer is empty.
+    if (lock_layer.getLayers().length > 0) {
+        show_map_layer_name("map_layer_lockdown");
+    }
 
 }
 
@@ -337,7 +343,10 @@ function add_hospital_layer(data) {
 
     }
 
-    show_map_layer_name("map_layer_hospital");
+    // Don't show name in layer list if layer is empty.
+    if (hosp_layer_icon_group.getLayers().length > 0) {
+        show_map_layer_name("map_layer_hospital");
+    }
 
 }
 
