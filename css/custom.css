@@ -780,7 +780,7 @@ marquee {
 
 .layer-switch-area .wrap {
     border: 1px solid #fff;
-    border-bottom: none;
+    margin-top: -1px;
     display: none;
 }
 
