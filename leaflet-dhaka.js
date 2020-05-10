@@ -8,7 +8,15 @@ function init() {
   var polyURL =
     "https://docs.google.com/spreadsheets/d/1CVAPcNM5sOUQnKv8vJ2kcSgtvq3d6AzQcdURcEWYtoQ/edit?usp=sharing";
 
-  Tabletop.init({ key: polyURL, callback: addPolygons, simpleSheet: true });
+  let sheet_names = ["map"];
+
+  Tabletop.init({
+    key: polyURL,
+    wanted: sheet_names,
+    callback: function (data) {
+      addPolygons(data[ sheet_names[0] ].elements);
+    },
+  });
   // Tabletop.init({ key: pointsURL, callback: addPoints, simpleSheet: true }); // simpleSheet assumes there is only one table and automatically sends its data
 }
 window.addEventListener("DOMContentLoaded", init);
