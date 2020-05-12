@@ -328,12 +328,28 @@ function add_hospital_layer(data) {
         let popup_html = `
             <div class="map-hosp-cont">
                 <div class="map-hosp-name">
-                    ${data[i].facility_name}
+                    ${ map_lang === "bn" ? data[i].fac_name_bd : data[i].facility_name }
                 </div>
-                <div class="map-hosp-detail">
-                    ${ data[i].med_team === "yes" ? '<div class="map-hosp-tick">Medical team</div>' : '' }
-                    ${ data[i].isol_unit === "yes" ? '<div class="map-hosp-tick">Isolation unit</div>' : '' }
-                    ${ data[i].sep_opd === "yes" ? '<div class="map-hosp-tick">Separate OPD for RTI patients</div>' : '' }
+                <div class="map-hosp-detail"> ${
+                    (data[i].med_team === "yes"
+                        ? ('<div class="map-hosp-tick">' + (map_lang === "bn"
+                            ? "মেডিকেল টিম"
+                            : "Medical team") +
+                        '</div>')
+                        : '') +
+                    (data[i].isol_unit === "yes"
+                        ? ('<div class="map-hosp-tick">' + (map_lang === "bn"
+                            ? "আইসোলেশন ইউনিট"
+                            : "Isolation unit") +
+                        '</div>')
+                        : '') +
+                    (data[i].sep_opd === "yes"
+                        ? ('<div class="map-hosp-tick">' + (map_lang === "bn"
+                            ? "আরটিআই রোগীর জন্য আলাদা ওপিডি"
+                            : "Separate OPD for RTI patients") +
+                        '</div>')
+                        : '')
+                }
                 </div>
             </div>
         `;
