@@ -381,7 +381,7 @@ function setBounds() {
     if (bounds_group.getLayers().length) {
         map.fitBounds(bounds_group.getBounds());
     }
-    map.setMaxBounds([[19.197,86.847],[27.713,93.768]]);
+    map.setMaxBounds([ [19.197,86], [28.5,93.768] ]);
 }
 
 setBounds();
