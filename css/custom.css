@@ -865,3 +865,38 @@ marquee {
     font-size: 1.25em;
     margin: -0.25em 0 0 -1em;
 }
+
+
+
+.self-test-area2 {
+    position: fixed;
+    top: 190px;
+    left: 10px;
+    font-size: 12px;
+    transition: all 0.5s ease;
+}
+
+
+.self-test-area2 a {
+    color: #fff;
+    text-align: center;
+}
+
+.self-test-area2 .clickable {
+    height: 100px;
+    width: 100px;
+/*    background-color: rgba(0, 128, 128, 0.8);*/
+    background-color: #F26A3E;
+    border-radius: 50%;
+    display: inline-block;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 5px #000;
+    justify-content: center;
+    transition: all 0.5s ease;
+}
+
+.self-test-area2 .clickable:hover {
+    box-shadow: 0 0 7px 1px #000;
+    font-size: 14px;
+}
