@@ -5,18 +5,11 @@ function init() {
   // these URLs come from Google Sheets 'shareable link' form
   // the first is the polygon layer and the second the points
  
-  var polyURL =
-    "https://docs.google.com/spreadsheets/d/1CVAPcNM5sOUQnKv8vJ2kcSgtvq3d6AzQcdURcEWYtoQ/edit?usp=sharing";
+  var polyURL ="https://docs.google.com/spreadsheets/d/1CVAPcNM5sOUQnKv8vJ2kcSgtvq3d6AzQcdURcEWYtoQ/edit?usp=sharing";
+  var hospURL ="https://docs.google.com/spreadsheets/d/1SQakzuOfO6_LGWZ0c2L0xcSRAnLPfat2EAB5mWBcPoo/edit?usp=sharing";
 
-  let sheet_names = ["map"];
-
-  Tabletop.init({
-    key: polyURL,
-    wanted: sheet_names,
-    callback: function (data) {
-      addPolygons(data[ sheet_names[0] ].elements);
-    },
-  });
+  Tabletop.init({ key: polyURL, callback: addPolygons, simpleSheet: true, wanted: ["map"] });
+  Tabletop.init({ key: hospURL, callback: add_hospital_layer, simpleSheet: true });
   // Tabletop.init({ key: pointsURL, callback: addPoints, simpleSheet: true }); // simpleSheet assumes there is only one table and automatically sends its data
 }
 window.addEventListener("DOMContentLoaded", init);
@@ -51,6 +44,8 @@ map.zoomControl.remove();
 
 // These are declared outisde the functions so that the functions can check if they already exist
 var polygonLayer;
+
+let conf_num_group = L.layerGroup().addTo(map);
 // The form of data must be a JSON representation of a table as returned by Tabletop.js
 // addPolygons first checks if the map layer has already been assigned, and if so, deletes it and makes a fresh one
 // The assumption is that the locally stored JSONs will load before Tabletop.js can pull the external data from Google Sheets
@@ -135,7 +130,9 @@ function addPolygons(data) {
         className: 'label',
         html: dist_label_html,
       })
-    }).addTo(map);
+    });
+
+      conf_num_group.addLayer(label);
     },
     style: polygonStyle
   }).addTo(map);
@@ -157,40 +154,12 @@ function addPolygons(data) {
     layer.feature.fill_color = fc;  // Save color to use again after mouseout
   });
 
-}
-
-//bound box
-var bounds_group = new L.featureGroup([]);
-        function setBounds() {
-            if (bounds_group.getLayers().length) {
-                map.fitBounds(bounds_group.getBounds());
-            }
-            map.setMaxBounds(map.getBounds());
-        }setBounds();
-
-
-
-    //logo position: bottomright, topright, topleft, bottomleft
-    var logo = L.control({position: 'bottomleft'});
-    let credit_html = "<a href='https://boiledbhoot.org/' target='_blank'>" +
-      (map_lang === "bn" ? "নির্মাণ ও তত্ত্বাবধানে" : "Powered and maintained by") +
-      "<img class='credit-logo' height='25px' src='" +
-      (map_lang === "bn" ? "boil.png" : "../boil.png")
-      + "'/></a>" +
-      "&nbsp;" +
-      "<a href='https://osmbdf.org/' target='_blank'>" +
-      (map_lang === "bn" ? "সহযোগিতায়" : "Supported by") +
-      "<img class='credit-logo' height='24px' src='" +
-      (map_lang === "bn" ? "img/logo_osmbdf.png" : "../img/logo_osmbdf.png")
-      + "'/></a>";
-    logo.onAdd = function(map){
-        var div = L.DomUtil.create('div', 'credit');
-        div.innerHTML= credit_html;
-        return div;
+   // Don't show name in layer list if layer is empty.
+  if (polygonLayer.getLayers().length > 0 || conf_num_group.getLayers().length > 0) {
+        show_map_layer_name("map_layer_conf");
     }
-    logo.addTo(map);
 
-
+}
 
 let legend = L.control({position: "bottomright"});
 legend.onAdd = function (map) {
@@ -234,6 +203,132 @@ legend.onAdd = function (map) {
 }
 legend.addTo(map);
 
-if (map_lang === "bn") {
-  document.getElementById("legend_toggler_label").innerText = "কালার কোড দেখুন";
+
+
+
+
+
+// var add_hospital_layer;
+
+let hosp_layer_icon_group = L.layerGroup();
+
+function add_hospital_layer(data) {
+
+    for (let i = 0; i < data.length; ++i) {
+
+        let lat_long,
+            lat = parseFloat(data[i].lat),
+            long = parseFloat(data[i].long);
+
+        // Don't add marker if invalid lat-long.
+        lat_long = lat && long ? [lat, long] : null;
+        if (!lat_long) {
+            continue;
+        }
+
+        let label_html = '<i class="map-hosp-icon glyphicon glyphicon-info-sign"></i>';
+        let label = L.marker(lat_long, {
+            icon: L.divIcon({
+                className: "hosp-label",
+                html: label_html,
+            }),
+        });
+
+        let popup_html = `
+            <div class="map-hosp-cont">
+                <div class="map-hosp-name">
+                    ${ map_lang === "bn" ? data[i].fac_name_bd : data[i].facility_name }
+                </div>
+                <div class="map-hosp-detail"> ${
+                    (data[i].med_team === "yes"
+                        ? ('<div class="map-hosp-tick">' + (map_lang === "bn"
+                            ? "মেডিকেল টিম"
+                            : "Medical team") +
+                        '</div>')
+                        : '') +
+                    (data[i].isol_unit === "yes"
+                        ? ('<div class="map-hosp-tick">' + (map_lang === "bn"
+                            ? "আইসোলেশন ইউনিট"
+                            : "Isolation unit") +
+                        '</div>')
+                        : '') +
+                    (data[i].sep_opd === "yes"
+                        ? ('<div class="map-hosp-tick">' + (map_lang === "bn"
+                            ? "আরটিআই রোগীর জন্য আলাদা ওপিডি"
+                            : "Separate OPD for RTI patients") +
+                        '</div>')
+                        : '')
+                }
+                </div>
+            </div>
+        `;
+        label.bindPopup(popup_html);
+
+        hosp_layer_icon_group.addLayer(label);
+
+    }
+
+    // Don't show name in layer list if layer is empty.
+    if (hosp_layer_icon_group.getLayers().length > 0) {
+        show_map_layer_name("map_layer_hospital");
+    }
+
 }
+
+// add_map_layer_name({
+//     input_id: "map_layer_hospital",
+//     text: "Hospital map",
+//     input_value: "hosp",
+// });
+
+
+
+
+
+
+
+
+
+
+
+//bound box
+var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+            if (bounds_group.getLayers().length) {
+                map.fitBounds(bounds_group.getBounds());
+            }
+            map.setMaxBounds(map.getBounds());
+        }setBounds();
+
+
+
+//logo position: bottomright, topright, topleft, bottomleft
+    var logo = L.control({position: 'bottomleft'});
+    let credit_html = "<a href='https://boiledbhoot.org/' target='_blank'>" +
+      (map_lang === "bn" ? "নির্মাণ ও তত্ত্বাবধানে" : "Powered and maintained by") +
+      "<img class='credit-logo' height='25px' src='" +
+      (map_lang === "bn" ? "boil.png" : "../boil.png")
+      + "'/></a>" +
+      "&nbsp;" +
+      "<a href='https://osmbdf.org/' target='_blank'>" +
+      (map_lang === "bn" ? "সহযোগিতায়" : "Supported by") +
+      "<img class='credit-logo' height='24px' src='" +
+      (map_lang === "bn" ? "img/logo_osmbdf.png" : "../img/logo_osmbdf.png")
+      + "'/></a>";
+    logo.onAdd = function(map){
+        var div = L.DomUtil.create('div', 'credit');
+        div.innerHTML= credit_html;
+        return div;
+    }
+    logo.addTo(map);
+
+
+
+if (map_lang === "bn") {
+
+    document.getElementById("legend_toggler_label").innerText = "কালার কোড দেখুন";
+    document.querySelector(".map-layer-conf > label").innerText = "সংক্রমণের মানচিত্র";
+    // document.querySelector(".map-layer-hosp > label").innerText = "হাসপাতালের মানচিত্র";
+}
+
+
