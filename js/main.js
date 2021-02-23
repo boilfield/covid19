@@ -114,24 +114,26 @@ function show_map_layer_name(id) {
 // as necessary.)
 // Then remove "active" class from all layer names, and add it to clicked name.
 function change_map_layer(el) {
-    if (el.value === "lock") {
-        conf_layer && conf_layer.remove();
-        conf_num_group && conf_num_group.remove();
-        vaccine_layer && vaccine_layer.remove();
-        vacci_num_group && vacci_num_group.remove();
-        hosp_layer_icon_group && hosp_layer_icon_group.remove();
-        toggle_map_legend(0);
-        lock_layer.addTo(map);
+    // if (el.value === "lock") {
+    //     conf_layer && conf_layer.remove();
+    //     conf_num_group && conf_num_group.remove();
+    //     vaccine_layer && vaccine_layer.remove();
+    //     vacci_num_group && vacci_num_group.remove();
+    //     hosp_layer_icon_group && hosp_layer_icon_group.remove();
+    //     toggle_map_legend(0);
+    //     lock_layer.addTo(map);
 
-        let layers = document.querySelectorAll(".layer-switch-area > .wrap");
-        for (let i = 0; i < layers.length; ++i) {
-            layers[i].classList.remove("active");
-        }
-        el.parentNode.classList.add("active");
-    } else if (el.value === "hosp") {
+    //     let layers = document.querySelectorAll(".layer-switch-area > .wrap");
+    //     for (let i = 0; i < layers.length; ++i) {
+    //         layers[i].classList.remove("active");
+    //     }
+    //     el.parentNode.classList.add("active");
+    // } else 
+
+    if (el.value === "hosp") {
         conf_layer && conf_layer.remove();
         conf_num_group && conf_num_group.remove();
-        lock_layer && lock_layer.remove();
+        // lock_layer && lock_layer.remove();
         vaccine_layer && vaccine_layer.remove();
         vacci_num_group && vacci_num_group.remove();
         toggle_map_legend(0);
@@ -143,7 +145,7 @@ function change_map_layer(el) {
         }
         el.parentNode.classList.add("active");
     } else if (el.value === "vacci") {
-        lock_layer && lock_layer.remove();
+        // lock_layer && lock_layer.remove();
         conf_layer && conf_layer.remove();
         conf_num_group && conf_num_group.remove();
         hosp_layer_icon_group && hosp_layer_icon_group.remove();
@@ -157,7 +159,7 @@ function change_map_layer(el) {
         el.parentNode.classList.add("active");
     } else if (el.value === "conf") {
         vacci_num_group && vacci_num_group.remove();
-        lock_layer && lock_layer.remove();
+        // lock_layer && lock_layer.remove();
         vaccine_layer && vaccine_layer.remove();
         hosp_layer_icon_group && hosp_layer_icon_group.remove();
         toggle_map_legend(1);

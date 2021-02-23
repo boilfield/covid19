@@ -14,11 +14,11 @@ function init() {
     // these URLs come from Google Sheets 'shareable link' form
     // the first is the polygon layer and the second the points
     var conf_URL = "https://docs.google.com/spreadsheets/d/1vsCq5u22w6IjKXyoOWQefDcPzgf9IIRswXs4ActkziU/edit?usp=sharing";
-    var lockdown_URL ="https://docs.google.com/spreadsheets/d/1WG9Sikm2PUkKdmsm2tm8iCZEiqpKKXTf9E5-O8xzTCA/edit?usp=sharing";
+    // var lockdown_URL ="https://docs.google.com/spreadsheets/d/1WG9Sikm2PUkKdmsm2tm8iCZEiqpKKXTf9E5-O8xzTCA/edit?usp=sharing";
     var vaccine_URL= "https://docs.google.com/spreadsheets/d/1EUoooHh_cvOkB8whp8zalhBCdGPUfUJ6WY7VNKVjoes/edit?usp=sharing";
     var hospital_url = 'https://docs.google.com/spreadsheets/d/1B4Oyx8J_4fzuZET-kHc5RCJMAbpgk7dLOm9N5z42KUA/edit?usp=sharing';
     Tabletop.init({ key: conf_URL, callback: add_conf_polygons, simpleSheet: true, wanted: ["map"] });
-    Tabletop.init({ key: lockdown_URL, callback: add_lockdown_polygons, simpleSheet: true });
+    // Tabletop.init({ key: lockdown_URL, callback: add_lockdown_polygons, simpleSheet: true });
     Tabletop.init({ key: vaccine_URL, callback: add_vaccine_polygons, simpleSheet: true, wanted: ["vaccine"] });
     Tabletop.init({ key: hospital_url, callback: add_hospital_layer, simpleSheet: true });
 }
@@ -202,104 +202,104 @@ function add_conf_polygons(data) {
 
 
 
-var lock_layer;
+// var lock_layer;
 
-function add_lockdown_polygons(data) {
+// function add_lockdown_polygons(data) {
 
-    if (lock_layer != null) {
-        lock_layer.remove();
-    }
+//     if (lock_layer != null) {
+//         lock_layer.remove();
+//     }
 
-    var geojson_lockdown_states = {
-        type: "FeatureCollection",
-        features: []
-    };
+//     var geojson_lockdown_states = {
+//         type: "FeatureCollection",
+//         features: []
+//     };
 
-    for (var row in data) {
-        if (data[row].include == "y") {
-            var coords = JSON.parse(data[row].geometry);
-            geojson_lockdown_states.features.push({
-                type: "Feature",
-                geometry: {
-                    type: "MultiPolygon",
-                    coordinates: coords
-                },
-                properties: {
-                    name: data[row].name,
-                    confirmed: data[row].lock_code,
-                    level: data[row].level,
-                }
-            });
-        }
-    }
+//     for (var row in data) {
+//         if (data[row].include == "y") {
+//             var coords = JSON.parse(data[row].geometry);
+//             geojson_lockdown_states.features.push({
+//                 type: "Feature",
+//                 geometry: {
+//                     type: "MultiPolygon",
+//                     coordinates: coords
+//                 },
+//                 properties: {
+//                     name: data[row].name,
+//                     confirmed: data[row].lock_code,
+//                     level: data[row].level,
+//                 }
+//             });
+//         }
+//     }
 
-    var polygonStyle = { color: "#f78c72", fillColor: "#f78c72" , weight: 1.5, fillOpacity: 1};
-    var polygonHoverStyle = { color: "#f5eb5d", fillColor: "#f7ea2f", weight: 1.5, fillOpacity: 1};
+//     var polygonStyle = { color: "#f78c72", fillColor: "#f78c72" , weight: 1.5, fillOpacity: 1};
+//     var polygonHoverStyle = { color: "#f5eb5d", fillColor: "#f7ea2f", weight: 1.5, fillOpacity: 1};
 
-    lock_layer = L.geoJSON(geojson_lockdown_states, {
+//     lock_layer = L.geoJSON(geojson_lockdown_states, {
 
-        style: polygonStyle,
+//         style: polygonStyle,
 
-        onEachFeature: function(feature, layer) {
+//         onEachFeature: function(feature, layer) {
 
-            layer.on({
+//             layer.on({
 
-                mouseout: function() {
-                    layer.setStyle({
-                        color: polygonStyle.color,
-                        weight: polygonStyle.weight,
-                        fillColor: feature.fill_color,
-                    });
-                    layer.closePopup();
-                },
+//                 mouseout: function() {
+//                     layer.setStyle({
+//                         color: polygonStyle.color,
+//                         weight: polygonStyle.weight,
+//                         fillColor: feature.fill_color,
+//                     });
+//                     layer.closePopup();
+//                 },
 
-                mouseover: function() {
-                    layer.setStyle(polygonHoverStyle);
-                    layer.openPopup();
-                }
+//                 mouseover: function() {
+//                     layer.setStyle(polygonHoverStyle);
+//                     layer.openPopup();
+//                 }
 
-            });
+//             });
 
-            let popup_html = "<div class='map-upz-lockdown-cont'>" +
-                "<div class='map-upz-lockdown-name'>" +
-                feature.properties.name +
-                "</div>" +
-                "<div class='map-upz-lockdown-level'>" +
-                (feature.properties.level && (
-                    feature.properties.level === "Partial Locked Down"
-                    ? "Partial lockdown"
-                    : (feature.properties.level === "Full Locked Down"
-                        ? "Full lockdown"
-                        : feature.properties.level)
-                    )
-                ) +
-                "</div>" +
-                "</div>";
-            layer.bindPopup(popup_html);
+//             let popup_html = "<div class='map-upz-lockdown-cont'>" +
+//                 "<div class='map-upz-lockdown-name'>" +
+//                 feature.properties.name +
+//                 "</div>" +
+//                 "<div class='map-upz-lockdown-level'>" +
+//                 (feature.properties.level && (
+//                     feature.properties.level === "Partial Locked Down"
+//                     ? "Partial lockdown"
+//                     : (feature.properties.level === "Full Locked Down"
+//                         ? "Full lockdown"
+//                         : feature.properties.level)
+//                     )
+//                 ) +
+//                 "</div>" +
+//                 "</div>";
+//             layer.bindPopup(popup_html);
 
-        }
+//         }
 
-    });
+//     });
 
-    lock_layer.eachLayer(function (layer) {
-        let d = layer.feature.properties.confirmed;
-        let fc = d > 2 ? '#800026' : d > 1 ? '#FEB24C' : '#FFFFFF';
-        layer.setStyle({fillColor: fc});
-        layer.feature.fill_color = fc;
-    });
+//     lock_layer.eachLayer(function (layer) {
+//         let d = layer.feature.properties.confirmed;
+//         let fc = d > 2 ? '#800026' : d > 1 ? '#FEB24C' : '#FFFFFF';
+//         layer.setStyle({fillColor: fc});
+//         layer.feature.fill_color = fc;
+//     });
 
-    // Don't show name in layer list if layer is empty.
-    if (lock_layer.getLayers().length > 0) {
-        show_map_layer_name("map_layer_lockdown");
-    }
+//     // Don't show name in layer list if layer is empty.
+//     if (lock_layer.getLayers().length > 0) {
+//         show_map_layer_name("map_layer_lockdown");
+//     }
 
-}
+// }
 
-add_map_layer_name({
-    input_id: "map_layer_lockdown",
-    text: "Lockdown map",
-    input_value: "lock",
-});
+// add_map_layer_name({
+//     input_id: "map_layer_lockdown",
+//     text: "Lockdown map",
+//     input_value: "lock",
+// });
 
 var vaccine_layer ;
 
@@ -411,7 +411,7 @@ function add_vaccine_polygons(data) {
 
 add_map_layer_name({
     input_id: "map_layer_vaccine",
-    text: "Vaccine map",
+    text: "Vaccination map",
     input_value: "vacci",
 });
 
@@ -631,8 +631,8 @@ if (map_lang === "bn") {
     document.getElementById("mst_label_dead").innerText = "মৃত";
     document.getElementById("legend_toggler_label").innerText = "কালার কোড দেখুন";
     document.querySelector(".map-layer-conf > label").innerText = "সংক্রমণের মানচিত্র";
-    document.querySelector(".map-layer-lock > label").innerText = "লকডাউনের মানচিত্র";
-    document.querySelector(".map-layer-vacci > label").innerText = " টিকার মানচিত্র";
+    // document.querySelector(".map-layer-lock > label").innerText = "লকডাউনের মানচিত্র";
+    document.querySelector(".map-layer-vacci > label").innerText = " টিকাদান মানচিত্র";
     document.querySelector(".map-layer-hosp > label").innerText = "হাসপাতালের মানচিত্র";
     document.getElementById("self_test_text").innerHTML = "লাইভ করোনা<br>ঝুঁকি পরীক্ষা";
     document.getElementById("surokkha").innerHTML = "করোনা ভ্যাকসিনের<br>অনলাইন নিবন্ধন";
