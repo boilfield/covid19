@@ -117,6 +117,8 @@ function change_map_layer(el) {
     if (el.value === "lock") {
         conf_layer && conf_layer.remove();
         conf_num_group && conf_num_group.remove();
+        vaccine_layer && vaccine_layer.remove();
+        vacci_num_group && vacci_num_group.remove();
         hosp_layer_icon_group && hosp_layer_icon_group.remove();
         toggle_map_legend(0);
         lock_layer.addTo(map);
@@ -130,6 +132,8 @@ function change_map_layer(el) {
         conf_layer && conf_layer.remove();
         conf_num_group && conf_num_group.remove();
         lock_layer && lock_layer.remove();
+        vaccine_layer && vaccine_layer.remove();
+        vacci_num_group && vacci_num_group.remove();
         toggle_map_legend(0);
         hosp_layer_icon_group.addTo(map);
 
@@ -138,8 +142,23 @@ function change_map_layer(el) {
             layers[i].classList.remove("active");
         }
         el.parentNode.classList.add("active");
-    } else if (el.value === "conf") {
+    } else if (el.value === "vacci") {
         lock_layer && lock_layer.remove();
+        conf_layer && conf_layer.remove();
+        conf_num_group && conf_num_group.remove();
+        hosp_layer_icon_group && hosp_layer_icon_group.remove();
+        toggle_map_legend(0);
+        vaccine_layer.addTo(map);
+        vacci_num_group.addTo(map);
+        let layers = document.querySelectorAll(".layer-switch-area > .wrap");
+        for (let i = 0; i < layers.length; ++i) {
+            layers[i].classList.remove("active");
+        }
+        el.parentNode.classList.add("active");
+    } else if (el.value === "conf") {
+        vacci_num_group && vacci_num_group.remove();
+        lock_layer && lock_layer.remove();
+        vaccine_layer && vaccine_layer.remove();
         hosp_layer_icon_group && hosp_layer_icon_group.remove();
         toggle_map_legend(1);
         conf_layer.addTo(map);
