@@ -9,7 +9,7 @@ function init() {
   var hospURL ="https://docs.google.com/spreadsheets/d/1SQakzuOfO6_LGWZ0c2L0xcSRAnLPfat2EAB5mWBcPoo/edit?usp=sharing";
 
   Tabletop.init({ key: polyURL, callback: addPolygons, simpleSheet: true, wanted: ["map"] });
-  Tabletop.init({ key: hospURL, callback: add_hospital_layer, simpleSheet: true });
+  Tabletop.init({ key: hospURL, callback: add_hospital_layer, simpleSheet: true, wanted: ["map"] });
   // Tabletop.init({ key: pointsURL, callback: addPoints, simpleSheet: true }); // simpleSheet assumes there is only one table and automatically sends its data
 }
 window.addEventListener("DOMContentLoaded", init);
@@ -227,39 +227,20 @@ function add_hospital_layer(data) {
         }
 
         let label_html = '<i class="map-hosp-icon glyphicon glyphicon-info-sign"></i>';
-        let label = L.marker(lat_long, {
-            icon: L.divIcon({
-                className: "hosp-label",
-                html: label_html,
-            }),
+        // let label = L.marker(lat_long, {icon: L.divIcon({className: "hosp-label",html: label_html,}),
+        let label = L.marker(lat_long, {icon: myIcon
         });
+
 
         let popup_html = `
             <div class="map-hosp-cont">
                 <div class="map-hosp-name">
                     ${ map_lang === "bn" ? data[i].fac_name_bd : data[i].facility_name }
                 </div>
-                <div class="map-hosp-detail"> ${
-                    (data[i].med_team === "yes"
-                        ? ('<div class="map-hosp-tick">' + (map_lang === "bn"
-                            ? "মেডিকেল টিম"
-                            : "Medical team") +
-                        '</div>')
-                        : '') +
-                    (data[i].isol_unit === "yes"
-                        ? ('<div class="map-hosp-tick">' + (map_lang === "bn"
-                            ? "আইসোলেশন ইউনিট"
-                            : "Isolation unit") +
-                        '</div>')
-                        : '') +
-                    (data[i].sep_opd === "yes"
-                        ? ('<div class="map-hosp-tick">' + (map_lang === "bn"
-                            ? "আরটিআই রোগীর জন্য আলাদা ওপিডি"
-                            : "Separate OPD for RTI patients") +
-                        '</div>')
-                        : '')
-                }
-                </div>
+                <div class="map-hosp-detail">
+                   <img src="img/manw.png" alt="Man" width="15" height="17">: ${ map_lang === "bn" ? data[i].male_bn : data[i].male }<br/>
+                   <img src="img/womanw.png" alt="Woman" width="15" height="17">: ${ map_lang === "bn" ? data[i].female_bn : data[i].female }<br/>
+                   AEFI: ${ map_lang === "bn" ? data[i].aefi_bn : data[i].aefi }
             </div>
         `;
         label.bindPopup(popup_html);
@@ -275,11 +256,11 @@ function add_hospital_layer(data) {
 
 }
 
-// add_map_layer_name({
-//     input_id: "map_layer_hospital",
-//     text: "Hospital map",
-//     input_value: "hosp",
-// });
+add_map_layer_name({
+    input_id: "map_layer_hospital",
+    text: "Vaccination map",
+    input_value: "hosp",
+});
 
 
 
@@ -328,7 +309,83 @@ if (map_lang === "bn") {
 
     document.getElementById("legend_toggler_label").innerText = "কালার কোড দেখুন";
     document.querySelector(".map-layer-conf > label").innerText = "সংক্রমণের মানচিত্র";
-    // document.querySelector(".map-layer-hosp > label").innerText = "হাসপাতালের মানচিত্র";
+    document.querySelector(".map-layer-hosp > label").innerText = "টিকাদানের মানচিত্র";
 }
 
 
+
+
+
+// Remove current data layer, and add target layer. (Add/remove district labels
+// as necessary.)
+// Then remove "active" class from all layer names, and add it to clicked name.
+function change_map_layer(el) {
+    if (el.value === "hosp") {
+        conf_num_group && conf_num_group.remove();
+        polygonLayer && polygonLayer.remove();
+        toggle_map_legend(0);
+        hosp_layer_icon_group.addTo(map);
+
+        let layers = document.querySelectorAll(".layer-switch-area > .wrap");
+        for (let i = 0; i < layers.length; ++i) {
+            layers[i].classList.remove("active");
+        }
+        el.parentNode.classList.add("active");
+    } else if (el.value === "conf") {
+        hosp_layer_icon_group && hosp_layer_icon_group.remove();
+        toggle_map_legend(1);
+        polygonLayer.addTo(map);
+        conf_num_group.addTo(map);
+
+        let layers = document.querySelectorAll(".layer-switch-area > .wrap");
+        for (let i = 0; i < layers.length; ++i) {
+            layers[i].classList.remove("active");
+        }
+        el.parentNode.classList.add("active");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+// Add a new map layer name to layer list.
+function add_map_layer_name({input_id, text, input_value}) {
+    let name_cont = document.createElement("div");
+    name_cont.classList.add(("map-layer-" + input_value), "wrap");
+
+    let input = document.createElement("input");
+    input.setAttribute("type", "radio");
+    input.setAttribute("name", "layer");
+    input.id = input_id;
+    input.setAttribute("value", input_value);
+    input.addEventListener("change", function (e) {
+        change_map_layer(e.target);
+    });
+
+    let label = document.createElement("label");
+    label.setAttribute("for", input_id);
+    label.innerText = text;
+
+    name_cont.appendChild(input);
+    name_cont.appendChild(label);
+
+    let layer_switch = document.querySelector(".layer-switch-area");
+    layer_switch.appendChild(name_cont);
+}
+
+
+var myIcon = L.icon({
+    iconUrl: 'img/syringe.png',
+    iconSize: [24, 24],
+    iconAnchor: [22, 94],
+    popupAnchor: [-3, -76],
+    // shadowUrl: 'my-icon-shadow.png',
+    // shadowSize: [68, 95],
+    // shadowAnchor: [22, 94]
+});
