@@ -331,6 +331,7 @@ function add_vaccine_polygons(data) {
                     male: data[row].male,
                     female: data[row].female,
                     aefi: data[row].aefi,
+                    web: data[row].web,
                 }
             });
         }
@@ -388,6 +389,7 @@ function add_vaccine_polygons(data) {
                 (map_lang === "bn" ? ("পুরুষঃ <b>" + bn_num(feature.properties.male)) : ('Male: <b>' + feature.properties.male))+ '</b><br/>' +
                 (map_lang === "bn" ? ("মহিলাঃ <b>" + bn_num(feature.properties.female)) : ('Female: <b>' + feature.properties.female))+ '</b><br/>' +
                 (map_lang === "bn" ? ("এ.ই.এফ.আইঃ <b>" + bn_num(feature.properties.aefi)) : ('A.E.F.I: <b>' + feature.properties.aefi))+ '</b>' +
+                '<h6 class="more-button">' + (!feature.properties.web ? "" : (map_lang === "bn" ? "<a href='dhaka.html' target='_blank'>বিস্তারিত তথ্য</a>" : "<a href='../dhaka.html' target='_blank'>Details</a>")) +'</h6>'+
                 "</div>";
             layer.bindPopup(popup_html);
 
