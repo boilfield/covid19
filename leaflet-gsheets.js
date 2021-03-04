@@ -338,7 +338,7 @@ function add_vaccine_polygons(data) {
     }
 
     var polygonStyle = { color: "#f78c72", fillColor: "#f78c72" , weight: 1.5, fillOpacity: 1};
-    var polygonHoverStyle = { color: "#f5eb5d", fillColor: "#F26A3E", weight: 1.5, fillOpacity: 1};
+    var polygonHoverStyle = { color: "#f5eb5d", fillColor: "#026868", weight: 1.5, fillOpacity: 1};
 
     vaccine_layer = L.geoJSON(geojson_vaccine_states, {
 
@@ -399,7 +399,7 @@ function add_vaccine_polygons(data) {
 
     vaccine_layer.eachLayer(function (layer) {
         let d = layer.feature.properties.male;
-        let fc = d > 2 ? '#800026' : d > 1 ? '#FEB24C' : '#143661';
+        let fc = d > 2 ? '#F26A3E' : d > 1 ? '#FEB24C' : '#143661';
         layer.setStyle({fillColor: fc});
         layer.feature.fill_color = fc;
     });
