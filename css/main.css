@@ -83,7 +83,7 @@
     font-color:#FFFFFF; 
 }
 
- .tooltip {
+/* .tooltip {
         background: #eee;
         box-shadow: 0 0 5px #999999;
         color: #333;
@@ -96,8 +96,8 @@
         top: 95px;
         width: 80px;
         z-index: 10;
-      }
-      .legend {
+      }*/
+      .legends {
         font-size: 12px;
         padding-left: 150px;
       }
