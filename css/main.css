@@ -97,7 +97,7 @@
         width: 80px;
         z-index: 10;
       }*/
-      .legends {
+      #legends {
         font-size: 12px;
         padding-left: 150px;
       }
