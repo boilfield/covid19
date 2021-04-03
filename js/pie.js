@@ -1,10 +1,10 @@
 (function(d3) {
   'use strict';
 
-  var width = 250;
-  var height = 150;
+  var width = 260;
+  var height = 160;
   var radius = Math.min(width, height) / 2;
-  var donutWidth = 30;
+  var donutWidth = 35;
   var legendRectSize = 18;
   var legendSpacing = 4;
 
@@ -81,8 +81,6 @@
       tooltip.select('.color')
         .style('background-color', color(d.data.label))
     });
-
-  
     
     path.on('mouseout', function() {
       tooltip.style('display', 'none');
