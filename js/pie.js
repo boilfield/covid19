@@ -2,7 +2,7 @@
   'use strict';
 
   var width = 250;
-  var height = 150;
+  var height = 140;
   var radius = Math.min(width, height) / 2;
   var donutWidth = 35;
   var legendRectSize = 18;
