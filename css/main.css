@@ -55,11 +55,11 @@
         color: #fff;
         display: none;
         font-size: 12px;
-        left: 100px;
+        left: 10px;
         padding: 10px;
         position: absolute;
         text-align: left;
-        top: 120px;
+        top: 10px;
         width: 80px;
         z-index: 10;
       }
