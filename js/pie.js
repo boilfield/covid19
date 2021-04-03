@@ -11,7 +11,7 @@
 
 
   // var color = d3.scaleOrdinal(d3.schemeCategory20b);
-  // var color = d3.scaleOrdinal(d3.YlOrRd);
+  // var color = d3.scaleOrdinal(d3.schemeSet1);
   var color = d3.scaleLinear()
     .domain([10, 100])
     .range(["orange", "red"]);
