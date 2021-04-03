@@ -10,7 +10,8 @@
 
 
 
-  var color = d3.scaleOrdinal(d3.data.color);
+  // var color = d3.scaleOrdinal(d3.schemeCategory20b);
+  var color = d3.scaleOrdinal(d3.schemeSet1);
 
   var svg = d3.select('#chart')
     .append('svg')
@@ -18,7 +19,8 @@
     .attr('height', height)
     .append('g')
     .attr('transform', 'translate(' + radius + ',' + radius + ')');
-    
+
+
   var arc = d3.arc()
     .innerRadius(radius - donutWidth)
     .outerRadius(radius);
