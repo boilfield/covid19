@@ -4,7 +4,7 @@
     top:17%;
     right:.5%;
 
-    width:250px;
+    width:300px;
     height:200px;
     padding:5px;
 
@@ -52,20 +52,20 @@
       .tooltip {
         background: #eee;
         box-shadow: 0 0 5px #999999;
-        color: #333;
+        color: #fff;
         display: none;
         font-size: 12px;
-        left: 130px;
+        left: 100px;
         padding: 10px;
         position: absolute;
-        text-align: center;
-        top: 95px;
+        text-align: left;
+        top: 120px;
         width: 80px;
         z-index: 10;
       }
       .legend {
-        color:#FFFFFF;
         font-size: 12px;
+        color:#fff;
       }
       rect {
         cursor: pointer;                                              /* NEW */
@@ -77,7 +77,7 @@
       h1 {                                                            /* NEW */
         font-size: 14px;                                              /* NEW */
         text-align: center;                                           /* NEW */
-      }                          
+      }                                                               /* NEW */   
 
 
 
