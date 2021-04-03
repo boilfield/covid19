@@ -99,6 +99,7 @@
       }
       .legend {
         font-size: 12px;
+        padding-left: 150px;
       }
       rect {
         cursor: pointer;                                              /* NEW */
