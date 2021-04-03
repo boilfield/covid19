@@ -39,6 +39,45 @@
     font-size: 100%;
 }
 
+
+#chart {
+/*        height: 360px;*/
+        margin: 0 auto;                                               /* NEW */
+        position: relative;
+/*        width: 360px;*/
+      }
+      .tooltip {
+        background: #eee;
+        box-shadow: 0 0 5px #999999;
+        color: #333;
+        display: none;
+        font-size: 12px;
+        left: 130px;
+        padding: 10px;
+        position: absolute;
+        text-align: center;
+        top: 95px;
+        width: 80px;
+        z-index: 10;
+      }
+      .legend {
+        font-size: 12px;
+      }
+      rect {
+        cursor: pointer;                                              /* NEW */
+        stroke-width: 2;
+      }
+      rect.disabled {                                                 /* NEW */
+        fill: transparent !important;                                 /* NEW */
+      }                                                               /* NEW */
+      h1 {                                                            /* NEW */
+        font-size: 14px;                                              /* NEW */
+        text-align: center;                                           /* NEW */
+      }                          
+
+
+
+
 /*.explain {
     position:absolute;
     z-index:2;
@@ -75,13 +114,13 @@
     font-size: 100%;
 }*/
 
-#chart {
+/*#chart {
     position: absolute;
     z-index:3;
     top:15%;
     left:5%;
     font-color:#FFFFFF; 
-}
+}*/
 
 /* .tooltip {
         background: #eee;
@@ -97,21 +136,21 @@
         width: 80px;
         z-index: 10;
       }*/
-      #legends {
+      /*#legends {
         font-size: 12px;
         padding-left: 150px;
       }
       rect {
         cursor: pointer;                                              /* NEW */
-        stroke-width: 2;
+/*        stroke-width: 2;
       }
       rect.disabled {                                                 /* NEW */
-        fill: transparent !important;                                 /* NEW */
-      }                                                               /* NEW */
-      h1 {                                                            /* NEW */
-        font-size: 14px;                                              /* NEW */
-        text-align: center;                                           /* NEW */
-      }                                                      /* NEW */
+/*        fill: transparent !important;                                 /* NEW */
+/*      }                                                               /* NEW */
+/*      h1 { */                                                           
+/*        font-size: 14px;                                              
+        text-align: center;                                          
+      }  */                                                   
 
 /*#zoomLevelBox {
     position: absolute;
