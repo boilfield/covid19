@@ -8,9 +8,9 @@
   var legendRectSize = 18;
   var legendSpacing = 4;
 
-  var colorScale = d3.scaleOrdinal(d3[weekdays[0].color])
 
-  // var color = d3.scaleOrdinal(d3.schemeCategory20b);
+
+  var color = d3.scaleOrdinal(d3.data.color);
 
   var svg = d3.select('#chart')
     .append('svg')
@@ -18,24 +18,7 @@
     .attr('height', height)
     .append('g')
     .attr('transform', 'translate(' + radius + ',' + radius + ')');
-
-
-
-
-  // var g = svg.selectAll(".arc")
-  //     .data(pie(data))
-  //     .enter().append("g");    
-
-  // g.append("path")
-  //     .attr("d", arc)
-  //     .style("fill", function(d,i) {
-  //       return d.data.color;
-  //     });
-
-
-
-
-
+    
   var arc = d3.arc()
     .innerRadius(radius - donutWidth)
     .outerRadius(radius);
