@@ -97,8 +97,8 @@
               return (d.enabled) ? feature.properties.count : 0;                       // UPDATED
             }));
             var percent = Math.round(1000 * feature.properties.count / total) / 10;
-            tooltip.select('.label').html(feature.properties..label);
-            tooltip.select('.count').html(feature.properties..count); 
+            tooltip.select('.label').html(feature.properties.label);
+            tooltip.select('.count').html(feature.properties.count); 
             tooltip.select('.percent').html(percent + '%'); 
             tooltip.style('display', 'block');
           });
