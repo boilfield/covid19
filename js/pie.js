@@ -2,7 +2,7 @@
   'use strict';
 
   var width = 250;
-  var height = 140;
+  var height = 150;
   var radius = Math.min(width, height) / 2;
   var donutWidth = 35;
   var legendRectSize = 18;
@@ -10,11 +10,11 @@
 
 
   //fill color
-  
+
   // var color = d3.scaleOrdinal(d3.schemeCategory20b);
   // var color = d3.scaleOrdinal(d3.schemeSet1);
   var color = d3.scaleLinear()
-    .domain([50,100,200,500,1000,2000,5000])
+    .domain([0-50,51-100,101-200,201-500,501-1000,1001-2000,2001-5000])
     .range(["orange", "red"]);
 
 
