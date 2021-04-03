@@ -44,7 +44,7 @@
         position: absolute;
         z-index:3;
         top:15%;
-        left:1%;
+        right: 2%
         height: 150px;
         margin: 0 auto;                                               /* NEW */
         width: 150px;
