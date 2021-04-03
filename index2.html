@@ -318,7 +318,7 @@
 
           legend.append('rect')
             .attr('width', legendRectSize)
-            .attr('height', legendRectSize)
+            .attr('height', legendRectSize)                                   
             .style('fill', color)
             .style('stroke', color)                                   // UPDATED (removed semicolon)
             .on('click', function(label) {                            // NEW
@@ -327,7 +327,7 @@
               var totalEnabled = d3.sum(dataset.map(function(d) {     // NEW
                 return (d.enabled) ? 1 : 0;                           // NEW
               }));                                                    // NEW
-
+              
               if (rect.attr('class') === 'disabled') {                // NEW
                 rect.attr('class', '');                               // NEW
               } else {                                                // NEW
@@ -353,7 +353,7 @@
                   };                                                  // NEW
                 });                                                   // NEW
             });                                                       // NEW
-
+            
           legend.append('text')
             .attr('x', legendRectSize + legendSpacing)
             .attr('y', legendRectSize - legendSpacing)
