@@ -4,7 +4,7 @@
     top:17%;
     right:.5%;
 
-    width:300px;
+    width:250px;
     height:200px;
     padding:5px;
 
@@ -33,7 +33,7 @@
 .boxtitle {
     text-align: center;
 
-    color:#FFFFFF;
+    color:#be2126;
 
     font-family: 'Roboto';
     font-size: 100%;
