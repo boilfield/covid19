@@ -2,9 +2,9 @@
   'use strict';
 
   var width = 250;
-  var height = 200;
+  var height = 150;
   var radius = Math.min(width, height) / 2;
-  var donutWidth = 35;
+  var donutWidth = 30;
   var legendRectSize = 18;
   var legendSpacing = 4;
 
@@ -59,49 +59,30 @@
       d.enabled = true;                                         // NEW
     });
 
-    // var path = svg.selectAll('path')
-    //   .data(pie(dataset))
-    //   .enter()
-    //   .append('path')
-    //   .attr('d', arc)
-    //   .attr('fill', function(d, i) { 
-    //     return color(d.data.label); 
-    //   })                                                        // UPDATED (removed semicolon)
-    //   .each(function(d) { this._current = d; });                // NEW
+    var path = svg.selectAll('path')
+      .data(pie(dataset))
+      .enter()
+      .append('path')
+      .attr('d', arc)
+      .attr('fill', function(d, i) { 
+        return color(d.data.label); 
+      })                                                        // UPDATED (removed semicolon)
+      .each(function(d) { this._current = d; });                // NEW
 
-    // path.on('mouseover', function(d) {
-    //   var total = d3.sum(dataset.map(function(d) {
-    //     return (d.enabled) ? d.count : 0;                       // UPDATED
-    //   }));
-    //   var percent = Math.round(1000 * d.data.count / total) / 10;
-    //   tooltip.select('.label').html(d.data.label);
-    //   tooltip.select('.count').html(d.data.count); 
-    //   tooltip.select('.percent').html(percent + '%'); 
-    //   tooltip.style('display', 'block');
-    //   tooltip.select('.color')
-    //     .style('background-color', color(d.data.label))
-    // });
+    path.on('mouseover', function(d) {
+      var total = d3.sum(dataset.map(function(d) {
+        return (d.enabled) ? d.count : 0;                       // UPDATED
+      }));
+      var percent = Math.round(1000 * d.data.count / total) / 10;
+      tooltip.select('.label').html(d.data.label);
+      tooltip.select('.count').html(d.data.count); 
+      tooltip.select('.percent').html(percent + '%'); 
+      tooltip.style('display', 'block');
+      tooltip.select('.color')
+        .style('background-color', color(d.data.label))
+    });
 
-           var path = svg.selectAll('path')
-            .data(pie(dataset))
-            .enter()
-            .append('path')
-            .attr('d', arc)
-            .attr('fill', function(d, i) { 
-              return color(d.data.label); 
-            })                                                        // UPDATED (removed semicolon)
-            .each(function(d) { this._current = d; });                // NEW
-
-          path.on('mouseover', function(d) {
-            var total = d3.sum(dataset.map(function(d) {
-              return (d.enabled) ? feature.properties.count : 0;                       // UPDATED
-            }));
-            var percent = Math.round(1000 * feature.properties.count / total) / 10;
-            tooltip.select('.label').html(feature.properties.label);
-            tooltip.select('.count').html(feature.properties.count); 
-            tooltip.select('.percent').html(percent + '%'); 
-            tooltip.style('display', 'block');
-          });
+  
     
     path.on('mouseout', function() {
       tooltip.style('display', 'none');
