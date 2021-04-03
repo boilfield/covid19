@@ -17,6 +17,23 @@
     .append('g')
     .attr('transform', 'translate(' + radius + ',' + radius + ')');
 
+
+
+
+  var g = svg.selectAll(".arc")
+      .data(pie(data))
+      .enter().append("g");    
+
+  g.append("path")
+      .attr("d", arc)
+      .style("fill", function(d,i) {
+        return d.data.color;
+      });
+
+
+
+
+
   var arc = d3.arc()
     .innerRadius(radius - donutWidth)
     .outerRadius(radius);
