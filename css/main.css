@@ -65,7 +65,7 @@
       }
       .legend {
         font-size: 12px;
-        color:#fff;
+        color: #fff;
       }
       rect {
         cursor: pointer;                                              /* NEW */
@@ -75,7 +75,8 @@
         fill: transparent !important;                                 /* NEW */
       }                                                               /* NEW */
       h1 {                                                            /* NEW */
-        font-size: 14px;                                              /* NEW */
+        font-size: 14px;
+        color: #fff;                                              /* NEW */
         text-align: center;                                           /* NEW */
       }                                                               /* NEW */   
 
