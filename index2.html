@@ -303,7 +303,7 @@
           });
           */
 
-          var legend = svg.selectAll('.legends')
+          var legend = svg.selectAll('.legend')
             .data(color.domain())
             .enter()
             .append('g')
@@ -313,7 +313,7 @@
               var offset =  height * color.domain().length / 2;
               var horz = -2 * legendRectSize;
               var vert = i * height - offset;
-              return 'translate(' + 30 + ',' + vert + ')';
+              return 'translate(' + 50 + ',' + vert + ')';
             });
 
           legend.append('rect')
