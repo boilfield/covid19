@@ -4,7 +4,7 @@
     top:17%;
     right:.5%;
 
-    width:300px;
+    width:320px;
     height:200px;
     padding:5px;
 
@@ -65,7 +65,7 @@
       }
       .legend {
         font-size: 12px;
-        color: #fff;
+        background-color: #fff;
       }
       rect {
         cursor: pointer;                                              /* NEW */
