@@ -29,7 +29,6 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
     <link href="css/leaflet.awesome-markers.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
-
     <link href="css/main.css" rel="stylesheet">
     <link href="css/normalize.css" rel="stylesheet">
 
@@ -177,6 +176,8 @@
     </script>
 
 <script src="js/d3.v4.min.js"></script>
+<script src="js/pie.js"></script>
+
     <!-- <script>
       (function(d3) {
         'use strict';
@@ -223,78 +224,78 @@
       })(window.d3);
     </script> -->
 
-        <script>
-      (function(d3) {
-        'use strict';
+        //<script>
+      // (function(d3) {
+      //   'use strict';
 
-        var width = 200;
-        var height = 150;
-        var radius = Math.min(width, height) / 2;
-        var donutWidth = 35;
+        // var width = 200;
+        // var height = 150;
+        // var radius = Math.min(width, height) / 2;
+        // var donutWidth = 35;
         // var legendRectSize = 18;
         // var legendSpacing = 4;
 
-        var color = d3.scaleOrdinal(d3.schemeCategory20b);
+        // var color = d3.scaleOrdinal(d3.schemeCategory20b);
 
-        var svg = d3.select('#chart')
-          .append('svg')
-          .attr('width', width)
-          .attr('height', height)
-          .append('g')
-          .attr('transform', 'translate(' + (width / 2) +
-            ',' + (height / 2) + ')');
+        // var svg = d3.select('#chart')
+        //   .append('svg')
+        //   .attr('width', width)
+        //   .attr('height', height)
+        //   .append('g')
+        //   .attr('transform', 'translate(' + (width / 2) +
+        //     ',' + (height / 2) + ')');
 
-        var arc = d3.arc()
-          .innerRadius(radius - donutWidth)
-          .outerRadius(radius);
+        // var arc = d3.arc()
+        //   .innerRadius(radius - donutWidth)
+        //   .outerRadius(radius);
 
-        var pie = d3.pie()
-          .value(function(d) { return d.count; })
-          .sort(null);
+        // var pie = d3.pie()
+        //   .value(function(d) { return d.count; })
+        //   .sort(null);
 
-        var tooltip = d3.select('#chart')
-          .append('div')
-          .attr('class', 'tooltip');
+        // var tooltip = d3.select('#chart')
+        //   .append('div')
+        //   .attr('class', 'tooltip');
 
-        tooltip.append('div')
-          .attr('class', 'label');
+        // tooltip.append('div')
+        //   .attr('class', 'label');
 
-        tooltip.append('div')
-          .attr('class', 'count');
+        // tooltip.append('div')
+        //   .attr('class', 'count');
 
-        tooltip.append('div')
-          .attr('class', 'percent');
+        // tooltip.append('div')
+        //   .attr('class', 'percent');
 
-        d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vQg6S_03R2ynngPlnguRyaocWm1Xay7LpVo_HGTNrHkExYjViIvZDxepMuVw6YYvXIlF6n3cF-22BVT/pub?gid=0&single=true&output=csv', function(error, dataset) {
-          dataset.forEach(function(d) {
-            d.count = +d.count;
-            d.enabled = true;                                         // NEW
-          });
+        // d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vQg6S_03R2ynngPlnguRyaocWm1Xay7LpVo_HGTNrHkExYjViIvZDxepMuVw6YYvXIlF6n3cF-22BVT/pub?gid=0&single=true&output=csv', function(error, dataset) {
+        //   dataset.forEach(function(d) {
+        //     d.count = +d.count;
+        //     d.enabled = true;                                         // NEW
+        //   });
 
-          var path = svg.selectAll('path')
-            .data(pie(dataset))
-            .enter()
-            .append('path')
-            .attr('d', arc)
-            .attr('fill', function(d, i) {
-              return color(d.data.label);
-            })                                                        // UPDATED (removed semicolon)
-            .each(function(d) { this._current = d; });                // NEW
+        //   var path = svg.selectAll('path')
+        //     .data(pie(dataset))
+        //     .enter()
+        //     .append('path')
+        //     .attr('d', arc)
+        //     .attr('fill', function(d, i) {
+        //       return color(d.data.label);
+        //     })                                                        // UPDATED (removed semicolon)
+        //     .each(function(d) { this._current = d; });                // NEW
 
-          path.on('mouseover', function(d) {
-            var total = d3.sum(dataset.map(function(d) {
-              return (d.enabled) ? d.data.count : 0;                       // UPDATED
-            }));
-            var percent = Math.round(1000 * d.data.count / total) / 10;
-            tooltip.select('.label').html(d.data.label);
-            tooltip.select('.count').html(d.data.count);
-            tooltip.select('.percent').html(percent + '%');
-            tooltip.style('display', 'block');
-          });
+        //   path.on('mouseover', function(d) {
+        //     var total = d3.sum(dataset.map(function(d) {
+        //       return (d.enabled) ? d.count : 0;                       // UPDATED
+        //     }));
+        //     var percent = Math.round(1000 * d.data.count / total) / 10;
+        //     tooltip.select('.label').html(d.data.label);
+        //     tooltip.select('.count').html(d.data.count);
+        //     tooltip.select('.percent').html(percent + '%');
+        //     tooltip.style('display', 'block');
+        //   });
 
-          path.on('mouseout', function() {
-            tooltip.style('display', 'none');
-          });
+          // path.on('mouseout', function() {
+          //   tooltip.style('display', 'none');
+          // });
 
           /* OPTIONAL
           path.on('mousemove', function(d) {
@@ -359,10 +360,10 @@
           //   .attr('y', legendRectSize - legendSpacing)
           //   .text(function(d) { return d; });
 
-        });
+      //   });
 
-      })(window.d3);
-    </script>
+      // })(window.d3);
+   //</script>
  
 
 </body>
