@@ -1,7 +1,7 @@
 (function(d3) {
   'use strict';
 
-  var width = 300;
+  var width = 250;
   var height = 150;
   var radius = Math.min(width, height) / 2;
   var donutWidth = 35;
