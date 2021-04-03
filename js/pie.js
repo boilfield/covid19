@@ -12,10 +12,7 @@
   //fill color
 
   // var color = d3.scaleOrdinal(d3.schemeCategory20b);
-  // var color = d3.scaleOrdinal(d3.schemeSet1);
-  var color = d3.scaleLinear()
-    .domain([0-50,51-100,101-200,201-500,501-1000,1001-2000,2001-5000])
-    .range(["orange", "red"]);
+  var color = d3.scaleOrdinal(d3.schemeSet1);
 
 
   var svg = d3.select('#chart')
