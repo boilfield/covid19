@@ -11,7 +11,7 @@
 
 
   // var color = d3.scaleOrdinal(d3.schemeCategory20b);
-  var color = d3.scaleOrdinal(d3.schemeSet1);
+  var color = d3.scale.schemeSet1();
 
   var svg = d3.select('#chart')
     .append('svg')
@@ -32,13 +32,13 @@
   var tooltip = d3.select('#chart')
     .append('div')
     .attr('class', 'tooltip');
-  /*
+  
   tooltip.append('svg').append('rect')
       .attr('width', legendRectSize)
       .attr('height', legendRectSize)                                   
       .style('fill', color)
       .style('stroke', color);
-  */
+  
 
   tooltip.append('div')
     .attr('class', 'color');
