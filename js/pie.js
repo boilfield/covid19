@@ -20,15 +20,15 @@
 
 
 
-  var g = svg.selectAll(".arc")
-      .data(pie(data))
-      .enter().append("g");    
+  // var g = svg.selectAll(".arc")
+  //     .data(pie(data))
+  //     .enter().append("g");    
 
-  g.append("path")
-      .attr("d", arc)
-      .style("fill", function(d,i) {
-        return d.data.color;
-      });
+  // g.append("path")
+  //     .attr("d", arc)
+  //     .style("fill", function(d,i) {
+  //       return d.data.color;
+  //     });
 
 
 
