@@ -265,7 +265,7 @@
         tooltip.append('div')
           .attr('class', 'percent');
 
-        d3.csv('weekdays.csv', function(error, dataset) {
+        d3.csv('https://docs.google.com/spreadsheets/d/e/2PACX-1vQg6S_03R2ynngPlnguRyaocWm1Xay7LpVo_HGTNrHkExYjViIvZDxepMuVw6YYvXIlF6n3cF-22BVT/pub?gid=0&single=true&output=csv', function(error, dataset) {
           dataset.forEach(function(d) {
             d.count = +d.count;
             d.enabled = true;                                         // NEW
