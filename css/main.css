@@ -42,9 +42,12 @@
 
 
 #chart {
+        position: absolute;
+        z-index:3;
+        top:15%;
+        left:5%;
         height: 150px;
         margin: 0 auto;                                               /* NEW */
-        position: relative;
         width: 150px;
       }
       .tooltip {
