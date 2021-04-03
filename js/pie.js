@@ -11,7 +11,7 @@
 
 
   // var color = d3.scaleOrdinal(d3.schemeCategory20b);
-  var color = d3.scaleOrdinal(d3.schemeCategory20b);
+  var color = d3.scaleOrdinal(d3.YlOrRd);
 
   var svg = d3.select('#chart')
     .append('svg')
