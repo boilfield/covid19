@@ -900,3 +900,11 @@ marquee {
     box-shadow: 0 0 7px 1px #000;
     font-size: 14px;
 }
+
+
+.top{
+    color: #111;
+    z-index: 55;
+    height: 60px;
+    width: 100%;
+}

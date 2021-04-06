@@ -9,22 +9,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>COVID-19 | Bangladesh</title>
-    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <title>কোভিড-১৯ | বাংলাদেশ</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
     <link href="../css/leaflet.awesome-markers.css" rel="stylesheet">
@@ -41,9 +35,9 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="/index.html">
+                <a class="navbar-brand page-scroll" href="../index.html">
                     <i><img class="logo" src="../icon.svg"></i>
-                    <span class="light">COVID-19, Bangladesh</span>
+                    <span class="light">কোভিড-১৯, বাংলাদেশ</span>
                 </a>
             </div>
 
@@ -52,66 +46,32 @@
                 <ul class="nav navbar-nav">
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                     <li class="hidden">
-                        <a href="index.html"></a>
+                        <a href="../index.html"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="dhaka.html">Dhaka City</a>
+                        <a class="page-scroll" href="../dhaka.html">ঢাকা সিটি</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="../pages/dashboard.html">Dashboard</a>
+                        <a class="page-scroll" href="dashboard.html">ড্যাশবোর্ড</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="../pages/ws.html">Global</a>
+                        <a class="page-scroll" href="ws.html" >বৈশ্বিক অবস্থা</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="../pages/engagement.html">Engage</a>
+                        <a class="page-scroll" href="engagement.html">অংশগ্রহণ</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="../pages/source.html">Sources</a>
+                        <a class="page-scroll" href="source.html">তথ্যসূত্র</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <marquee scrollamount=3>National Call Center: 333 * Shasthya Batayan: 16263 * IEDCR: 10655 * Specialist helpline: 096116 77777 * National helpline: 109</marquee>
 
-    <script type="text/javascript">
-        let map_lang = "en";
-    </script>
-
-    <div id="map"></div>
-
-    <div class="map-lang-button">
-        <a href="../index.html" title="Click to switch language">
-            বাং
-            <div class="button" style="padding-left: 9px;"></div>
-            En
-        </a>
-    </div>
-
-    <div class="layer-switch-area">
-        <div class="map-layer-conf wrap active">
-            <input id="map_layer_conf" type="radio" name="layer" value="conf" onchange="change_map_layer(this)" checked="true">
-            <label for="map_layer_conf">Infection map</label>
-        </div>
-    </div>
-
-    <div class="self-test-area">
-        <a href="https://livecoronatest.com/" target="_blank">
-            <div class="clickable">
-                <div id="self_test_text" class="text">Live Corona<br>Assessment</div>
-            </div>
-        </a>
-    </div>
-
-    <div class="self-test-area2">
-        <a href="https://surokkha.gov.bd/" target="_blank">
-            <div class="clickable">
-                <div id="surokkha" class="text">Online Registration<br>for Corona Vaccine</div>
-            </div>
-        </a>
-    </div>
+    <div class="top">
+     </div>
+    <iframe src="https://www.worldometers.info/coronavirus/" style="height:100%;width:100%;" title="Iframe Example"></iframe>
 
     <script src="../js/leaflet.js"></script>
     <script src="../js/tabletop.min.js"></script>
@@ -119,9 +79,8 @@
     <script src="../js/jquery-1.11.3.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/leaflet.awesome-markers.min.js"></script>
-
     <script src="../js/main.js"></script>
-    <script src="../leaflet-gsheets.js"></script>
+    <!-- <script src="../leaflet-gsheets.js"></script> -->
 
     <script language="JavaScript">
         /**

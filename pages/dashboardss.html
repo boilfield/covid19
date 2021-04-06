@@ -13,26 +13,20 @@
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/custom_cg.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    <!-- map -->
+    <link rel="stylesheet" href="../css/leaflet.css" />
+    <link href="../css/custom_cg.css" rel="stylesheet">
 
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
-    <!-- Navigation -->
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -52,13 +46,13 @@
                         <a href="index.html"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="../index.html">Map</a>
+                        <a class="page-scroll" href="../index.html">Bangladesh</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="dashboard.html">Dashboard</a>
+                        <a class="page-scroll" href="http://103.247.238.81/webportal/pages/covid19.php" target="_blank">Dashboard</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="ws.html">Global</a>
+                        <a class="page-scroll" href="https://www.worldometers.info/coronavirus/" target="_blank">Global</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="engagement.html">Engage</a>
@@ -71,18 +65,73 @@
         </div>
     </nav>
 
-    <section id="web" class="content-section"></section>
 
-    <div class="attr-footer">
-        <a href='https://boiledbhoot.org/' target='_blank'>
-            Powered and maintained by
-            <img height='25px' src='../boil.png'/>
-        </a>
-    </div>
 
+    <section id="web" class="content-section">
+
+        <div class="container column-narrow" >
+
+            <hr class="custom-hr">
+            <h2>Bangladesh</h2>
+
+            <div id="loctable">
+                <h2 style="text-align: center;">Table</h2>
+            </div>
+
+            <did id="piechart">
+                <h2 style="text-align: center;">Pie Chart</h2>
+            </div>
+
+            <hr class="custom-hr">
+        </div>
+
+
+
+        <div class='limiter'>
+            <div class='col10 margin1 pad4y'>
+
+                <div class='space-bottom'>
+                    <h4>Upazilla lockdown map</h4>
+                    <div id='map' class='col12 row10'></div>
+                </div>
+
+                <div id="loctable">
+                    <h2 style="text-align: center;">Chart 2</h2>
+                </div>
+
+                <section id="web2" class="content-section">
+                    <br><hr class="custom-hr">
+                </section>
+
+            </div>
+        </div>
+
+    </section>
+
+
+
+    <section>
+        <div class="attr-footer">
+            <a href='https://boiledbhoot.org/' target='_blank'>
+                Powered and maintained by
+                <img height='25px' src='../boil.png'/>
+            </a>
+        </div>
+    </section>
+
+    <script src="../js/leaflet.js"></script>
     <script src="../js/jquery-1.11.3.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/jquery.easing.min.js"></script>
+    <script src="../js/leaflet-sidebar.js"></script>
+    <script src="../js/leaflet.awesome-markers.min.js"></script>
+    <script src="../js/tabletop.min.js"></script>
+    <script src="../js/leaflet-hash.js"></script>
+    <script src="../js/L.Control.Locate.min.js"></script>
+    <script src='../dist/Leaflet.fullscreen.min.js'></script>
+    <script src="../js/d3.min.js"></script>
+
+    <script src="../js/dashboard.js"></script>
     <script src="../js/main.js"></script>
 
 </body>
