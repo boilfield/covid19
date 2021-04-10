@@ -59,15 +59,41 @@
       d.enabled = true;                                         // NEW
     });
 
-    var path = svg.selectAll('path')
-      .data(pie(dataset))
-      .enter()
-      .append('path')
-      .attr('d', arc)
-      .attr('fill', function(d, i) { 
-        return color(d.data.label); 
-      })                                                        // UPDATED (removed semicolon)
-      .each(function(d) { this._current = d; });                // NEW
+
+
+  var path = svg.selectAll('path')
+            .data(pie(dataset))
+            .enter()
+            .append('path')
+            .attr('d', arc)
+            .attr('fill', function(d, i) { 
+              return color(d.data.label); 
+            });
+
+          path.on('mouseover', function(d) {                            // NEW
+            var total = d3.sum(dataset.map(function(d) {                // NEW
+              return d.count;                                           // NEW
+            }));                                                        // NEW
+            var percent = Math.round(1000 * d.data.count / total) / 10; // NEW
+            tooltip.select('.label').html(d.data.label);                // NEW
+            tooltip.select('.count').html(d.data.count);                // NEW
+            tooltip.select('.percent').html(percent + '%');             // NEW
+            tooltip.style('display', 'block');                          // NEW
+          });                                                           // NEW
+          
+          path.on('mouseout', function() {                              // NEW
+            tooltip.style('display', 'none');                           // NEW
+          });                                                           // NEW
+
+    // var path = svg.selectAll('path')
+    //   .data(pie(dataset))
+    //   .enter()
+    //   .append('path')
+    //   .attr('d', arc)
+    //   .attr('fill', function(d, i) { 
+    //     return color(d.data.label); 
+    //   })                                                        // UPDATED (removed semicolon)
+    //   .each(function(d) { this._current = d; });                // NEW
 
     // path.on('mouseover', function(d) {
     //   var total = d3.sum(dataset.map(function(d) {
