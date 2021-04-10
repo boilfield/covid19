@@ -177,4 +177,15 @@
 
   });
 
+
+
+   // append text
+  g.append("text")
+    .transition()
+      .ease(d3.easeLinear)
+      .duration(2000)
+    .attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
+      .attr("dy", ".35em")
+      .text(function(d) { return d.data.label;});
+
 })(window.d3);
