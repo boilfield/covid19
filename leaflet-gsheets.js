@@ -331,6 +331,11 @@ function add_vaccine_polygons(data) {
                     male: data[row].male,
                     female: data[row].female,
                     aefi: data[row].aefi,
+                    male2: data[row].male2nd,
+                    female2: data[row].female2nd,
+                    aefi2: data[row].aefi2nd,
+                    total2: data[row].total2nd,
+                    totalall: data[row].totalall,
                     web: data[row].web,
                 }
             });
@@ -370,7 +375,7 @@ function add_vaccine_polygons(data) {
                 feature.properties.name +
                 "</div>" +
                 "<div class='map-dist-label-num'>" +
-                (map_lang === "bn" ? bn_num(feature.properties.total) : feature.properties.total) +
+                (map_lang === "bn" ? bn_num(feature.properties.totalall) : feature.properties.totalall) +
                 "</div></div>";
 
             let label = L.marker(layer.getBounds().getCenter(), {
@@ -385,10 +390,16 @@ function add_vaccine_polygons(data) {
 
 
 
-            let popup_html = "<div class='map-upz-lockdown-cont'>" +
+            let popup_html = "<div class='map-upz-lockdown-cont'>" + 
+                (map_lang === "bn" ? ("<h2>" + bn_num(feature.properties.totalall)) : ('<h2>' + feature.properties.totalall))+ '</h2>' + '<hr>' +
+                (map_lang === "bn" ? ("দ্বিতীয় ডোজঃ <b>" + bn_num(feature.properties.total2)) : ('2nd Dose: <b>' + feature.properties.total2))+ '</b><br/>' +
+                (map_lang === "bn" ? ("পুরুষঃ <b>" + bn_num(feature.properties.male2)) : ('Male: <b>' + feature.properties.male2))+ '</b><br/>' +
+                (map_lang === "bn" ? ("মহিলাঃ <b>" + bn_num(feature.properties.female2)) : ('Female: <b>' + feature.properties.female2))+ '</b><br/>' +
+                (map_lang === "bn" ? ("এ.ই.এফ.আইঃ <b>" + bn_num(feature.properties.aefi2)) : ('A.E.F.I: <b>' + feature.properties.aefi2))+ '</b>' + '<hr>' +
+                (map_lang === "bn" ? ("প্রথম ডোজঃ <b>" + bn_num(feature.properties.total)) : ('1st Dose: <b>' + feature.properties.total))+ '</b><br/>' +
                 (map_lang === "bn" ? ("পুরুষঃ <b>" + bn_num(feature.properties.male)) : ('Male: <b>' + feature.properties.male))+ '</b><br/>' +
                 (map_lang === "bn" ? ("মহিলাঃ <b>" + bn_num(feature.properties.female)) : ('Female: <b>' + feature.properties.female))+ '</b><br/>' +
-                (map_lang === "bn" ? ("এ.ই.এফ.আইঃ <b>" + bn_num(feature.properties.aefi)) : ('A.E.F.I: <b>' + feature.properties.aefi))+ '</b>' +
+                (map_lang === "bn" ? ("এ.ই.এফ.আইঃ <b>" + bn_num(feature.properties.aefi)) : ('A.E.F.I: <b>' + feature.properties.aefi))+ '</b>' + '<hr>' +
                 '<h6 class="more-button">' + (!feature.properties.web ? "" : (map_lang === "bn" ? "<a href='dhaka.html' target='_blank'>বিস্তারিত তথ্য</a>" : "<a href='../dhaka.html' target='_blank'>Details</a>")) +'</h6>'+
                 "</div>";
             layer.bindPopup(popup_html);
