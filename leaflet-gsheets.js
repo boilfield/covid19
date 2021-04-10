@@ -29,7 +29,7 @@ window.addEventListener("DOMContentLoaded", init);
 var map = L.map("map").setView([23.373, 90.308], 7);
 map.zoomControl.remove();
 
-var hash = new L.Hash(map);
+// var hash = new L.Hash(map);
 
 let tile_url = "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png";
 
