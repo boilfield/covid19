@@ -36,8 +36,13 @@ var margin = {top: 20,
               bottom: 20, 
               left: 20},
               width = 200 - margin.right - margin.left,
-              height = 200 - margin.top - margin.bottom,
-              radius = width/4;
+              height = 200 - margin.top - margin.bottom;
+  var radius = Math.min(width, height) / 2;
+  var donutWidth = 35;
+  var legendRectSize = 18;
+  var legendSpacing = 4;
+              // radius = width/4;
+
 
 // color range
 var color = d3.scaleOrdinal()
