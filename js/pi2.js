@@ -1,8 +1,12 @@
 // margin
-var margin = {top: 20, right: 20, bottom: 20, left: 20},
-    width = 500 - margin.right - margin.left,
-    height = 500 - margin.top - margin.bottom,
-    radius = width/2;
+var margin = {top: 20, 
+              right: 20, 
+              bottom: 20, 
+              left: 20},
+              width = 300 - margin.right - margin.left,
+              height = 300 - margin.top - margin.bottom,
+              radius = width/2;
+
 
 // color range
 var color = d3.scaleOrdinal()
@@ -20,13 +24,13 @@ var arc2 = d3.arc()
 
 // arc for the labels position
 var labelArc = d3.arc()
-    .outerRadius(radius - 40)
+    .outerRadius(radius - 50)
     .innerRadius(radius - 40);
 
 // generate pie chart and donut chart
 var pie = d3.pie()
     .sort(null)
-    .value(function(d) { return d.count; });
+    .value(function(d) { return d.percent; });
 
 
 // define the svg donut chart
@@ -72,7 +76,7 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQg6S_03R2ynngPlnguRyaoc
       .duration(2000)
     .attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
       .attr("dy", ".35em")
-      .text(function(d) { return d.data.count; });
+      .text(function(d) { return d.data.count;});
       
   
     
@@ -90,4 +94,3 @@ function tweenDonut(b) {
   var i = d3.interpolate({startAngle: 0, endAngle: 0}, b);
   return function(t) { return arc2(i(t)); };
 }
-        
