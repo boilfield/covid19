@@ -391,7 +391,7 @@ function add_vaccine_polygons(data) {
 
 
             let popup_html = "<div class='map-upz-lockdown-cont'>" + 
-                (map_lang === "bn" ? ("<h2>" + bn_num(feature.properties.totalall)) : ('<h2>' + feature.properties.totalall))+ '</h2>' + '<hr>' +
+                (map_lang === "bn" ? ("<h2>" + bn_num(feature.properties.totalall)) : ('<h2>' + feature.properties.totalall))+ '</h2>' +
                 (map_lang === "bn" ? ("দ্বিতীয় ডোজঃ <b>" + bn_num(feature.properties.total2)) : ('2nd Dose: <b>' + feature.properties.total2))+ '</b><br/>' +
                 (map_lang === "bn" ? ("পুরুষঃ <b>" + bn_num(feature.properties.male2)) : ('Male: <b>' + feature.properties.male2))+ '</b><br/>' +
                 (map_lang === "bn" ? ("মহিলাঃ <b>" + bn_num(feature.properties.female2)) : ('Female: <b>' + feature.properties.female2))+ '</b><br/>' +
@@ -399,7 +399,7 @@ function add_vaccine_polygons(data) {
                 (map_lang === "bn" ? ("প্রথম ডোজঃ <b>" + bn_num(feature.properties.total)) : ('1st Dose: <b>' + feature.properties.total))+ '</b><br/>' +
                 (map_lang === "bn" ? ("পুরুষঃ <b>" + bn_num(feature.properties.male)) : ('Male: <b>' + feature.properties.male))+ '</b><br/>' +
                 (map_lang === "bn" ? ("মহিলাঃ <b>" + bn_num(feature.properties.female)) : ('Female: <b>' + feature.properties.female))+ '</b><br/>' +
-                (map_lang === "bn" ? ("এ.ই.এফ.আইঃ <b>" + bn_num(feature.properties.aefi)) : ('A.E.F.I: <b>' + feature.properties.aefi))+ '</b>' + '<hr>' +
+                (map_lang === "bn" ? ("এ.ই.এফ.আইঃ <b>" + bn_num(feature.properties.aefi)) : ('A.E.F.I: <b>' + feature.properties.aefi))+ '</b>' +
                 '<h6 class="more-button">' + (!feature.properties.web ? "" : (map_lang === "bn" ? "<a href='dhaka.html' target='_blank'>বিস্তারিত তথ্য</a>" : "<a href='../dhaka.html' target='_blank'>Details</a>")) +'</h6>'+
                 "</div>";
             layer.bindPopup(popup_html);
