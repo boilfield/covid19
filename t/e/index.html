@@ -75,8 +75,8 @@ d3.csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQg6S_03R2ynngPlnguRyaoc
   svg.append("g")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x))
-      // .selectAll("text")    
-      .style("text-anchor", "end")
+      .selectAll("text")    
+      // .style("text-anchor", "end")
       // .attr("dx", "-.8em")
       // .attr("dy", "-.5em")
       .attr("transform", "rotate(-90)");
