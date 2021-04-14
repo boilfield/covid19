@@ -649,6 +649,7 @@ if (map_lang === "bn") {
     document.querySelector(".map-layer-hosp > label").innerText = "হাসপাতালের মানচিত্র";
     document.getElementById("self_test_text").innerHTML = "লাইভ করোনা<br>ঝুঁকি পরীক্ষা";
     document.getElementById("surokkha").innerHTML = "করোনা ভ্যাকসিনের<br>অনলাইন নিবন্ধন";
+    document.getElementById("movementpass").innerHTML = "মুভমেন্ট<br>পাস";
 }
 
 

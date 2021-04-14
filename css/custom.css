@@ -883,7 +883,7 @@ marquee {
 
 .self-test-area2 {
     position: fixed;
-    top: 190px;
+    top: 180px;
     left: 10px;
     font-size: 12px;
     transition: all 0.5s ease;
@@ -920,4 +920,37 @@ marquee {
     z-index: 55;
     height: 60px;
     width: 100%;
+}
+
+.self-test-area3 {
+    position: fixed;
+    top: 290px;
+    left: 10px;
+    font-size: 12px;
+    transition: all 0.5s ease;
+}
+
+.self-test-area3 a {
+    color: #fff;
+    text-align: center;
+}
+
+.self-test-area3 .clickable {
+    height: 100px;
+    width: 100px;
+/*    background-color: rgba(0, 128, 128, 0.8);*/
+    background-color: #040158;
+    border-radius: 50%;
+    display: inline-block;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 5px #000;
+    justify-content: center;
+    transition: all 0.5s ease;
+}
+
+.self-test-area3 .clickable:hover {
+    box-shadow: 0 0 7px 1px #000;
+    font-size: 14px;
+    background-image: url("img/police.png");
 }
