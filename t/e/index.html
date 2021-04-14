@@ -23,6 +23,9 @@
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
 
+  var canvas = document.querySelector("canvas"),
+    context = canvas.getContext("2d");
+
 // set the dimensions and margins of the graph
 var margin = {top: 20, right: 20, bottom: 30, left: 50},
     width = canvas.width - margin.left - margin.right,
