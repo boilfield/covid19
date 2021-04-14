@@ -3,6 +3,10 @@
   <head>
 <meta charset="utf-8">
 <style>
+  #chart {
+        background-color: #DBDDE0;
+        margin: 100px 100px;
+      }
 
  /* set the CSS */
 .line {
@@ -14,7 +18,7 @@
 </style>
 <body>
 
- <div id="canvas"></div> 
+ <div id="chart"></div>> 
 
 <!-- load the d3.js library -->    	
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -40,7 +44,7 @@ var valueline = d3.line()
 // append the svg obgect to the body of the page
 // appends a 'group' element to 'svg'
 // moves the 'group' element to the top left margin
-var svg = d3.select("canvas").append("svg")
+var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
