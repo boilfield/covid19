@@ -8,8 +8,8 @@ var parseMonth = d3.timeParse("%b");
 var formatMonth = d3.timeFormat("%b");
 
 // Set the ranges
-// var x = d3.scaleTime().domain([parseMonth("Jan"),parseMonth("Dec")]).range([0, width]);
-// var y = d3.scaleLinear().range([height, 0]);
+var x = d3.scaleTime().domain([parseMonth("Jan"),parseMonth("Dec")]).range([0, width]);
+var y = d3.scaleLinear().range([height, 0]);
 
 // Define the line
 var valueLine = d3.line()
