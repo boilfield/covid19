@@ -12,17 +12,23 @@
     <title>কোভিড-১৯ | বাংলাদেশ</title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
 
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
-    <link href="../css/leaflet.awesome-markers.css" rel="stylesheet">
-    <link href="../css/custom.css" rel="stylesheet">
+    <link href="css/leaflet.awesome-markers.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
 
 </head>
 
@@ -35,8 +41,8 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="../index.html">
-                    <i><img class="logo" src="../icon.svg"></i>
+                <a class="navbar-brand page-scroll" href="index.html">
+                    <i><img class="logo" src="icon.svg"></i>
                     <span class="light">কোভিড-১৯, বাংলাদেশ</span>
                 </a>
             </div>
@@ -46,41 +52,84 @@
                 <ul class="nav navbar-nav">
                     <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
                     <li class="hidden">
-                        <a href="../index.html"></a>
+                        <a href="index.html"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="../dhaka.html">ঢাকা সিটি</a>
+                        <a class="page-scroll" href="dhaka.html">ঢাকা সিটি</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="http://103.247.238.81/webportal/pages/covid19.php" target="_blank">ড্যাশবোর্ড</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="ws.html">বৈশ্বিক অবস্থা</a>
+                        <a class="page-scroll" href="pages/ws.html">বৈশ্বিক অবস্থা</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="engagement.html">অংশগ্রহণ</a>
+                        <a class="page-scroll" href="pages/engagement.html">অংশগ্রহণ</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="source.html">তথ্যসূত্র</a>
+                        <a class="page-scroll" href="pages/source.html">তথ্যসূত্র</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
+    <marquee scrollamount=3>ন্যাশনাল কল সেন্টার ৩৩৩ * স্বাস্থ্য বাতায়ন ১৬২৬৩ * আইইডিসিআর ১০৬৫৫ * বিশেষজ্ঞ হেলথ লাইন ০৯৬১১৬ ৭৭৭৭৭ * ন্যাশনাল হেল্পলাইন ১০৯ </marquee>
 
-    <div class="top">
-     </div>
-    <iframe src="https://movementpass.police.gov.bd/" style="height:100%;width:100%;" title="Iframe Example"></iframe>
+    <script type="text/javascript">
+        let map_lang = "bn";
+    </script>
 
-    <script src="../js/leaflet.js"></script>
-    <script src="../js/tabletop.min.js"></script>
-    <script src="../js/leaflet-hash.js"></script>
-    <script src="../js/jquery-1.11.3.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/leaflet.awesome-markers.min.js"></script>
-    <script src="../js/main.js"></script>
-    <!-- <script src="../leaflet-gsheets.js"></script> -->
+    <div id="map"></div>
+
+    <div class="map-lang-button">
+        <a href="en/index.html" title="ভাষা পরিবর্তন করতে ক্লিক করুন">
+            বাং
+            <div class="button"></div>
+            En
+        </a>
+    </div>
+
+    <div class="layer-switch-area">
+        <div class="map-layer-conf wrap active">
+            <input id="map_layer_conf" type="radio" name="layer" value="conf" onchange="change_map_layer(this)" checked="true">
+            <label for="map_layer_conf">Infection map</label>
+        </div>
+    </div>
+
+
+    <div class="self-test-area">
+        <a href="https://livecoronatest.com/" target="_blank">
+            <div class="clickable">
+                <div id="self_test_text" class="text">Live Corona<br>Assessment</div>
+            </div>
+        </a>
+    </div>
+
+    <div class="self-test-area2">
+        <a href="https://surokkha.gov.bd/" target="_blank">
+            <div class="clickable">
+                <div id="surokkha" class="text">Online Registration<br>for Corona Vaccine</div>
+            </div>
+        </a>
+    </div>
+
+    <div class="self-test-area3">
+        <a href="https://movementpass.police.gov.bd/" target="_blank">
+            <div class="clickable">
+                <div id="movementpass" class="text">Movement<br>Pass</div>
+            </div>
+        </a>
+    </div>
+
+    <script src="js/leaflet.js"></script>
+    <script src="js/tabletop.min.js"></script>
+    <script src="js/leaflet-hash.js"></script>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/leaflet.awesome-markers.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="leaflet-gsheets.js"></script>
 
     <script language="JavaScript">
         /**
