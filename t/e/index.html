@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<canvas width="960" height="500"></canvas>
-<style> /* set the CSS */
+<style>
 
+.canvas{
+  width="960"; 
+  height="500";
+}
+
+ /* set the CSS */
 .line {
   fill: none;
   stroke: steelblue;
@@ -12,17 +17,16 @@
 </style>
 <body>
 
+ <div id="canvas"></div> 
+
 <!-- load the d3.js library -->    	
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
 
-var canvas = document.querySelector("canvas"),
-    context = canvas.getContext("2d");
-
 // set the dimensions and margins of the graph
 var margin = {top: 20, right: 20, bottom: 30, left: 50},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    width = canvas.width - margin.left - margin.right,
+    height = canvas.height - margin.top - margin.bottom;
 
 // parse the date / time
 var parseTime = d3.timeParse("%d-%b-%y");
