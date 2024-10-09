@@ -13,7 +13,8 @@ function init() {
     // PASTE YOUR URLs HERE
     // these URLs come from Google Sheets 'shareable link' form
     // the first is the polygon layer and the second the points
-    var conf_URL = "https://docs.google.com/spreadsheets/d/1vsCq5u22w6IjKXyoOWQefDcPzgf9IIRswXs4ActkziU/edit?usp=sharing";
+    // var conf_URL = "https://docs.google.com/spreadsheets/d/1vsCq5u22w6IjKXyoOWQefDcPzgf9IIRswXs4ActkziU/edit?usp=sharing";
+    var conf_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78dqSIRu1hoKhO0OhxMDHC2LZ_fxP-pO01ebOK50Q-0tr4RG-CunqIK1NEyMcEkmFXfLi79xfGrBo/pub?gid=0&single=true&output=csv";
     // var lockdown_URL ="https://docs.google.com/spreadsheets/d/1WG9Sikm2PUkKdmsm2tm8iCZEiqpKKXTf9E5-O8xzTCA/edit?usp=sharing";
     var vaccine_URL= "https://docs.google.com/spreadsheets/d/1EUoooHh_cvOkB8whp8zalhBCdGPUfUJ6WY7VNKVjoes/edit?usp=sharing";
     var hospital_url = 'https://docs.google.com/spreadsheets/d/1B4Oyx8J_4fzuZET-kHc5RCJMAbpgk7dLOm9N5z42KUA/edit?usp=sharing';
